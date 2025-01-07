@@ -7,10 +7,9 @@ import { Home } from "lucide-react";
 
 interface ErrorProps {
   error: Error;
-  reset: () => void;
 }
 
-export default function Error({ error, reset }: ErrorProps) {
+export default function Error({ error }: ErrorProps) {
   useEffect(() => {
     // エラーをログに記録
     console.error(error);
@@ -28,7 +27,6 @@ export default function Error({ error, reset }: ErrorProps) {
           再度お試しください。
         </p>
         <div className="space-y-4">
-          <Button onClick={reset}>再試行</Button>
           <Button asChild className="mt-8">
             <Link href="/">
               <Home className="mr-2 h-4 w-4" />

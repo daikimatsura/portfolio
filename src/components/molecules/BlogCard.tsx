@@ -20,7 +20,7 @@ const BlogCard = ({ blog }: BlogCardProps) => {
             alt={blog.title}
             width={500}
             height={500}
-            className="object-cover"
+            className="object-cover w-full h-full"
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20" />
