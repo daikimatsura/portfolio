@@ -27,12 +27,15 @@ export default function Error({ error, reset }: ErrorProps) {
           <br />
           再度お試しください。
         </p>
-        <Button asChild className="mt-8">
-          <Link href="/">
-            <Home className="mr-2 h-4 w-4" />
-            トップページに戻る
-          </Link>
-        </Button>
+        <div className="space-y-4">
+          <Button onClick={reset}>再試行</Button>
+          <Button asChild className="mt-8">
+            <Link href="/">
+              <Home className="mr-2 h-4 w-4" />
+              トップページに戻る
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   );

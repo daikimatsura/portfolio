@@ -41,11 +41,11 @@ export default function CareerTimeline({ careers }: CareerTimelineProps) {
                   <Briefcase className="w-4 h-4 mr-2" />
                   業務内容
                 </h4>
-                <p className="text-gray-600 dark:text-gray-300">
+                <div className="text-gray-600 dark:text-gray-300">
                   {career.description.split("\n").map((line, index) => (
                     <p key={index}>{line}</p>
                   ))}
-                </p>
+                </div>
               </div>
             )}
 
@@ -84,11 +84,11 @@ export default function CareerTimeline({ careers }: CareerTimelineProps) {
                           <Badge className="mt-1">{project.role}</Badge>
                         </div>
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                      <div className="text-sm text-gray-600 dark:text-gray-300 mb-3">
                         {project.description.split("\n").map((line, index) => (
                           <p key={index}>{line}</p>
                         ))}
-                      </p>
+                      </div>
                       <div className="flex flex-wrap gap-2">
                         {project.technologies.map((tech, techIndex) => (
                           <Badge
