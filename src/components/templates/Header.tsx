@@ -76,10 +76,10 @@ const Header = () => {
                 About
               </Link>
               <Link
-                href="#works"
+                href="#blogs"
                 className="block hover:text-blue-400 transition-colors"
               >
-                Works
+                Blogs
               </Link>
               <Link
                 href="#skills"
