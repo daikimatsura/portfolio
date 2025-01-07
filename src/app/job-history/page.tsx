@@ -258,7 +258,7 @@ const careerData: CareerHistory[] = [
         role: "メンター",
         description:
           "次世代のエンジニアリーダー育成プログラムにメンターとして参加。\n去年の経験を活かし後輩のチーム開発をサポート。",
-        technologies: ["特になし"],
+        technologies: ["AWS IAM"],
         period: {
           start: "2024/07",
           end: "2024/11",
