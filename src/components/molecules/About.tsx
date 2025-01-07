@@ -1,5 +1,5 @@
 import { Button } from "@/components/atoms/Button";
-import { Github, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const About = () => {

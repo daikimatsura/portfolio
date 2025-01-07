@@ -4,10 +4,9 @@ import Link from "next/link";
 
 interface BlogCardProps {
   blog: Blog;
-  className?: string;
 }
 
-const BlogCard = ({ blog, className }: BlogCardProps) => {
+const BlogCard = ({ blog }: BlogCardProps) => {
   return (
     <div
       key={blog.id}
