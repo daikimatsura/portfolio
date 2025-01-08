@@ -268,7 +268,7 @@ const careerData: CareerHistory[] = [
         name: "新規プロダクトのプロトタイプ開発",
         role: "テックリード",
         description:
-          "大手通信会社のデモ展示用プロトタイプ開発の開発リーダーを担当。\n現在製作中",
+          "大手通信会社のデモ展示用プロトタイプ開発の開発リーダーを担当。\nWBSの管理やシステム設計を行い現在製作中",
         technologies: [
           "WordPress",
           "PHP",
@@ -288,7 +288,6 @@ const careerData: CareerHistory[] = [
           "AWS IAM",
           "Amazon Lex",
           "Amplify Gen2",
-          "AWS IAM",
           "AWS API Gateway",
           "Cognito",
         ],
