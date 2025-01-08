@@ -114,7 +114,7 @@ const careerData: CareerHistory[] = [
     company: "現職",
     position: "フルスタックエンジニア",
     period: {
-      start: "2023/02",
+      start: "2023/03",
       end: "present",
     },
     description:
@@ -153,7 +153,7 @@ const careerData: CareerHistory[] = [
           "Chime SDK",
         ],
         period: {
-          start: "2023/02",
+          start: "2023/03",
           end: "present",
         },
       },
