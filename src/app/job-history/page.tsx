@@ -128,7 +128,7 @@ const careerData: CareerHistory[] = [
         name: "Sylphina",
         role: "フルスタックエンジニア",
         description:
-          "Amazon Connectを拡張する自社サービスの開発を担当。\nマルチテナントアプリケーション化をしSaaS化対応など。",
+          "Amazon Connectを拡張する自社サービスの開発を担当。\nマルチテナントアプリケーション化をしSaaS化対応。\nWell ArchitectedレビューやFTR要件を確認しアーキテクチャがベストプラクティスに則っているかチームで確認しました。",
         technologies: [
           "React",
           "TypeScript",
