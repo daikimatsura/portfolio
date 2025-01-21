@@ -321,6 +321,8 @@ const careerData: CareerHistory[] = [
     id: "1",
     company: "前職",
     position: "エンジニア",
+    description:
+      "React/Amplifyを使用したWebアプリ開発でフロントエンドからバックエンドまでフルスタックに担当。",
     period: {
       start: "2022/04",
       end: "2023/02",
