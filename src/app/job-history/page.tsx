@@ -314,7 +314,7 @@ const careerData: CareerHistory[] = [
     achievements: [
       "自社サービスのSaaS化/マルチテナントアプリケーション化",
       "自社サービスのWell ArchitectedレビューおよびFTR要件を確認しベストプラクティス対応",
-      "AIアプリ開発、テックリード",
+      "AIアプリ開発(RAG/LangChain/LLM)、テックリード",
       "社内向けTypeScript/React勉強会の実施",
     ],
   },
