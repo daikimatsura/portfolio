@@ -34,7 +34,7 @@ const BlogCard = ({ blog }: BlogCardProps) => {
               <Button
                 size="sm"
                 variant="outline"
-                className="border-gray-800 text-gray-300 hover:bg-purple-800 hover:text-gray-300 shadow-md bg-purple-600"
+                className="border-none text-gray-300 hover:bg-purple-800 hover:text-gray-300 shadow-md bg-purple-600"
               >
                 <Link href={blog.link} target="_blank">
                   見に行く
