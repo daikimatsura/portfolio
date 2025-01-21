@@ -1,0 +1,37 @@
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    name
+  }
+}
+
+query ListUsers {
+  listUsers {
+    id
+    name
+  }
+}
+
+query GetTodo($id: ID!) {
+  getTodo(id: $id) {
+    id
+    text
+    done
+    user {
+      id
+      name
+    }
+  }
+}
+
+query ListTodos {
+  listTodos {
+    id
+    text
+    done
+    user {
+      id
+      name
+    }
+  }
+}

@@ -1,0 +1,35 @@
+mutation CreateTodo($text: String!, $userId: String!) {
+  createTodo(input: { text: $text, userId: $userId }) {
+    id
+    text
+    done
+    user {
+      id
+      name
+    }
+  }
+}
+
+mutation UpdateTodo($id: ID!, $text: String!, $userId: String!) {
+  updateTodo(id: $id, input: { text: $text, userId: $userId }) {
+    id
+    text
+    done
+    user {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteTodo($id: ID!) {
+  deleteTodo(id: $id) {
+    id
+    text
+    done
+    user {
+      id
+      name
+    }
+  }
+}
