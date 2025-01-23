@@ -1,14 +1,8 @@
 "use client";
 
 import { useState } from "react";
-
+import { SkillCard } from "../molecules/SkillCard";
 const Skills = () => {
-  const [expanded, setExpanded] = useState<Record<number, boolean>>({});
-
-  const toggleExpand = (index: number) => {
-    setExpanded((prev) => ({ ...prev, [index]: !prev[index] }));
-  };
-
   const skillData = [
     {
       title: "Frontend",
@@ -163,41 +157,8 @@ const Skills = () => {
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold mb-12">Main Skills</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {skillData.map((category, index) => (
-            <div
-              key={index}
-              className="bg-black/50 backdrop-blur-sm rounded-xl p-6 border border-white/10"
-            >
-              <h3 className="text-xl font-bold mb-4">{category.title}</h3>
-              <div className="space-y-4">
-                {category.skills
-                  .slice(0, expanded[index] ? category.skills.length : 4)
-                  .map((skill, skillIndex) => (
-                    <div key={skillIndex} className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span>{skill.name}</span>
-                        <span className="text-gray-400">
-                          {skill.percentage}%
-                        </span>
-                      </div>
-                      <div className="h-1 bg-gray-700 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
-                          style={{ width: `${skill.percentage}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                {category.skills.length > 4 && (
-                  <div
-                    className="text-sm text-gray-400 mt-4 italic text-right cursor-pointer"
-                    onClick={() => toggleExpand(index)}
-                  >
-                    {expanded[index] ? "少なく表示" : "さらに詳細"}
-                  </div>
-                )}
-              </div>
-            </div>
+          {skillData.map((skill, index) => (
+            <SkillCard key={index} skill={skill} />
           ))}
         </div>
       </div>

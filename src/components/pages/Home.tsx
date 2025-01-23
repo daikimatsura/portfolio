@@ -1,6 +1,6 @@
 import About from "@/components/molecules/About";
 import Blogs from "@/components/organisms/Blogs";
-import Skills from "@/components/molecules/Skills";
+import Skills from "@/components/organisms/Skills";
 import Contact from "@/components/molecules/Contact";
 const Home = async () => {
   return (
