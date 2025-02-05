@@ -373,6 +373,7 @@ const JobHistory = () => {
             <CardContent className="p-6">
               <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
                 <li>AWS Certified Cloud Practitioner </li>
+                <li>AWS Certified AI Practitioner</li>
                 <li>AWS Certified Solutions Architect – Associate</li>
                 <li>AWS Certified Solutions Architect – Professional</li>
               </ul>
