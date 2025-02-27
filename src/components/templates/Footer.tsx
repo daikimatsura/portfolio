@@ -57,7 +57,8 @@ const Footer = () => {
               className="text-muted-foreground text-sm"
               {...fadeInDelayedAnimation}
             >
-              フロントエンド開発とAWSネイティブなシステム開発を専門とするソフトウェアエンジニア
+              React、Next.js、TypeScript、Amplify、AWS
+              CDKを活用したWebアプリケーション開発が得意です。
             </motion.p>
           </div>
 

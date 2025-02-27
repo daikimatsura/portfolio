@@ -51,33 +51,36 @@ const About = () => {
               transition={{ delay: 0.9, duration: 0.8 }}
               className="text-muted-foreground dark:text-gray-300 text-lg md:text-xl max-w-lg mb-8 leading-relaxed"
             >
-              フロントエンド開発とAWSインフラ構築を専門とするソフトウェアエンジニアです。
-              ユーザー体験を向上させる革新的なソリューションの開発に情熱を持っています。
-              <span className="block mt-2 text-blue-800 dark:text-blue-400">
-                React、Next.js、TypeScript、AWS
-                CDKを活用したプロジェクト開発が得意です。
-              </span>
+              React、Next.js、TypeScript、Amplify、AWS
+              CDKを活用したWebアプリケーション開発が得意です。
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2, duration: 0.8 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row items-center gap-4"
             >
-              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg">
-                <Link href="/job-history" className="flex items-center">
+              <Button
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg min-w-[180px]  w-full sm:w-auto"
+                asChild
+              >
+                <Link
+                  href="/job-history"
+                  className="flex items-center justify-center w-full h-full px-4 py-2"
+                >
                   職務経歴を見る
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button
                 variant="outline"
-                className="bg-background/50 backdrop-blur-sm border-border hover:bg-background/80"
+                className="bg-background/50 backdrop-blur-sm border-border hover:bg-background/80 min-w-[180px]  w-full sm:w-auto"
+                asChild
               >
                 <Link
                   href="/introduction-this-site"
-                  className="flex items-center"
+                  className="flex items-center justify-center w-full h-full px-4 py-2"
                 >
                   このサイトについて
                   <ArrowRight className="ml-2 h-4 w-4" />

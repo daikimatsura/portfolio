@@ -98,8 +98,14 @@ const Header = () => {
                     <Button
                       variant="outline"
                       className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-md rounded-lg font-medium dark:bg-gradient-to-r dark:from-blue-600 dark:to-purple-600"
+                      asChild
                     >
-                      <Link href={item.href}>{item.name}</Link>
+                      <Link
+                        href={item.href}
+                        className="flex items-center justify-center w-full h-full px-4 py-2"
+                      >
+                        {item.name}
+                      </Link>
                     </Button>
                   ) : (
                     <Link
@@ -160,9 +166,15 @@ const Header = () => {
                     <Button
                       variant="outline"
                       className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground dark:bg-gradient-to-r dark:from-blue-600 dark:to-purple-600"
-                      onClick={() => setIsMenuOpen(false)}
+                      asChild
                     >
-                      <Link href={item.href}>{item.name}</Link>
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="flex items-center justify-center w-full h-full px-4 py-2"
+                      >
+                        {item.name}
+                      </Link>
                     </Button>
                   ) : (
                     <Link
