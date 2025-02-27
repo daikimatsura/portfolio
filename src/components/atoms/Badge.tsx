@@ -20,11 +20,11 @@ export const Badge = ({
   animated = false,
 }: BadgeProps) => {
   const variants = {
-    default: "bg-blue-500/20 text-blue-300 border-blue-500/30",
-    outline: "bg-transparent border-gray-700 text-gray-300",
+    default: "bg-primary/20 text-primary border-primary/30",
+    outline: "bg-transparent border-border text-foreground",
     gradient:
-      "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 border-blue-500/30",
-    secondary: "bg-gray-800 text-gray-300 border-gray-700",
+      "bg-gradient-to-r from-blue-700/20 to-purple-700/20 text-blue-800 dark:text-primary border-blue-700/30 dark:border-primary/30",
+    secondary: "bg-secondary text-secondary-foreground border-border",
   };
 
   const sizes = {

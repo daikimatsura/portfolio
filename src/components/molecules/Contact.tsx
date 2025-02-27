@@ -30,7 +30,7 @@ const Contact = () => {
   return (
     <section id="contact" className="relative py-32 overflow-hidden">
       {/* 背景のグラデーションエフェクト */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/20" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/20" />
 
       {/* デコレーション要素 */}
       <motion.div
@@ -40,7 +40,7 @@ const Contact = () => {
         transition={{ duration: 1.5 }}
       >
         <motion.div
-          className="absolute -left-4 -top-4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"
+          className="absolute -left-4 -top-4 w-64 h-64 bg-blue-500/10 dark:bg-blue-500/10 rounded-full blur-3xl"
           animate={{
             x: [0, 20, 0],
             y: [0, -20, 0],
@@ -52,7 +52,7 @@ const Contact = () => {
           }}
         />
         <motion.div
-          className="absolute -right-4 -bottom-4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"
+          className="absolute -right-4 -bottom-4 w-64 h-64 bg-purple-500/10 dark:bg-purple-500/10 rounded-full blur-3xl"
           animate={{
             x: [0, -20, 0],
             y: [0, 20, 0],
@@ -84,12 +84,12 @@ const Contact = () => {
               <div className="relative">
                 <div className="absolute inset-0 animate-ping rounded-full bg-blue-400/20" />
                 <div className="relative bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full p-5 backdrop-blur-sm border border-blue-500/30">
-                  <Mail className="w-8 h-8 text-blue-400" />
+                  <Mail className="w-8 h-8 text-blue-700 dark:text-blue-400" />
                 </div>
               </div>
             </motion.div>
             <motion.h2
-              className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+              className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
@@ -97,7 +97,7 @@ const Contact = () => {
               お問い合わせ
             </motion.h2>
             <motion.p
-              className="text-gray-300 text-lg leading-relaxed"
+              className="text-foreground text-lg leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.8 }}
@@ -140,21 +140,21 @@ const Contact = () => {
 
           {/* ステータス表示 */}
           <motion.div
-            className="bg-gradient-to-br from-gray-900 to-black backdrop-blur-xl rounded-2xl p-8 border border-gray-800"
+            className="bg-gradient-to-br from-card/80 to-card backdrop-blur-xl rounded-2xl p-8 border border-border"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.3, duration: 0.8 }}
           >
             <div className="flex items-center justify-center space-x-3 mb-6">
-              <Clock className="w-5 h-5 text-blue-400 animate-pulse" />
-              <span className="text-blue-400 font-medium">
+              <Clock className="w-5 h-5 text-blue-700 dark:text-blue-400 animate-pulse" />
+              <span className="text-blue-800 dark:text-blue-400 font-medium">
                 お問い合わせフォーム準備中
               </span>
             </div>
 
             <Button
               size="lg"
-              className="w-full bg-gradient-to-r from-blue-600/50 to-purple-600/50 hover:from-blue-600/70 hover:to-purple-600/70 transition-colors duration-300 backdrop-blur-sm"
+              className="w-full bg-gradient-to-r from-blue-700/50 to-purple-700/50 hover:from-blue-700/70 hover:to-purple-700/70 transition-colors duration-300 backdrop-blur-sm"
               disabled
             >
               <div className="flex items-center justify-center space-x-2">

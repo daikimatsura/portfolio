@@ -55,7 +55,7 @@ const JobHistory = () => {
           <h2 className="text-2xl font-semibold mb-4">自己PR</h2>
           <Card>
             <CardContent className="p-6">
-              <p className="text-gray-300 dark:text-gray-300 leading-relaxed">
+              <p className="text-foreground dark:text-gray-300 leading-relaxed">
                 エンジニア歴4年目
                 <br />
                 好きな領域はReact/TypeScriptを使ったフロントエンド開発
@@ -73,7 +73,7 @@ const JobHistory = () => {
           <h2 className="text-2xl font-semibold mb-4">資格</h2>
           <Card>
             <CardContent className="p-6">
-              <ul className="list-disc list-inside space-y-2 text-gray-300 dark:text-gray-300">
+              <ul className="list-disc list-inside space-y-2 text-foreground dark:text-gray-300">
                 <li>AWS Certified Cloud Practitioner </li>
                 <li>AWS Certified AI Practitioner</li>
                 <li>AWS Certified Solutions Architect – Associate</li>
@@ -92,7 +92,7 @@ const JobHistory = () => {
                 <Badge
                   key={skill}
                   variant="secondary"
-                  className="text-sm bg-purple-500 text-white"
+                  className="text-sm bg-blue-600 text-white dark:bg-purple-500 dark:text-white"
                 >
                   {skill}
                 </Badge>

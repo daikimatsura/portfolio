@@ -3,6 +3,7 @@ import Header from "@/components/templates/Header";
 import Footer from "@/components/templates/Footer";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Noto_Sans_JP } from "next/font/google";
+import { ThemeProvider } from "@/hooks/useTheme";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -47,11 +48,13 @@ const RootLayout = ({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSansJP.variable} font-sans antialiased`}
       >
-        <div className="min-h-screen bg-black text-white flex flex-col">
-          <Header />
-          <main className="pt-20 flex-grow">{children}</main>
-          <Footer />
-        </div>
+        <ThemeProvider>
+          <div className="min-h-screen bg-background text-foreground flex flex-col">
+            <Header />
+            <main className="pt-20 flex-grow">{children}</main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

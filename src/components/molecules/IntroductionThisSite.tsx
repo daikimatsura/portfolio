@@ -26,26 +26,32 @@ const IntroductionThisSite = () => {
       name: "Next.js & React",
       description:
         "モダンなUIとシームレスなユーザー体験を実現するフレームワーク",
-      icon: <Zap className="w-6 h-6 text-yellow-400" />,
-      color: "from-yellow-500/20 to-yellow-600/20 border-yellow-500/30",
+      icon: <Zap className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />,
+      color:
+        "from-yellow-600/20 to-yellow-700/20 dark:from-yellow-500/20 dark:to-yellow-600/20 border-yellow-600/30 dark:border-yellow-500/30",
     },
     {
       name: "TypeScript",
       description: "型安全性を確保し、開発効率と保守性を向上",
-      icon: <Code className="w-6 h-6 text-blue-400" />,
-      color: "from-blue-500/20 to-blue-600/20 border-blue-500/30",
+      icon: <Code className="w-6 h-6 text-blue-600 dark:text-blue-400" />,
+      color:
+        "from-blue-600/20 to-blue-700/20 dark:from-blue-500/20 dark:to-blue-600/20 border-blue-600/30 dark:border-blue-500/30",
     },
     {
       name: "Tailwind CSS & Shadcn UI",
       description: "美しく一貫性のあるデザインシステムを構築",
-      icon: <Palette className="w-6 h-6 text-purple-400" />,
-      color: "from-purple-500/20 to-purple-600/20 border-purple-500/30",
+      icon: (
+        <Palette className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+      ),
+      color:
+        "from-purple-600/20 to-purple-700/20 dark:from-purple-500/20 dark:to-purple-600/20 border-purple-600/30 dark:border-purple-500/30",
     },
     {
       name: "アトミックデザイン",
       description: "再利用可能で保守性の高いコンポーネント設計",
-      icon: <Layers className="w-6 h-6 text-green-400" />,
-      color: "from-green-500/20 to-green-600/20 border-green-500/30",
+      icon: <Layers className="w-6 h-6 text-green-600 dark:text-green-400" />,
+      color:
+        "from-green-600/20 to-green-700/20 dark:from-green-500/20 dark:to-green-600/20 border-green-600/30 dark:border-green-500/30",
     },
   ];
 
@@ -77,7 +83,7 @@ const IntroductionThisSite = () => {
   return (
     <section className="relative py-32 overflow-hidden">
       {/* 背景のグラデーションエフェクト */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/20" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-200/30 dark:to-gray-900/20" />
 
       {/* デコレーション要素 */}
       <motion.div
@@ -87,7 +93,7 @@ const IntroductionThisSite = () => {
         transition={{ duration: 1.5 }}
       >
         <motion.div
-          className="absolute -left-4 -top-4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"
+          className="absolute -left-4 -top-4 w-64 h-64 bg-blue-600/10 dark:bg-blue-500/10 rounded-full blur-3xl"
           animate={{
             x: [0, 20, 0],
             y: [0, -20, 0],
@@ -99,7 +105,7 @@ const IntroductionThisSite = () => {
           }}
         />
         <motion.div
-          className="absolute -right-4 -bottom-4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"
+          className="absolute -right-4 -bottom-4 w-64 h-64 bg-purple-600/10 dark:bg-purple-500/10 rounded-full blur-3xl"
           animate={{
             x: [0, -20, 0],
             y: [0, 20, 0],
@@ -122,7 +128,7 @@ const IntroductionThisSite = () => {
             transition={{ duration: 0.8 }}
           >
             <motion.h1
-              className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+              className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
@@ -130,7 +136,7 @@ const IntroductionThisSite = () => {
               このサイトについて
             </motion.h1>
             <motion.p
-              className="text-gray-300 text-lg leading-relaxed"
+              className="text-foreground dark:text-gray-300 text-lg leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
@@ -149,7 +155,7 @@ const IntroductionThisSite = () => {
             transition={{ delay: 0.7, duration: 0.8 }}
           >
             <motion.h2
-              className="text-3xl font-bold mb-8 text-center"
+              className="text-3xl font-bold mb-8 text-center text-foreground"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9, duration: 0.8 }}
@@ -166,14 +172,16 @@ const IntroductionThisSite = () => {
                   whileHover={{ y: -5 }}
                 >
                   <div className="flex items-start">
-                    <div className="bg-gray-900/50 p-3 rounded-lg mr-4">
+                    <div className="bg-gray-100/80 dark:bg-gray-900/50 p-3 rounded-lg mr-4">
                       {tech.icon}
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold mb-2">
+                      <h3 className="text-xl font-semibold mb-2 text-foreground">
                         {tech.name}
                       </h3>
-                      <p className="text-gray-300">{tech.description}</p>
+                      <p className="text-foreground dark:text-gray-300">
+                        {tech.description}
+                      </p>
                     </div>
                   </div>
                 </motion.div>
@@ -189,7 +197,7 @@ const IntroductionThisSite = () => {
             transition={{ delay: 1.5, duration: 0.8 }}
           >
             <motion.h2
-              className="text-3xl font-bold mb-8 text-center"
+              className="text-3xl font-bold mb-8 text-center text-foreground"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.7, duration: 0.8 }}
@@ -197,16 +205,21 @@ const IntroductionThisSite = () => {
               実装詳細
             </motion.h2>
             <motion.div
-              className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-8"
+              className="bg-gray-100/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-800 rounded-xl p-8"
               {...fadeInUpAnimation}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
-              <ul className="space-y-4 text-gray-300">
+              <ul className="space-y-4 text-foreground">
                 {implementationDetails.map((detail, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
+                    <span className="text-blue-700 dark:text-blue-400 mr-2">
+                      •
+                    </span>
                     <span>
-                      <strong>{detail.title}</strong>: {detail.description}
+                      <strong className="text-foreground">
+                        {detail.title}
+                      </strong>
+                      : {detail.description}
                     </span>
                   </li>
                 ))}
@@ -222,7 +235,7 @@ const IntroductionThisSite = () => {
             transition={{ delay: 2.1, duration: 0.8 }}
           >
             <motion.p
-              className="text-gray-300 mb-6"
+              className="text-foreground dark:text-gray-300 mb-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 2.3, duration: 0.8 }}

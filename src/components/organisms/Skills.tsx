@@ -194,10 +194,10 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden"
+      className="py-20 bg-background relative overflow-hidden bg-grid-pattern"
     >
       {/* 装飾要素 */}
-      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-background to-transparent" />
       <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
       <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl" />
 
@@ -209,12 +209,12 @@ const Skills = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold mb-4 inline-block relative">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400">
               スキルセット
             </span>
-            <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full" />
+            <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400 rounded-full" />
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             フロントエンド開発からAWSインフラ構築まで、幅広いスキルを持っています。
             常に新しい技術を学び、実践することで技術力を高めています。
           </p>

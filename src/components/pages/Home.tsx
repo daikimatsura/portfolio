@@ -40,14 +40,14 @@ const Home = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="text-gray-400 text-sm mb-2">
+              <span className="text-muted-foreground text-sm mb-2">
                 スクロールして続きを見る
               </span>
               <motion.div
                 animate={{ y: [0, 10, 0] }}
                 transition={{ repeat: Infinity, duration: 1.5 }}
               >
-                <ChevronDown className="h-6 w-6 text-blue-400" />
+                <ChevronDown className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               </motion.div>
             </motion.div>
           )}

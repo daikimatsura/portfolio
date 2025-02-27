@@ -9,7 +9,7 @@ const About = () => {
   return (
     <section
       id="about-me"
-      className="relative min-h-[calc(100vh-20px)] flex items-center justify-center bg-grid-white/[0.02] overflow-hidden"
+      className="relative min-h-[calc(100vh-20px)] flex items-center justify-center bg-grid-pattern overflow-hidden"
     >
       {/* 背景エフェクト */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20" />
@@ -30,7 +30,7 @@ const About = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
-                className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400"
+                className="text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400"
               >
                 Software Engineer
               </motion.span>
@@ -39,6 +39,7 @@ const About = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
+                className="text-foreground"
               >
                 daiki matsuura
               </motion.span>
@@ -48,11 +49,11 @@ const About = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9, duration: 0.8 }}
-              className="text-gray-300 text-lg md:text-xl max-w-lg mb-8 leading-relaxed"
+              className="text-muted-foreground dark:text-gray-300 text-lg md:text-xl max-w-lg mb-8 leading-relaxed"
             >
               フロントエンド開発とAWSインフラ構築を専門とするソフトウェアエンジニアです。
               ユーザー体験を向上させる革新的なソリューションの開発に情熱を持っています。
-              <span className="block mt-2 text-blue-400">
+              <span className="block mt-2 text-blue-800 dark:text-blue-400">
                 React、Next.js、TypeScript、AWS
                 CDKを活用したプロジェクト開発が得意です。
               </span>
@@ -64,7 +65,7 @@ const About = () => {
               transition={{ delay: 1.2, duration: 0.8 }}
               className="flex flex-wrap gap-4"
             >
-              <Button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-lg">
+              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg">
                 <Link href="/job-history" className="flex items-center">
                   職務経歴を見る
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -72,7 +73,7 @@ const About = () => {
               </Button>
               <Button
                 variant="outline"
-                className="bg-white/5 backdrop-blur-sm border-gray-700 hover:bg-white/10"
+                className="bg-background/50 backdrop-blur-sm border-border hover:bg-background/80"
               >
                 <Link
                   href="/introduction-this-site"
@@ -93,13 +94,13 @@ const About = () => {
               <Link
                 href="https://github.com/daikimatsura"
                 target="_blank"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Github className="h-6 w-6" />
               </Link>
               <Link
                 href="#contact"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Mail className="h-6 w-6" />
               </Link>
@@ -114,32 +115,54 @@ const About = () => {
           >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-md" />
-              <div className="relative bg-gray-900/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-800">
+              <div className="relative bg-card/80 backdrop-blur-sm p-8 rounded-2xl border border-border">
                 <div className="flex items-center space-x-2 mb-4">
                   <div className="w-3 h-3 rounded-full bg-red-500" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500" />
                   <div className="w-3 h-3 rounded-full bg-green-500" />
                 </div>
-                <pre className="font-mono text-sm text-gray-300">
+                <pre className="font-mono text-sm text-foreground/90">
                   <code>
-                    <span className="text-blue-400">const</span>{" "}
-                    <span className="text-green-400">developer</span> = {"{"}
+                    <span className="text-blue-800 dark:text-blue-400">
+                      const
+                    </span>{" "}
+                    <span className="text-green-800 dark:text-green-400">
+                      developer
+                    </span>{" "}
+                    = {"{"}
                     <br />
                     {"  "}name:{" "}
-                    <span className="text-yellow-300">'daiki matsuura'</span>,
+                    <span className="text-yellow-800 dark:text-yellow-300">
+                      'daiki matsuura'
+                    </span>
+                    ,
                     <br />
                     {"  "}role:{" "}
-                    <span className="text-yellow-300">'Software Engineer'</span>
+                    <span className="text-yellow-800 dark:text-yellow-300">
+                      'Software Engineer'
+                    </span>
                     ,
                     <br />
                     {"  "}skills: [
-                    <span className="text-yellow-300">'React'</span>,{" "}
-                    <span className="text-yellow-300">'Next.js'</span>,{" "}
-                    <span className="text-yellow-300">'TypeScript'</span>,{" "}
-                    <span className="text-yellow-300">'AWS'</span>],
+                    <span className="text-yellow-800 dark:text-yellow-300">
+                      'React'
+                    </span>
+                    ,{" "}
+                    <span className="text-yellow-800 dark:text-yellow-300">
+                      'Next.js'
+                    </span>
+                    ,{" "}
+                    <span className="text-yellow-800 dark:text-yellow-300">
+                      'TypeScript'
+                    </span>
+                    ,{" "}
+                    <span className="text-yellow-800 dark:text-yellow-300">
+                      'AWS'
+                    </span>
+                    ],
                     <br />
                     {"  "}loves:{" "}
-                    <span className="text-yellow-300">
+                    <span className="text-yellow-800 dark:text-yellow-300">
                       'Creating innovative solutions'
                     </span>
                     <br />

@@ -38,23 +38,23 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative py-12 border-t border-gray-800 overflow-hidden">
+    <footer className="relative py-12 border-t border-border overflow-hidden">
       {/* 背景装飾 */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50" />
-      <div className="absolute -bottom-40 left-1/2 transform -translate-x-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-50" />
+      <div className="absolute -bottom-40 left-1/2 transform -translate-x-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* プロフィールセクション */}
           <div>
             <motion.h3
-              className="text-xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+              className="text-xl font-bold mb-4 bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent"
               {...fadeInAnimation}
             >
               Daiki Matsuura
             </motion.h3>
             <motion.p
-              className="text-gray-400 text-sm"
+              className="text-muted-foreground text-sm"
               {...fadeInDelayedAnimation}
             >
               フロントエンド開発とAWSネイティブなシステム開発を専門とするソフトウェアエンジニア
@@ -64,7 +64,7 @@ const Footer = () => {
           {/* ナビゲーションリンク */}
           <div>
             <motion.h3
-              className="text-lg font-medium mb-4"
+              className="text-lg font-medium mb-4 text-foreground"
               {...fadeInAnimation}
             >
               リンク
@@ -74,7 +74,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     href={link.path}
-                    className="text-gray-400 hover:text-blue-400 transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -114,12 +114,12 @@ const Footer = () => {
 
         {/* フッターボトム */}
         <motion.div
-          className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center"
+          className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
-          <p className="text-gray-400 text-sm mb-4 md:mb-0">
+          <p className="text-muted-foreground text-sm mb-4 md:mb-0">
             &copy; {currentYear} Daiki Matsuura. All rights reserved.
           </p>
         </motion.div>

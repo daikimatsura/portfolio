@@ -22,15 +22,13 @@ export const Card = ({
       whileHover={hoverEffect ? { y: -5, transition: { duration: 0.2 } } : {}}
       className={cn(
         "relative rounded-xl overflow-hidden",
-        gradient
-          ? "bg-gradient-to-br from-gray-900 to-black"
-          : "bg-gray-900/80",
-        "border border-gray-800 backdrop-blur-sm",
+        gradient ? "bg-gradient-to-br from-card to-background" : "bg-card",
+        "border border-border backdrop-blur-sm",
         className
       )}
     >
       {gradient && (
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       )}
       <div className="relative z-10">{children}</div>
     </motion.div>
@@ -57,7 +55,7 @@ export const CardTitle = ({
   return (
     <h3
       className={cn(
-        "text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400",
+        "text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400",
         className
       )}
     >
@@ -74,7 +72,9 @@ export const CardDescription = ({
   className?: string;
 }) => {
   return (
-    <p className={cn("text-gray-400 text-sm mt-2", className)}>{children}</p>
+    <p className={cn("text-muted-foreground text-sm mt-2", className)}>
+      {children}
+    </p>
   );
 };
 
@@ -98,7 +98,7 @@ export const CardFooter = ({
   return (
     <div
       className={cn(
-        "flex items-center p-6 pt-0 border-t border-gray-800 mt-6",
+        "flex items-center p-6 pt-0 border-t border-border mt-6",
         className
       )}
     >

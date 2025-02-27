@@ -66,12 +66,12 @@ const Blogs = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold mb-4 inline-block relative">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400">
               技術ブログ
             </span>
-            <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full" />
+            <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400 rounded-full" />
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             技術的な知見や経験を共有するために執筆したブログ記事です。
             主にフロントエンド開発やAWSサービスに関する内容を発信しています。
           </p>

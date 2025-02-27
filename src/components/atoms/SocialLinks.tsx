@@ -67,14 +67,14 @@ const SocialLinks = ({
   const getItemStyle = (link: SocialLink) => {
     switch (variant) {
       case "with-text":
-        return "flex items-center space-x-2 text-gray-400 hover:text-white transition-colors";
+        return "flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors";
       case "button":
-        return `bg-gray-800 p-2 rounded-full text-gray-400 hover:text-white ${
+        return `bg-gray-800 p-2 rounded-full text-muted-foreground hover:text-foreground ${
           link.color || "hover:bg-blue-600"
         } transition-colors`;
       case "icon-only":
       default:
-        return "text-gray-400 hover:text-white transition-colors";
+        return "text-muted-foreground hover:text-foreground transition-colors";
     }
   };
 
