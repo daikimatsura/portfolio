@@ -1,7 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code, Layers, Palette, Zap, Github } from "lucide-react";
+import {
+  Code,
+  Layers,
+  Palette,
+  Zap,
+  Github,
+  TestTube,
+  Rocket,
+  Shield,
+  Gauge,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/atoms/Button";
 import { ReactNode } from "react";
@@ -53,6 +63,20 @@ const IntroductionThisSite = () => {
       color:
         "from-green-600/20 to-green-700/20 dark:from-green-500/20 dark:to-green-600/20 border-green-600/30 dark:border-green-500/30",
     },
+    {
+      name: "テスト実装",
+      description: "Jest & React Testing Libraryによる堅牢なテスト",
+      icon: <TestTube className="w-6 h-6 text-red-600 dark:text-red-400" />,
+      color:
+        "from-red-600/20 to-red-700/20 dark:from-red-500/20 dark:to-red-600/20 border-red-600/30 dark:border-red-500/30",
+    },
+    {
+      name: "CI/CD対応",
+      description: "効率的な開発フローと安定したデプロイを実現",
+      icon: <Rocket className="w-6 h-6 text-orange-600 dark:text-orange-400" />,
+      color:
+        "from-orange-600/20 to-orange-700/20 dark:from-orange-500/20 dark:to-orange-600/20 border-orange-600/30 dark:border-orange-500/30",
+    },
   ];
 
   // 実装詳細リスト
@@ -77,6 +101,30 @@ const IntroductionThisSite = () => {
     {
       title: "アクセシビリティ",
       description: "Radix UIの機能を活用した高いアクセシビリティ",
+    },
+  ];
+
+  // 新しい実装ポイント
+  const advancedFeatures = [
+    {
+      title: "パフォーマンス最適化",
+      description: "Webバイタルを継続的に計測し、最適なユーザー体験を提供",
+      icon: <Gauge className="w-6 h-6 text-blue-600 dark:text-blue-400" />,
+    },
+    {
+      title: "テスト自動化",
+      description: "単体テスト、統合テスト、E2Eテストによる品質保証",
+      icon: <TestTube className="w-6 h-6 text-green-600 dark:text-green-400" />,
+    },
+    {
+      title: "エラーハンドリング",
+      description: "統一されたエラー処理とフォールバックUIの実装",
+      icon: <Shield className="w-6 h-6 text-red-600 dark:text-red-400" />,
+    },
+    {
+      title: "CI/CD対応",
+      description: "ESLintとTypeScriptによる厳格なコード品質管理",
+      icon: <Rocket className="w-6 h-6 text-purple-600 dark:text-purple-400" />,
     },
   ];
 
@@ -144,6 +192,8 @@ const IntroductionThisSite = () => {
               このポートフォリオサイトは、私のスキルと経験を紹介するために作成しました。
               <br />
               モダンなWeb技術を活用し、パフォーマンスとユーザー体験を重視した設計になっています。
+              <br />
+              テスト駆動開発とCI/CD対応により、高品質なコードベースを維持しています。
             </motion.p>
           </motion.div>
 
@@ -227,24 +277,68 @@ const IntroductionThisSite = () => {
             </motion.div>
           </motion.div>
 
+          {/* 新しい実装ポイントセクション */}
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.0, duration: 0.8 }}
+          >
+            <motion.h2
+              className="text-3xl font-bold mb-8 text-center text-foreground"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2.1, duration: 0.8 }}
+            >
+              高度な実装ポイント
+            </motion.h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {advancedFeatures.map((feature, index) => (
+                <motion.div
+                  key={feature.title}
+                  className="bg-gray-100/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-800 rounded-xl p-6"
+                  {...fadeInUpAnimation}
+                  transition={{ delay: 2.2 + index * 0.1, duration: 0.5 }}
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="flex items-start">
+                    <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 dark:from-blue-500/20 dark:to-purple-500/20 p-3 rounded-lg mr-4">
+                      {feature.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold mb-2 text-foreground">
+                        {feature.title}
+                      </h3>
+                      <p className="text-foreground dark:text-gray-300">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
           {/* ソースコードリンク */}
           <motion.div
             className="text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 2.1, duration: 0.8 }}
+            transition={{ delay: 2.6, duration: 0.8 }}
           >
             <motion.p
               className="text-foreground dark:text-gray-300 mb-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 2.3, duration: 0.8 }}
+              transition={{ delay: 2.7, duration: 0.8 }}
             >
               このポートフォリオサイトのソースコードはGitHubで公開しています。
+              <br />
+              コーディングガイドラインに基づいた一貫性のある実装を確認できます。
             </motion.p>
             <motion.div
               {...fadeInUpAnimation}
-              transition={{ delay: 2.5, duration: 0.8 }}
+              transition={{ delay: 2.8, duration: 0.8 }}
             >
               <Button className="bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800">
                 <Link
