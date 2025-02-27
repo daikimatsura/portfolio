@@ -1,32 +1,21 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import IntroductionThisSite from "@/components/molecules/IntroductionThisSite";
+import { useEffect } from "react";
 
-const IntroductionThisSite = () => {
-  const router = useRouter();
-  return (
-    <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
-      <div className="space-y-6 text-center max-w-2xl px-4">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-          Technical Overview
-        </h1>
-        <p className="text-3xl font-bold animate-bounce">準備中</p>
-        <div className="space-y-2 text-gray-300">
-          <p>
-            このサイトで使用している技術や実装のポイントについて、近日公開予定です
-          </p>
-          <p>今しばらくお待ちください</p>
-        </div>
-      </div>
-      <Button
-        className="mt-12 bg-blue-500 px-6 hover:bg-blue-700 shadow-lg transform hover:scale-110 transition duration-300"
-        onClick={() => router.back()}
-      >
-        戻る
-      </Button>
-    </div>
-  );
+/**
+ * このサイトについてのページコンポーネント
+ *
+ * このコンポーネントは、ポートフォリオサイトの技術的な詳細や実装について説明するページです。
+ * molecules/IntroductionThisSiteコンポーネントをラップし、必要に応じてページレベルの処理を追加します。
+ */
+const IntroductionThisSitePage = () => {
+  // ページ表示時にスクロール位置をトップに戻す
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return <IntroductionThisSite />;
 };
 
-export default IntroductionThisSite;
+export default IntroductionThisSitePage;

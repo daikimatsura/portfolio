@@ -2,39 +2,77 @@
 
 import { useEffect } from "react";
 import { Button } from "@/components/atoms/Button";
-import Link from "next/link";
-import { Home } from "lucide-react";
+import { motion } from "framer-motion";
+import { AlertTriangle, RefreshCw } from "lucide-react";
 
-interface ErrorProps {
-  error: Error;
-}
-
-export default function Error({ error }: ErrorProps) {
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
   useEffect(() => {
-    // エラーをログに記録
     console.error(error);
   }, [error]);
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <div className="text-center space-y-6 p-8">
-        <span className="text-6xl">⚠️</span>
+    <div className="min-h-[80vh] flex items-center justify-center px-6">
+      <motion.div
+        className="max-w-md w-full bg-gradient-to-br from-gray-900 to-black p-8 rounded-xl border border-gray-800 shadow-xl"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="text-center">
+          <motion.div
+            className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-500/10 mb-6 mx-auto"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 200,
+              damping: 10,
+              delay: 0.2,
+            }}
+          >
+            <AlertTriangle className="h-8 w-8 text-red-500" />
+          </motion.div>
 
-        <h2 className="text-2xl font-semibold">予期せぬエラーが発生しました</h2>
-        <p className="text-gray-400 max-w-md mx-auto">
-          申し訳ありません。問題が発生しました。
-          <br />
-          再度お試しください。
-        </p>
-        <div className="space-y-4">
-          <Button asChild className="mt-8">
-            <Link href="/">
-              <Home className="mr-2 h-4 w-4" />
-              トップページに戻る
-            </Link>
-          </Button>
+          <motion.h2
+            className="text-2xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            エラーが発生しました
+          </motion.h2>
+
+          <motion.p
+            className="text-gray-400 mb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
+            申し訳ありませんが、ページの読み込み中に問題が発生しました。
+            もう一度お試しいただくか、後ほどアクセスしてください。
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            <Button
+              onClick={reset}
+              className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
+            >
+              <RefreshCw className="mr-2 h-4 w-4" />
+              再読み込み
+            </Button>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

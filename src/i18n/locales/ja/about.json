@@ -1,0 +1,10 @@
+{
+  "jobHistory": {
+    "title": "職務経歴",
+    "description": "これまでの職務経歴と担当したプロジェクトの概要です。",
+    "experience": "経験",
+    "skills": "使用技術",
+    "achievements": "成果",
+    "present": "現在"
+  }
+}

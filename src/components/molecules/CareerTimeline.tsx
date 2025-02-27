@@ -5,31 +5,127 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/atoms/Card";
-import { Briefcase, Calendar, Award } from "lucide-react";
+import { Briefcase, Calendar, Award, Code } from "lucide-react";
+import { ReactNode } from "react";
+
+// 型定義
+interface Period {
+  start: string;
+  end: string;
+}
+
+interface Project {
+  name: string;
+  role: string;
+  period: Period;
+  description: string;
+  technologies: string[];
+}
+
+interface CareerHistory {
+  id: string;
+  company: string;
+  position: string;
+  period: Period;
+  description?: string;
+  achievements?: string[];
+  projectHighlights?: Project[];
+}
 
 interface CareerTimelineProps {
   careers: CareerHistory[];
 }
 
+// 共通コンポーネント
+// セクションタイトル
+const SectionTitle = ({
+  icon,
+  children,
+}: {
+  icon: ReactNode;
+  children: ReactNode;
+}) => (
+  <h4 className="font-semibold mb-3 flex items-center text-white">
+    {icon}
+    <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+      {children}
+    </span>
+  </h4>
+);
+
+// 期間表示
+const PeriodDisplay = ({ period }: { period: Period }) => (
+  <div className="flex items-center text-gray-400 dark:text-gray-300 text-sm">
+    <Calendar className="w-4 h-4 mr-2" />
+    {period.start} - {period.end}
+  </div>
+);
+
+// 複数行テキスト表示
+const MultiLineText = ({ text }: { text: string }) => (
+  <div className="text-gray-300 dark:text-gray-300">
+    {text.split("\n").map((line, index) => (
+      <p key={index} className="mb-1">
+        {line}
+      </p>
+    ))}
+  </div>
+);
+
+// テクノロジーバッジ
+const TechBadge = ({ tech }: { tech: string }) => (
+  <Badge
+    variant="outline"
+    className="text-xs bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700 transition-colors"
+  >
+    {tech}
+  </Badge>
+);
+
+// プロジェクトカードコンポーネント
+const ProjectCard = ({ project }: { project: Project }) => (
+  <div className="p-4 bg-gray-900/80 dark:bg-gray-900 rounded-lg border border-gray-800 shadow-md hover:shadow-blue-900/20 transition-all duration-200">
+    <div className="flex justify-between items-start mb-2">
+      <h5 className="font-medium text-blue-400 dark:text-blue-300">
+        {project.name}
+      </h5>
+      <div className="flex flex-col items-end">
+        <PeriodDisplay period={project.period} />
+        <Badge className="mt-1 bg-blue-900/30 hover:bg-blue-800/40 text-blue-300">
+          {project.role}
+        </Badge>
+      </div>
+    </div>
+    <MultiLineText text={project.description} />
+    <div className="flex flex-wrap gap-2">
+      {project.technologies.map((tech, techIndex) => (
+        <TechBadge key={techIndex} tech={tech} />
+      ))}
+    </div>
+  </div>
+);
+
 export default function CareerTimeline({ careers }: CareerTimelineProps) {
   return (
     <div className="space-y-8">
       {careers.map((career) => (
-        <Card key={career.id} className="relative overflow-hidden">
+        <Card
+          key={career.id}
+          className="relative overflow-hidden bg-gray-900/60 border-gray-800 shadow-lg"
+        >
           <div className="absolute top-0 left-0 w-1 h-full bg-blue-500" />
           <CardHeader>
             <CardTitle>
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl font-bold">{career.company}</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
+                  <h3 className="text-xl font-bold text-white">
+                    {career.company}
+                  </h3>
+                  <p className="text-gray-400 dark:text-gray-300 text-sm mt-1">
                     {career.position}
                   </p>
                 </div>
-                <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  {career.period.start} - {career.period.end}
-                </div>
+                <PeriodDisplay period={career.period} />
               </div>
             </CardTitle>
           </CardHeader>
@@ -37,26 +133,24 @@ export default function CareerTimeline({ careers }: CareerTimelineProps) {
             {/* 業務内容 */}
             {career.description && (
               <div>
-                <h4 className="font-semibold mb-2 flex items-center">
-                  <Briefcase className="w-4 h-4 mr-2" />
+                <SectionTitle
+                  icon={<Briefcase className="w-4 h-4 mr-2 text-blue-400" />}
+                >
                   業務内容
-                </h4>
-                <div className="text-gray-600 dark:text-gray-300">
-                  {career.description.split("\n").map((line, index) => (
-                    <p key={index}>{line}</p>
-                  ))}
-                </div>
+                </SectionTitle>
+                <MultiLineText text={career.description} />
               </div>
             )}
 
             {/* 成果・実績 */}
             {career.achievements && (
               <div>
-                <h4 className="font-semibold mb-2 flex items-center">
-                  <Award className="w-4 h-4 mr-2" />
+                <SectionTitle
+                  icon={<Award className="w-4 h-4 mr-2 text-blue-400" />}
+                >
                   主な成果・実績
-                </h4>
-                <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+                </SectionTitle>
+                <ul className="list-disc list-inside space-y-2 text-gray-300 dark:text-gray-300">
                   {career.achievements.map((achievement, index) => (
                     <li key={index}>{achievement}</li>
                   ))}
@@ -65,46 +159,21 @@ export default function CareerTimeline({ careers }: CareerTimelineProps) {
             )}
 
             {/* プロジェクトハイライト */}
-            {career.projectHighlights && (
-              <div>
-                <h4 className="font-semibold mb-3">プロジェクト詳細</h4>
-                <div className="grid gap-4">
-                  {career.projectHighlights.map((project, index) => (
-                    <div
-                      key={index}
-                      className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
-                    >
-                      <div className="flex justify-between items-start mb-2">
-                        <h5 className="font-medium">{project.name}</h5>
-                        <div className="flex flex-col items-end">
-                          <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
-                            <Calendar className="w-4 h-4 mr-2" />
-                            {project.period.start} - {project.period.end}
-                          </div>
-                          <Badge className="mt-1">{project.role}</Badge>
-                        </div>
-                      </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-300 mb-3">
-                        {project.description.split("\n").map((line, index) => (
-                          <p key={index}>{line}</p>
-                        ))}
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.map((tech, techIndex) => (
-                          <Badge
-                            key={techIndex}
-                            variant="outline"
-                            className="text-xs"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+            {career.projectHighlights &&
+              career.projectHighlights.length > 0 && (
+                <div>
+                  <SectionTitle
+                    icon={<Code className="w-4 h-4 mr-2 text-blue-400" />}
+                  >
+                    プロジェクト詳細
+                  </SectionTitle>
+                  <div className="grid gap-4">
+                    {career.projectHighlights.map((project, index) => (
+                      <ProjectCard key={index} project={project} />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
           </CardContent>
         </Card>
       ))}

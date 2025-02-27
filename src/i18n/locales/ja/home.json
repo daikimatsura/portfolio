@@ -1,0 +1,46 @@
+{
+  "nav": {
+    "about": "About me",
+    "blogs": "ブログ",
+    "skills": "スキル",
+    "contact": "お問い合わせ"
+  },
+  "about": {
+    "title": "Software Engineer",
+    "name": "daiki matsuura",
+    "description": "フロントエンド開発とAWSインフラ構築を専門とするソフトウェアエンジニアです。ユーザー体験を向上させる革新的なソリューションの開発に情熱を持っています。",
+    "skills": "React、Next.js、TypeScript、AWS CDKを活用したプロジェクト開発が得意です。",
+    "buttons": {
+      "jobHistory": "職務経歴を見る",
+      "aboutSite": "このサイトについて"
+    },
+    "scrollIndicator": "スクロールして続きを見る"
+  },
+  "skills": {
+    "title": "スキルセット",
+    "description": "フロントエンド開発からAWSインフラ構築まで、幅広いスキルを持っています。常に新しい技術を学び、実践することで技術力を高めています。",
+    "showAll": "すべて表示",
+    "collapse": "折りたたむ",
+    "skillCount": "スキル"
+  },
+  "blogs": {
+    "title": "技術ブログ",
+    "description": "技術的な知見や経験を共有するために執筆したブログ記事です。主にフロントエンド開発やAWSサービスに関する内容を発信しています。",
+    "readArticle": "記事を読む",
+    "viewAll": "すべての記事を見る"
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "description": "現在、お問い合わせフォームを準備中です。下記のソーシャルリンクからご連絡いただけます。",
+    "status": "お問い合わせフォーム準備中",
+    "comingSoon": "Coming Soon"
+  },
+  "footer": {
+    "description": "フロントエンド開発とAWSインフラ構築を専門とするソフトウェアエンジニア",
+    "links": "リンク",
+    "social": "ソーシャル",
+    "copyright": "All rights reserved.",
+    "madeWith": "Made with",
+    "using": "using Next.js and Tailwind CSS"
+  }
+}
