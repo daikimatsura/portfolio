@@ -16,7 +16,7 @@ const careerData: CareerHistory[] = [
     achievements: [
       "自社サービスのSaaS化/マルチテナントアプリケーション化",
       "自社サービスのWell ArchitectedレビューおよびFTR要件を確認しベストプラクティス対応",
-      "AIアプリ開発(RAG/LangChain/LLM)、テックリード",
+      "LLMを活用したアプリケーション開発",
       "社内向けTypeScript/React勉強会の実施",
     ],
   },
@@ -109,9 +109,8 @@ const JobHistory = () => {
 };
 
 export default JobHistory;
-
 /*
-const careerData: CareerHistory[] = [
+const careerData1: CareerHistory[] = [
   {
     id: "0",
     company: "大学生",
@@ -229,8 +228,9 @@ const careerData: CareerHistory[] = [
     description:
       "自社サービス開発の他、Amazon Connect構築や少人数チームのテックリードを担当。\n概算見積もりやAWS設計・チーム開発のタスク管理など",
     achievements: [
-      "自社サービスのSaaS化",
+      "自社サービスのSaaS化/マルチテナントアプリケーション化",
       "社内向けTypeScript/React勉強会の実施",
+      "LLMを活用したアプリケーション開発",
     ],
     projectHighlights: [
       {
