@@ -273,3 +273,19 @@ Next.js App Router with React, Shadcn UI, Radix UI, and Tailwind
 - モバイルメニューボタン（ハンバーガーメニュー）もトップページでのみ表示する
 - 条件付きレンダリングを使用する場合は、UI要素ごとに個別の条件を適用し、必要なものだけを表示/非表示にする
 - ユーティリティ機能（テーマ切替、外部リンクなど）はすべてのページで利用可能にする
+
+26. CI/CD対応のための設定と確認事項:
+- ESLintの設定は.eslintrc.jsonを使用し、フラットな設定ファイル（eslint.config.mjs）は使用しない
+- Next.jsの設定ファイルは必ずJavaScriptファイル（next.config.js）を使用し、TypeScriptファイル（next.config.ts）は使用しない
+- package.jsonのdependenciesとdevDependenciesのバージョン互換性を確保する
+  - 特にTypeScriptとESLint関連のパッケージバージョンの互換性に注意する
+  - @typescript-eslint/eslint-pluginと@typescript-eslint/parserのバージョンは一致させる
+  - eslintのバージョンはeslint-config-nextが要求するバージョンと互換性があることを確認する
+- コード変更前にローカルでビルドテストを実行し、ビルドエラーがないことを確認する
+- 新しいライブラリを追加する際は、既存のライブラリとの互換性を確認する
+- 不要なライブラリやファイルは削除し、プロジェクトを軽量に保つ
+- 空のファイルや未使用のコードは残さない
+- 環境変数の型定義を適切に行い、ビルド時に必要な環境変数が設定されていることを確認する
+- デプロイ前にlintとtypeチェックを実行し、エラーがないことを確認する
+- CI/CDパイプラインでのビルドエラーが発生した場合は、ローカル環境で同じ条件でビルドを試みて問題を特定する
+- 本番環境と開発環境の差異を最小限に抑え、環境依存のバグを防止する
