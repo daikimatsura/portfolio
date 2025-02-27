@@ -1,9 +1,8 @@
 "use client";
 
 import { Button } from "@/components/atoms/Button";
-import { Clock, Mail, Github, Linkedin } from "lucide-react";
+import { Clock, Mail } from "lucide-react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 
 const Contact = () => {
   // const socialLinks = [

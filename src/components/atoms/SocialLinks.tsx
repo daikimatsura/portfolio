@@ -3,7 +3,7 @@
 import { ReactNode } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Github, Mail, Linkedin } from "lucide-react";
+import { Github } from "lucide-react";
 
 // ソーシャルリンクの型定義
 export interface SocialLink {

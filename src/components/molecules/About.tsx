@@ -136,37 +136,37 @@ const About = () => {
                     <br />
                     {"  "}name:{" "}
                     <span className="text-yellow-800 dark:text-yellow-300">
-                      'daiki matsuura'
+                      &apos;daiki matsuura&apos;
                     </span>
                     ,
                     <br />
                     {"  "}role:{" "}
                     <span className="text-yellow-800 dark:text-yellow-300">
-                      'Software Engineer'
+                      &apos;Software Engineer&apos;
                     </span>
                     ,
                     <br />
                     {"  "}skills: [
                     <span className="text-yellow-800 dark:text-yellow-300">
-                      'React'
+                      &apos;React&apos;
                     </span>
                     ,{" "}
                     <span className="text-yellow-800 dark:text-yellow-300">
-                      'Next.js'
+                      &apos;Next.js&apos;
                     </span>
                     ,{" "}
                     <span className="text-yellow-800 dark:text-yellow-300">
-                      'TypeScript'
+                      &apos;TypeScript&apos;
                     </span>
                     ,{" "}
                     <span className="text-yellow-800 dark:text-yellow-300">
-                      'AWS'
+                      &apos;AWS&apos;
                     </span>
                     ],
                     <br />
                     {"  "}loves:{" "}
                     <span className="text-yellow-800 dark:text-yellow-300">
-                      'Creating innovative solutions'
+                      &apos;Creating innovative solutions&apos;
                     </span>
                     <br />
                     {"}"};

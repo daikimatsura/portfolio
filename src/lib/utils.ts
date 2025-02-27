@@ -12,7 +12,7 @@ export function cn(...inputs: ClassValue[]) {
  * デバウンス関数
  * 連続して呼び出される関数の実行を遅延させる
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
@@ -39,7 +39,7 @@ export function debounce<T extends (...args: any[]) => any>(
  * スロットル関数
  * 指定した時間内に1回だけ関数を実行する
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
   limit: number
 ): (...args: Parameters<T>) => void {

@@ -1,7 +1,6 @@
 // components/layout/Footer.tsx
 "use client";
 
-import { Github, Mail, Linkedin, Heart } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 

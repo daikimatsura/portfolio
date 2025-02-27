@@ -4,8 +4,6 @@ import BlogCard from "@/components/molecules/BlogCard";
 import { useInView } from "react-intersection-observer";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 const Blogs = () => {
   const { ref, inView } = useInView({

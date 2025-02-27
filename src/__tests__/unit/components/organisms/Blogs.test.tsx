@@ -21,7 +21,7 @@ describe("Blogs", () => {
 
     expect(
       screen.getByText(
-        (content, element) =>
+        (content) =>
           content.includes(
             "技術的な知見や経験を共有するために執筆したブログ記事です"
           ) &&
