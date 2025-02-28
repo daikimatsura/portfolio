@@ -1,31 +1,45 @@
 "use client";
 
 import { Button } from "@/components/atoms/Button";
-import { Clock, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import { motion } from "framer-motion";
+import { ContactForm } from "@/components/organisms/ContactForm";
+import { fadeInUp } from "@/lib/animations/variants";
+
+// アニメーション設定
+const decorationAnimation = {
+  left: {
+    animate: {
+      x: [0, 20, 0],
+      y: [0, -20, 0],
+    },
+    transition: {
+      repeat: Infinity,
+      duration: 8,
+      ease: "easeInOut",
+    },
+  },
+  right: {
+    animate: {
+      x: [0, -20, 0],
+      y: [0, 20, 0],
+    },
+    transition: {
+      repeat: Infinity,
+      duration: 8,
+      ease: "easeInOut",
+      delay: 1,
+    },
+  },
+};
+
+// フォームコンテナのアニメーション
+const formAnimation = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+};
 
 const Contact = () => {
-  // const socialLinks = [
-  //   {
-  //     name: "GitHub",
-  //     icon: <Github className="w-5 h-5" />,
-  //     url: "https://github.com/daikimatsura",
-  //     color: "hover:text-white hover:bg-gray-800",
-  //   },
-  //   {
-  //     name: "LinkedIn",
-  //     icon: <Linkedin className="w-5 h-5" />,
-  //     url: "#",
-  //     color: "hover:text-white hover:bg-blue-600",
-  //   },
-  //   {
-  //     name: "Email",
-  //     icon: <Mail className="w-5 h-5" />,
-  //     url: "#",
-  //     color: "hover:text-white hover:bg-green-600",
-  //   },
-  // ];
-
   return (
     <section id="contact" className="relative py-32 overflow-hidden">
       {/* 背景のグラデーションエフェクト */}
@@ -40,28 +54,13 @@ const Contact = () => {
       >
         <motion.div
           className="absolute -left-4 -top-4 w-64 h-64 bg-blue-500/10 dark:bg-blue-500/10 rounded-full blur-3xl"
-          animate={{
-            x: [0, 20, 0],
-            y: [0, -20, 0],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 8,
-            ease: "easeInOut",
-          }}
+          animate={decorationAnimation.left.animate}
+          transition={decorationAnimation.left.transition}
         />
         <motion.div
           className="absolute -right-4 -bottom-4 w-64 h-64 bg-purple-500/10 dark:bg-purple-500/10 rounded-full blur-3xl"
-          animate={{
-            x: [0, -20, 0],
-            y: [0, 20, 0],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 8,
-            ease: "easeInOut",
-            delay: 1,
-          }}
+          animate={decorationAnimation.right.animate}
+          transition={decorationAnimation.right.transition}
         />
       </motion.div>
 
@@ -70,8 +69,8 @@ const Contact = () => {
           {/* ヘッダー部分 */}
           <motion.div
             className="text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={fadeInUp.hidden}
+            animate={fadeInUp.visible}
             transition={{ duration: 0.8 }}
           >
             <motion.div
@@ -83,7 +82,11 @@ const Contact = () => {
               <div className="relative">
                 <div className="absolute inset-0 animate-ping rounded-full bg-blue-400/20" />
                 <div className="relative bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full p-5 backdrop-blur-sm border border-blue-500/30">
-                  <Mail className="w-8 h-8 text-blue-700 dark:text-blue-400" />
+                  <Mail
+                    className="w-8 h-8 text-blue-700 dark:text-blue-400"
+                    data-testid="mail-icon"
+                    aria-hidden="true"
+                  />
                 </div>
               </div>
             </motion.div>
@@ -101,69 +104,20 @@ const Contact = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.8 }}
             >
-              現在、お問い合わせフォームを準備中です。
+              ご質問やお仕事のご依頼など、お気軽にお問い合わせください。
               <br />
-              {/* 下記のソーシャルリンクからご連絡いただけます。 */}
+              下記のフォームからメッセージを送信いただけます。
             </motion.p>
           </motion.div>
 
-          {/* ソーシャルリンク */}
-          {/* <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
-          >
-            {socialLinks.map((link, index) => (
-              <motion.div
-                key={link.name}
-                whileHover={{ y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 + index * 0.1, duration: 0.5 }}
-              >
-                <Link href={link.url} target="_blank" className="block">
-                  <div
-                    className={`bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-6 flex items-center justify-center transition-colors ${link.color}`}
-                  >
-                    <div className="flex flex-col items-center">
-                      <div className="mb-3">{link.icon}</div>
-                      <span className="font-medium">{link.name}</span>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div> */}
-
-          {/* ステータス表示 */}
+          {/* コンタクトフォーム */}
           <motion.div
             className="bg-gradient-to-br from-card/80 to-card backdrop-blur-xl rounded-2xl p-8 border border-border"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={formAnimation.initial}
+            animate={formAnimation.animate}
             transition={{ delay: 1.3, duration: 0.8 }}
           >
-            <div className="flex items-center justify-center space-x-3 mb-6">
-              <Clock className="w-5 h-5 text-blue-700 dark:text-blue-400 animate-pulse" />
-              <span className="text-blue-800 dark:text-blue-400 font-medium">
-                お問い合わせフォーム準備中
-              </span>
-            </div>
-
-            <Button
-              size="lg"
-              className="w-full bg-gradient-to-r from-blue-700/50 to-purple-700/50 hover:from-blue-700/70 hover:to-purple-700/70 transition-colors duration-300 backdrop-blur-sm"
-              disabled
-            >
-              <div className="flex items-center justify-center space-x-2">
-                <span>Coming Soon</span>
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                </span>
-              </div>
-            </Button>
+            <ContactForm />
           </motion.div>
         </div>
       </div>

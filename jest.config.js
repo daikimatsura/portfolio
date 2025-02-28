@@ -11,9 +11,31 @@ module.exports = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   modulePaths: ["<rootDir>/src/"],
   transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }],
+    "^.+\\.(js|jsx|ts|tsx)$": [
+      "babel-jest",
+      {
+        presets: [
+          [
+            "next/babel",
+            {
+              "preset-react": {
+                runtime: "automatic",
+              },
+            },
+          ],
+        ],
+      },
+    ],
   },
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
+  },
+  testEnvironmentOptions: {
+    customExportConditions: [""],
+  },
+  globals: {
+    "ts-jest": {
+      tsconfig: "tsconfig.jest.json",
+    },
   },
 };

@@ -4,6 +4,26 @@
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
 
+// React 19のサポートを追加
+// ReactDOMTestUtils.actの警告を抑制
+jest.mock("react-dom/test-utils", () => {
+  const originalModule = jest.requireActual("react-dom/test-utils");
+  return {
+    ...originalModule,
+    act: jest.requireActual("react").act,
+  };
+});
+
+// @testing-library/reactのactを最適化
+jest.mock("@testing-library/react", () => {
+  const originalModule = jest.requireActual("@testing-library/react");
+  return {
+    ...originalModule,
+    // actをReactから直接インポート
+    act: jest.requireActual("react").act,
+  };
+});
+
 // Mock next/router
 jest.mock("next/router", () => ({
   useRouter() {
@@ -187,6 +207,11 @@ jest.mock("framer-motion", () => ({
       .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
         <nav {...props}>{children}</nav>
       )),
+    form: jest
+      .fn()
+      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
+        <form {...props}>{children}</form>
+      )),
   },
   AnimatePresence: jest.fn().mockImplementation(({ children }) => children),
   useAnimation: jest.fn().mockReturnValue({
@@ -303,5 +328,40 @@ jest.mock("lucide-react", () => {
     ChevronDown: () => <span data-testid="chevron-down-icon">▼</span>,
     ChevronUp: () => <span data-testid="chevron-up-icon">▲</span>,
     Monitor: () => <span data-testid="monitor-icon">🖥️</span>,
+    Send: ({ className }) => (
+      <span data-testid="send-icon" className={className}>
+        Send Icon
+      </span>
+    ),
+    CheckCircle: ({ className }) => (
+      <span data-testid="check-circle-icon" className={className}>
+        CheckCircle Icon
+      </span>
+    ),
+    AlertCircle: ({ className }) => (
+      <span data-testid="alert-circle-icon" className={className}>
+        AlertCircle Icon
+      </span>
+    ),
+    TestTube: ({ className }) => (
+      <span data-testid="test-tube-icon" className={className}>
+        TestTube Icon
+      </span>
+    ),
+    Rocket: ({ className }) => (
+      <span data-testid="rocket-icon" className={className}>
+        Rocket Icon
+      </span>
+    ),
+    Gauge: ({ className }) => (
+      <span data-testid="gauge-icon" className={className}>
+        Gauge Icon
+      </span>
+    ),
+    Shield: ({ className }) => (
+      <span data-testid="shield-icon" className={className}>
+        Shield Icon
+      </span>
+    ),
   };
 });

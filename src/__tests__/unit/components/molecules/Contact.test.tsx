@@ -1,49 +1,59 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { act } from "react";
 import Contact from "@/components/molecules/Contact";
+import "@testing-library/jest-dom";
 
-// framer-motionのモックは既にjest.setup.jsで設定されています
+// ContactFormコンポーネントをモック
+jest.mock("@/components/organisms/ContactForm", () => ({
+  ContactForm: () => (
+    <div data-testid="contact-form-mock">ContactForm Mock</div>
+  ),
+}));
 
 describe("Contact", () => {
-  it("お問い合わせセクションが表示される", () => {
-    render(<Contact />);
+  it("コンポーネントが正しくレンダリングされること", async () => {
+    await act(async () => {
+      render(<Contact />);
+    });
 
-    // セクションタイトルが表示されていることを確認
+    // ヘッダー部分が表示されていることを確認
     expect(screen.getByText("お問い合わせ")).toBeInTheDocument();
-
-    // 説明文が表示されていることを確認
     expect(
-      screen.getByText("現在、お問い合わせフォームを準備中です。")
+      screen.getByText(
+        /ご質問やお仕事のご依頼など、お気軽にお問い合わせください。/i
+      )
     ).toBeInTheDocument();
+    expect(
+      screen.getByText(/下記のフォームからメッセージを送信いただけます。/i)
+    ).toBeInTheDocument();
+
+    // メールアイコンが表示されていることを確認
+    expect(screen.getByTestId("mail-icon")).toBeInTheDocument();
+
+    // ContactFormコンポーネントがレンダリングされていることを確認
+    expect(screen.getByTestId("contact-form-mock")).toBeInTheDocument();
   });
 
-  it("準備中のステータスが表示される", () => {
-    render(<Contact />);
+  it("セクションIDが正しく設定されていること", async () => {
+    await act(async () => {
+      render(<Contact />);
+    });
 
-    // 準備中のメッセージが表示されていることを確認
-    expect(screen.getByText("お問い合わせフォーム準備中")).toBeInTheDocument();
+    const contactSection = document.getElementById("contact");
+    expect(contactSection).toBeInTheDocument();
   });
 
-  it("Coming Soonボタンが表示され、無効化されている", () => {
-    render(<Contact />);
+  it("アニメーション要素が存在すること", async () => {
+    await act(async () => {
+      render(<Contact />);
+    });
 
-    // Coming Soonボタンが表示されていることを確認
-    const comingSoonButton = screen.getByText("Coming Soon");
-    expect(comingSoonButton).toBeInTheDocument();
-
-    // ボタンが無効化されていることを確認
-    const button = comingSoonButton.closest("button");
-    expect(button).toBeDisabled();
-  });
-
-  it("背景のグラデーションエフェクトが表示される", () => {
-    render(<Contact />);
-
-    // 背景のグラデーションエフェクト要素が存在することを確認
-    const gradientElement = document.querySelector(
-      ".absolute.inset-0.bg-gradient-to-b"
-    );
+    // 背景のグラデーションエフェクトが存在することを確認
+    const gradientElement = document.querySelector(".bg-gradient-to-b");
     expect(gradientElement).toBeInTheDocument();
+
+    // デコレーション要素が存在することを確認
+    const decorationElements = document.querySelectorAll(".blur-3xl");
+    expect(decorationElements.length).toBe(2);
   });
 });

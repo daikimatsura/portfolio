@@ -137,11 +137,43 @@ npm start
 
 ## 🧪 テスト
 
+このプロジェクトではJestとReact Testing Libraryを使用してテストを実装しています。
+
 ```bash
-# テストを実行
+# すべてのテストを実行
 yarn test
 # または
 npm test
+
+# 監視モードでテストを実行（ファイル変更時に自動的に再実行）
+yarn test:watch
+# または
+npm run test:watch
+
+# カバレッジレポートを生成
+yarn test:coverage
+# または
+npm run test:coverage
+```
+
+### テスト環境の設定
+
+- **Jest**: テストランナーとして使用
+- **React Testing Library**: コンポーネントのテストに使用
+- **JSX変換**: 新しいReact JSX変換を使用（高速なパフォーマンス）
+- **モック**: 外部依存関係（API、アイコンなど）は適切にモック化
+
+テストファイルは各コンポーネントと同じディレクトリ構造で `src/__tests__` ディレクトリに配置されています。
+
+```
+src/__tests__/
+├── unit/                 # 単体テスト
+│   ├── components/       # コンポーネントテスト
+│   │   ├── atoms/        # 基本的なUI要素のテスト
+│   │   ├── molecules/    # 複合コンポーネントのテスト
+│   │   └── organisms/    # 機能的なセクションのテスト
+│   └── hooks/            # カスタムフックのテスト
+└── integration/          # 統合テスト
 ```
 
 ## 🔍 パフォーマンス最適化
@@ -153,7 +185,6 @@ npm test
 - **サーバーサイドレンダリング**: 初期ロード時間の短縮
 - **キャッシュ戦略**: 適切なキャッシュヘッダーの設定
 - **Web Vitals**: Core Web Vitalsの継続的なモニタリングと改善
-  s
 
 ## 👨‍💻 作者
 

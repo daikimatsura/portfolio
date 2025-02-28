@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import { useAnimationInView } from "./useAnimationInView";
+import { useAnimationInView } from "../../../hooks/useAnimationInView";
 
 // モックの設定
 const mockStart = jest.fn();
