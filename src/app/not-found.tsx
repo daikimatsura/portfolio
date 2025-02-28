@@ -4,12 +4,14 @@ import { Button } from "@/components/atoms/Button";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Home, Search } from "lucide-react";
+import { notFoundCardBg, notFoundIconBg, notFoundText } from "@/lib/styles";
+import { cn } from "@/lib/utils";
 
 export default function NotFound() {
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-6">
       <motion.div
-        className="max-w-md w-full bg-gradient-to-br from-gray-900 to-black p-8 rounded-xl border border-gray-800 shadow-xl"
+        className={cn(notFoundCardBg, "max-w-md w-full p-8 rounded-xl")}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -21,7 +23,7 @@ export default function NotFound() {
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 200, damping: 10 }}
           >
-            <div className="absolute inset-0 bg-blue-500/10 rounded-full blur-xl" />
+            <div className={notFoundIconBg} />
             <div className="relative flex items-center justify-center h-full">
               <span className="text-6xl">🔍</span>
             </div>
@@ -32,14 +34,14 @@ export default function NotFound() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <h2 className="text-4xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-              404
-            </h2>
-            <h3 className="text-xl font-medium mb-4">ページが見つかりません</h3>
+            <h2 className={cn(notFoundText, "text-4xl font-bold mb-2")}>404</h2>
+            <h3 className="text-xl font-medium mb-4 text-foreground">
+              ページが見つかりません
+            </h3>
           </motion.div>
 
           <motion.p
-            className="text-gray-400 mb-8"
+            className="text-foreground dark:text-gray-400 mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
@@ -54,10 +56,7 @@ export default function NotFound() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
-            <Button
-              asChild
-              className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
-            >
+            <Button asChild gradient>
               <Link href="/">
                 <Home className="mr-2 h-4 w-4" />
                 ホームに戻る
@@ -67,7 +66,7 @@ export default function NotFound() {
             <Button
               asChild
               variant="outline"
-              className="bg-white/5 backdrop-blur-sm border-gray-700 hover:bg-white/10"
+              className="bg-background/5 backdrop-blur-sm border-border hover:bg-background/10"
             >
               <Link href="/#contact">
                 <Search className="mr-2 h-4 w-4" />

@@ -3,19 +3,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-
-// アニメーション設定
-const fadeInAnimation = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
-};
-
-const fadeInDelayedAnimation = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { delay: 0.2, duration: 0.5 },
-};
+import { fadeInProps, fadeInDelayedProps } from "@/lib/animations";
 
 // ナビゲーションリンク
 const navLinks = [
@@ -48,13 +36,13 @@ const Footer = () => {
           <div>
             <motion.h3
               className="text-xl font-bold mb-4 bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent"
-              {...fadeInAnimation}
+              {...fadeInProps}
             >
               Daiki Matsuura
             </motion.h3>
             <motion.p
               className="text-muted-foreground text-sm"
-              {...fadeInDelayedAnimation}
+              {...fadeInDelayedProps}
             >
               React、Next.js、TypeScript、Amplify、AWS
               CDKを活用したWebアプリケーション開発が得意です。
@@ -65,11 +53,11 @@ const Footer = () => {
           <div>
             <motion.h3
               className="text-lg font-medium mb-4 text-foreground"
-              {...fadeInAnimation}
+              {...fadeInProps}
             >
               リンク
             </motion.h3>
-            <motion.ul className="space-y-2" {...fadeInDelayedAnimation}>
+            <motion.ul className="space-y-2" {...fadeInDelayedProps}>
               {navLinks.map((link) => (
                 <li key={link.path}>
                   <Link
@@ -87,11 +75,11 @@ const Footer = () => {
           {/* <div>
             <motion.h3
               className="text-lg font-medium mb-4"
-              {...fadeInAnimation}
+              {...fadeInProps}
             >
               ソーシャル
             </motion.h3>
-            <motion.div className="flex space-x-4" {...fadeInDelayedAnimation}>
+            <motion.div className="flex space-x-4" {...fadeInDelayedProps}>
               {socialLinks.map((link) => (
                 <motion.div
                   key={link.name}

@@ -2,6 +2,8 @@
 
 import React, { Component, ErrorInfo, ReactNode } from "react";
 import { logError, toAppError } from "./errorHandlers";
+import { errorCardBg, errorIconBg, errorText } from "@/lib/styles";
+import { cn } from "@/lib/utils";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -66,14 +68,14 @@ export class ErrorBoundary extends Component<
 
       return (
         fallback || (
-          <div className="p-4 bg-red-500/10 border border-red-500 rounded-md">
-            <h2 className="text-lg font-semibold text-red-500">
+          <div className={cn(errorCardBg, "p-4 border rounded-md")}>
+            <h2 className={cn(errorIconBg, "text-lg font-semibold")}>
               エラーが発生しました
             </h2>
-            <p className="mt-2 text-gray-300">{error.message}</p>
+            <p className={cn(errorText, "mt-2")}>{error.message}</p>
             <button
               onClick={this.resetErrorBoundary}
-              className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
+              className="mt-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-md hover:from-blue-600 hover:to-purple-600 transition-colors"
             >
               再試行
             </button>

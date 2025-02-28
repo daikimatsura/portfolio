@@ -1,10 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { loadingBg, loadingText } from "@/lib/styles";
+import { cn } from "@/lib/utils";
 
 export default function Loading() {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black z-50">
+    <div
+      className={cn(
+        loadingBg,
+        "fixed inset-0 flex items-center justify-center z-50"
+      )}
+    >
       <div className="text-center">
         <motion.div
           className="relative w-24 h-24 mx-auto mb-8"
@@ -36,7 +43,7 @@ export default function Loading() {
         </motion.div>
 
         <motion.p
-          className="text-gray-400 text-sm"
+          className={cn(loadingText, "text-sm")}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}

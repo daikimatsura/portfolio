@@ -14,7 +14,23 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/atoms/Button";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
+import { fadeInUpProps } from "@/lib/animations";
+import {
+  gradientText,
+  blueIconColor,
+  greenIconColor,
+  redIconColor,
+  purpleIconColor,
+  yellowIconColor,
+  orangeIconColor,
+  cardBg,
+  iconBg,
+  getTechCardColor,
+  gradientIconBg,
+} from "@/lib/styles";
+import { cn } from "@/lib/utils";
+import GradientBlurDecoration from "@/components/atoms/GradientBlurDecoration";
 
 // 型定義
 interface Technology {
@@ -24,58 +40,44 @@ interface Technology {
   color: string;
 }
 
-// アニメーション設定の共通化
-const fadeInUpAnimation = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-};
-
 const IntroductionThisSite = () => {
   const technologies: Technology[] = [
     {
       name: "Next.js & React",
       description:
         "モダンなUIとシームレスなユーザー体験を実現するフレームワーク",
-      icon: <Zap className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />,
-      color:
-        "from-yellow-600/20 to-yellow-700/20 dark:from-yellow-500/20 dark:to-yellow-600/20 border-yellow-600/30 dark:border-yellow-500/30",
+      icon: <Zap className={cn("w-6 h-6", yellowIconColor)} />,
+      color: getTechCardColor("yellow"),
     },
     {
       name: "TypeScript",
       description: "型安全性を確保し、開発効率と保守性を向上",
-      icon: <Code className="w-6 h-6 text-blue-600 dark:text-blue-400" />,
-      color:
-        "from-blue-600/20 to-blue-700/20 dark:from-blue-500/20 dark:to-blue-600/20 border-blue-600/30 dark:border-blue-500/30",
+      icon: <Code className={cn("w-6 h-6", blueIconColor)} />,
+      color: getTechCardColor("blue"),
     },
     {
       name: "Tailwind CSS & Shadcn UI",
       description: "美しく一貫性のあるデザインシステムを構築",
-      icon: (
-        <Palette className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-      ),
-      color:
-        "from-purple-600/20 to-purple-700/20 dark:from-purple-500/20 dark:to-purple-600/20 border-purple-600/30 dark:border-purple-500/30",
+      icon: <Palette className={cn("w-6 h-6", purpleIconColor)} />,
+      color: getTechCardColor("purple"),
     },
     {
       name: "アトミックデザイン",
       description: "再利用可能で保守性の高いコンポーネント設計",
-      icon: <Layers className="w-6 h-6 text-green-600 dark:text-green-400" />,
-      color:
-        "from-green-600/20 to-green-700/20 dark:from-green-500/20 dark:to-green-600/20 border-green-600/30 dark:border-green-500/30",
+      icon: <Layers className={cn("w-6 h-6", greenIconColor)} />,
+      color: getTechCardColor("green"),
     },
     {
       name: "テスト実装",
       description: "Jest & React Testing Libraryによる堅牢なテスト",
-      icon: <TestTube className="w-6 h-6 text-red-600 dark:text-red-400" />,
-      color:
-        "from-red-600/20 to-red-700/20 dark:from-red-500/20 dark:to-red-600/20 border-red-600/30 dark:border-red-500/30",
+      icon: <TestTube className={cn("w-6 h-6", redIconColor)} />,
+      color: getTechCardColor("red"),
     },
     {
       name: "CI/CD対応",
       description: "効率的な開発フローと安定したデプロイを実現",
-      icon: <Rocket className="w-6 h-6 text-orange-600 dark:text-orange-400" />,
-      color:
-        "from-orange-600/20 to-orange-700/20 dark:from-orange-500/20 dark:to-orange-600/20 border-orange-600/30 dark:border-orange-500/30",
+      icon: <Rocket className={cn("w-6 h-6", orangeIconColor)} />,
+      color: getTechCardColor("orange"),
     },
   ];
 
@@ -109,22 +111,22 @@ const IntroductionThisSite = () => {
     {
       title: "パフォーマンス最適化",
       description: "Webバイタルを継続的に計測し、最適なユーザー体験を提供",
-      icon: <Gauge className="w-6 h-6 text-blue-600 dark:text-blue-400" />,
+      icon: <Gauge className={cn("w-6 h-6", blueIconColor)} />,
     },
     {
       title: "テスト自動化",
       description: "単体テスト、統合テスト、E2Eテストによる品質保証",
-      icon: <TestTube className="w-6 h-6 text-green-600 dark:text-green-400" />,
+      icon: <TestTube className={cn("w-6 h-6", greenIconColor)} />,
     },
     {
       title: "エラーハンドリング",
       description: "統一されたエラー処理とフォールバックUIの実装",
-      icon: <Shield className="w-6 h-6 text-red-600 dark:text-red-400" />,
+      icon: <Shield className={cn("w-6 h-6", redIconColor)} />,
     },
     {
       title: "CI/CD対応",
       description: "ESLintとTypeScriptによる厳格なコード品質管理",
-      icon: <Rocket className="w-6 h-6 text-purple-600 dark:text-purple-400" />,
+      icon: <Rocket className={cn("w-6 h-6", purpleIconColor)} />,
     },
   ];
 
@@ -134,49 +136,18 @@ const IntroductionThisSite = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-200/30 dark:to-gray-900/20" />
 
       {/* デコレーション要素 */}
-      <motion.div
-        className="absolute inset-0 overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-      >
-        <motion.div
-          className="absolute -left-4 -top-4 w-64 h-64 bg-blue-600/10 dark:bg-blue-500/10 rounded-full blur-3xl"
-          animate={{
-            x: [0, 20, 0],
-            y: [0, -20, 0],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 8,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute -right-4 -bottom-4 w-64 h-64 bg-purple-600/10 dark:bg-purple-500/10 rounded-full blur-3xl"
-          animate={{
-            x: [0, -20, 0],
-            y: [0, 20, 0],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 8,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
-      </motion.div>
+      <GradientBlurDecoration animate={true} />
 
       <div className="container relative mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           {/* ヘッダー部分 */}
           <motion.div
             className="text-center mb-16"
-            {...fadeInUpAnimation}
+            {...fadeInUpProps}
             transition={{ duration: 0.8 }}
           >
             <motion.h1
-              className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent"
+              className={cn("text-5xl font-bold mb-6", gradientText)}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
@@ -213,29 +184,56 @@ const IntroductionThisSite = () => {
               使用技術
             </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {technologies.map((tech, index) => (
-                <motion.div
-                  key={tech.name}
-                  className={`bg-gradient-to-br ${tech.color} backdrop-blur-sm border rounded-xl p-6`}
-                  {...fadeInUpAnimation}
-                  transition={{ delay: 1.1 + index * 0.1, duration: 0.5 }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="flex items-start">
-                    <div className="bg-gray-100/80 dark:bg-gray-900/50 p-3 rounded-lg mr-4">
-                      {tech.icon}
+              {technologies.map((tech, index) => {
+                // 色に基づいて適切なグラデーションクラスを選択
+                let gradientClass = "";
+                if (tech.name === "Next.js & React") {
+                  gradientClass =
+                    "bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 border-yellow-500/30";
+                } else if (tech.name === "TypeScript") {
+                  gradientClass =
+                    "bg-gradient-to-br from-blue-500/20 to-blue-600/20 border-blue-500/30";
+                } else if (tech.name === "Tailwind CSS & Shadcn UI") {
+                  gradientClass =
+                    "bg-gradient-to-br from-purple-500/20 to-purple-600/20 border-purple-500/30";
+                } else if (tech.name === "アトミックデザイン") {
+                  gradientClass =
+                    "bg-gradient-to-br from-green-500/20 to-green-600/20 border-green-500/30";
+                } else if (tech.name === "テスト実装") {
+                  gradientClass =
+                    "bg-gradient-to-br from-red-500/20 to-red-600/20 border-red-500/30";
+                } else if (tech.name === "CI/CD対応") {
+                  gradientClass =
+                    "bg-gradient-to-br from-orange-500/20 to-orange-600/20 border-orange-500/30";
+                }
+
+                return (
+                  <motion.div
+                    key={tech.name}
+                    className={cn(
+                      "backdrop-blur-sm border rounded-xl p-6",
+                      gradientClass
+                    )}
+                    {...fadeInUpProps}
+                    transition={{ delay: 1.1 + index * 0.1, duration: 0.5 }}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="flex items-start">
+                      <div className={cn(iconBg, "p-3.5 mr-4")}>
+                        <div className="w-6 h-6">{tech.icon}</div>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2 text-foreground">
+                          {tech.name}
+                        </h3>
+                        <p className="text-foreground dark:text-gray-300">
+                          {tech.description}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2 text-foreground">
-                        {tech.name}
-                      </h3>
-                      <p className="text-foreground dark:text-gray-300">
-                        {tech.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
 
@@ -255,8 +253,8 @@ const IntroductionThisSite = () => {
               実装詳細
             </motion.h2>
             <motion.div
-              className="bg-gray-100/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-800 rounded-xl p-8"
-              {...fadeInUpAnimation}
+              className={cn(cardBg, "p-8")}
+              {...fadeInUpProps}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
               <ul className="space-y-4 text-foreground">
@@ -293,29 +291,33 @@ const IntroductionThisSite = () => {
               高度な実装ポイント
             </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {advancedFeatures.map((feature, index) => (
-                <motion.div
-                  key={feature.title}
-                  className="bg-gray-100/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-800 rounded-xl p-6"
-                  {...fadeInUpAnimation}
-                  transition={{ delay: 2.2 + index * 0.1, duration: 0.5 }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="flex items-start">
-                    <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 dark:from-blue-500/20 dark:to-purple-500/20 p-3 rounded-lg mr-4">
-                      {feature.icon}
+              {advancedFeatures.map((feature, index) => {
+                return (
+                  <motion.div
+                    key={feature.title}
+                    className={cn(
+                      "backdrop-blur-sm border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-900/50 rounded-xl p-6"
+                    )}
+                    {...fadeInUpProps}
+                    transition={{ delay: 2.2 + index * 0.1, duration: 0.5 }}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="flex items-start">
+                      <div className={cn(gradientIconBg, "p-3.5 mr-4")}>
+                        <div className="w-6 h-6">{feature.icon}</div>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2 text-foreground">
+                          {feature.title}
+                        </h3>
+                        <p className="text-foreground dark:text-gray-300">
+                          {feature.description}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2 text-foreground">
-                        {feature.title}
-                      </h3>
-                      <p className="text-foreground dark:text-gray-300">
-                        {feature.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
 
@@ -337,10 +339,13 @@ const IntroductionThisSite = () => {
               コーディングガイドラインに基づいた一貫性のある実装を確認できます。
             </motion.p>
             <motion.div
-              {...fadeInUpAnimation}
+              {...fadeInUpProps}
               transition={{ delay: 2.8, duration: 0.8 }}
             >
-              <Button className="bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800">
+              <Button
+                className="bg-gray-800 hover:bg-gray-700 text-white"
+                asChild
+              >
                 <Link
                   href="https://github.com/daikimatsura/portfolio"
                   target="_blank"

@@ -3,6 +3,8 @@
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { fadeInUpProps } from "@/lib/animations";
+import { gradientText, gradientUnderline } from "@/lib/styles";
+import { cn } from "@/lib/utils";
 
 interface SectionTitleProps {
   title: string;
@@ -38,15 +40,13 @@ const SectionTitle = ({
 
   return (
     <motion.div
-      className={`mb-16 ${alignmentClasses[align]} ${className}`}
+      className={cn(`mb-16 ${alignmentClasses[align]}`, className)}
       {...fadeInUpProps}
     >
       <h2 className="text-4xl font-bold mb-4 inline-block relative">
         {icon && <span className="mr-2">{icon}</span>}
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400">
-          {title}
-        </span>
-        <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400 rounded-full" />
+        <span className={gradientText}>{title}</span>
+        <div className={gradientUnderline} />
       </h2>
       {subtitle && (
         <motion.p

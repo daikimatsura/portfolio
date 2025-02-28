@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import ContactForm from "@/components/organisms/ContactForm";
 import { Mail } from "lucide-react";
-import { fadeInUp } from "@/lib/animations/variants";
+import { fadeInUp } from "@/lib/animations";
+import { cn } from "@/lib/utils";
+import { blueText, cardBg } from "@/lib/styles";
 
 // フォームコンテナのアニメーション
 const formAnimation = {
@@ -15,13 +17,13 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden"
+      className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-black relative overflow-hidden"
     >
       {/* 装飾要素 - 左上 */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/5 dark:bg-blue-600/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
 
       {/* 装飾要素 - 右下 */}
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/5 dark:bg-purple-600/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
@@ -39,9 +41,9 @@ const Contact = () => {
             >
               <div className="relative">
                 <div className="absolute inset-0 animate-ping rounded-full bg-blue-400/20" />
-                <div className="relative bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full p-5 backdrop-blur-sm border border-blue-500/30">
+                <div className="relative bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-500/20 dark:to-purple-500/20 rounded-full p-5 backdrop-blur-sm border border-blue-200 dark:border-blue-500/30">
                   <Mail
-                    className="w-8 h-8 text-blue-700 dark:text-blue-400"
+                    className={cn("w-8 h-8", blueText)}
                     data-testid="mail-icon"
                     aria-hidden="true"
                   />
@@ -57,7 +59,7 @@ const Contact = () => {
               お問い合わせ
             </motion.h2>
             <motion.p
-              className="text-foreground text-lg leading-relaxed"
+              className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.8 }}
@@ -70,7 +72,7 @@ const Contact = () => {
 
           {/* コンタクトフォーム */}
           <motion.div
-            className="bg-gradient-to-br from-card/80 to-card backdrop-blur-xl rounded-2xl p-8 border border-border"
+            className={cn(cardBg, "p-8 shadow-lg")}
             initial={formAnimation.initial}
             animate={formAnimation.animate}
             transition={{ delay: 1.3, duration: 0.8 }}

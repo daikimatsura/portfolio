@@ -4,6 +4,15 @@ import { useActionState } from "react";
 import { Button } from "@/components/atoms/Button";
 import { motion } from "framer-motion";
 import { Send, CheckCircle, AlertCircle, Clock } from "lucide-react";
+import {
+  blueIconColor,
+  errorBg,
+  formInputStyle,
+  successBg,
+  successText,
+  blueText,
+} from "@/lib/styles";
+import { cn } from "@/lib/utils";
 
 // フォームの状態を表す型
 type FormState = {
@@ -76,18 +85,14 @@ export const ContactForm = () => {
   if (!FORMSPREE_ENDPOINT) {
     return (
       <>
-        <div className="flex items-center justify-center space-x-3 mb-6">
-          <Clock className="w-5 h-5 text-blue-700 dark:text-blue-400 animate-pulse" />
-          <span className="text-blue-800 dark:text-blue-400 font-medium">
+        <div className="flex items-center space-x-2 mb-4">
+          <Clock className={cn("w-5 h-5 animate-pulse", blueIconColor)} />
+          <span className={cn("font-medium", blueText)}>
             お問い合わせフォーム準備中
           </span>
         </div>
 
-        <Button
-          size="lg"
-          className="w-full bg-gradient-to-r from-blue-700/50 to-purple-700/50 hover:from-blue-700/70 hover:to-purple-700/70 transition-colors duration-300 backdrop-blur-sm"
-          disabled
-        >
+        <Button size="lg" gradient className="w-full backdrop-blur-sm" disabled>
           <div className="flex items-center justify-center space-x-2">
             <span>Coming Soon</span>
             <span className="relative flex h-2 w-2">
@@ -135,21 +140,18 @@ export const ContactForm = () => {
     return (
       <div className="w-full">
         <motion.div
-          className="bg-gradient-to-br from-green-500/20 to-green-600/20 backdrop-blur-xl rounded-2xl p-8 border border-green-500/30"
+          className={cn(successBg, "p-8")}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           <div className="flex flex-col items-center justify-center text-center space-y-4">
-            <CheckCircle className="w-16 h-16 text-green-500 mb-2" />
-            <h3 className="text-2xl font-bold text-green-500">送信完了</h3>
-            <p className="text-foreground">
+            <CheckCircle className="w-16 h-16 text-green-600 dark:text-green-500 mb-2" />
+            <h3 className={cn("text-2xl font-bold", successText)}>送信完了</h3>
+            <p className="text-gray-700 dark:text-gray-300">
               お問い合わせありがとうございます。できるだけ早くご返信いたします。
             </p>
-            <Button
-              onClick={resetForm}
-              className="mt-4 bg-gradient-to-r from-blue-700/50 to-purple-700/50 hover:from-blue-700/70 hover:to-purple-700/70"
-            >
+            <Button onClick={resetForm} gradient className="mt-4">
               新しいメッセージを送信
             </Button>
           </div>
@@ -172,7 +174,7 @@ export const ContactForm = () => {
           <div>
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-foreground mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
               お名前 <span className="text-red-500">*</span>
             </label>
@@ -181,7 +183,7 @@ export const ContactForm = () => {
               id="name"
               name="name"
               required
-              className="w-full px-4 py-3 rounded-lg bg-card/50 border border-border focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-colors"
+              className={formInputStyle}
               placeholder="山田 太郎"
             />
           </div>
@@ -189,7 +191,7 @@ export const ContactForm = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-foreground mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
               メールアドレス <span className="text-red-500">*</span>
             </label>
@@ -198,7 +200,7 @@ export const ContactForm = () => {
               id="email"
               name="email"
               required
-              className="w-full px-4 py-3 rounded-lg bg-card/50 border border-border focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-colors"
+              className={formInputStyle}
               placeholder="example@example.com"
             />
           </div>
@@ -206,7 +208,7 @@ export const ContactForm = () => {
           <div>
             <label
               htmlFor="subject"
-              className="block text-sm font-medium text-foreground mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
               件名 <span className="text-red-500">*</span>
             </label>
@@ -215,7 +217,7 @@ export const ContactForm = () => {
               id="subject"
               name="subject"
               required
-              className="w-full px-4 py-3 rounded-lg bg-card/50 border border-border focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-colors"
+              className={formInputStyle}
               placeholder="お問い合わせの件名"
             />
           </div>
@@ -223,7 +225,7 @@ export const ContactForm = () => {
           <div>
             <label
               htmlFor="message"
-              className="block text-sm font-medium text-foreground mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
               メッセージ <span className="text-red-500">*</span>
             </label>
@@ -232,7 +234,7 @@ export const ContactForm = () => {
               name="message"
               rows={6}
               required
-              className="w-full px-4 py-3 rounded-lg bg-card/50 border border-border focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-colors resize-none"
+              className={cn(formInputStyle, "resize-none")}
               placeholder="メッセージを入力してください"
             ></textarea>
           </div>
@@ -240,14 +242,17 @@ export const ContactForm = () => {
 
         {formState.status === "error" && (
           <motion.div
-            className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 flex items-start space-x-3"
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className={cn(errorBg, "p-4 flex items-start space-x-3")}
           >
             <AlertCircle className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
             <div>
-              <h4 className="font-medium text-red-500">エラーが発生しました</h4>
-              <p className="text-sm text-foreground/80">
+              <h4 className="font-medium text-red-600 dark:text-red-500">
+                エラーが発生しました
+              </h4>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
                 {formState.errorMessage}
               </p>
             </div>
@@ -257,18 +262,20 @@ export const ContactForm = () => {
         <Button
           type="submit"
           disabled={isPending}
-          className="w-full bg-gradient-to-r from-blue-700/50 to-purple-700/50 hover:from-blue-700/70 hover:to-purple-700/70 transition-colors duration-300 backdrop-blur-sm"
+          gradient
+          size="lg"
+          className="w-full backdrop-blur-sm text-lg py-6 shadow-lg"
         >
-          <div className="flex items-center justify-center space-x-2">
+          <div className="flex items-center justify-center space-x-3">
             {isPending ? (
               <>
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                <span>送信中...</span>
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                <span className="text-white">送信中...</span>
               </>
             ) : (
               <>
-                <Send className="w-4 h-4" />
-                <span>送信する</span>
+                <Send className="w-6 h-6" />
+                <span className="text-white">送信する</span>
               </>
             )}
           </div>

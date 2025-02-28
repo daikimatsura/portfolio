@@ -6,11 +6,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/atoms/ThemeToggle";
+import { gradientText } from "@/lib/styles";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   // スクロール検出
   useEffect(() => {
@@ -36,6 +39,43 @@ const Header = () => {
     { name: "Contact", href: "#contact", isButton: true },
   ];
 
+  // ナビゲーション項目のレンダリング
+  const renderNavItems = () => {
+    if (!isHomePage) return null;
+
+    return navItems.map((item, index) => (
+      <motion.div
+        key={item.name}
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
+      >
+        {item.isButton ? (
+          <Button
+            gradient
+            className="text-white font-medium rounded-xl shadow-lg"
+            asChild
+          >
+            <Link
+              href={item.href}
+              className="flex items-center justify-center w-full h-full px-4 py-2"
+            >
+              {item.name}
+            </Link>
+          </Button>
+        ) : (
+          <Link
+            href={item.href}
+            className="text-foreground hover:text-primary transition-colors relative group"
+          >
+            {item.name}
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+          </Link>
+        )}
+      </motion.div>
+    ));
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -55,7 +95,7 @@ const Header = () => {
             transition={{ delay: 0.2, duration: 0.5 }}
           >
             <Link href="/">
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-800 to-purple-800 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+              <span className={cn("text-xl font-bold", gradientText)}>
                 Daiki Matsuura
               </span>
             </Link>
@@ -71,7 +111,7 @@ const Header = () => {
             >
               <Github className="h-5 w-5" />
             </Link>
-            {pathname === "/" && (
+            {isHomePage && (
               <motion.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -86,38 +126,7 @@ const Header = () => {
 
           {/* デスクトップメニュー */}
           <div className="hidden lg:flex items-center space-x-8">
-            {pathname === "/" &&
-              navItems.map((item, index) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-                >
-                  {item.isButton ? (
-                    <Button
-                      variant="outline"
-                      className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-md rounded-lg font-medium dark:bg-gradient-to-r dark:from-blue-600 dark:to-purple-600"
-                      asChild
-                    >
-                      <Link
-                        href={item.href}
-                        className="flex items-center justify-center w-full h-full px-4 py-2"
-                      >
-                        {item.name}
-                      </Link>
-                    </Button>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className="text-foreground hover:text-primary transition-colors relative group"
-                    >
-                      {item.name}
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </Link>
-                  )}
-                </motion.div>
-              ))}
+            {renderNavItems()}
 
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
@@ -146,7 +155,7 @@ const Header = () => {
 
       {/* モバイルメニュー */}
       <AnimatePresence>
-        {isMenuOpen && pathname === "/" && (
+        {isMenuOpen && isHomePage && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
@@ -164,8 +173,8 @@ const Header = () => {
                 >
                   {item.isButton ? (
                     <Button
-                      variant="outline"
-                      className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground dark:bg-gradient-to-r dark:from-blue-600 dark:to-purple-600"
+                      gradient
+                      className="w-full text-white font-medium rounded-xl shadow-lg"
                       asChild
                     >
                       <Link

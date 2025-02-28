@@ -1,16 +1,16 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import GradientBackground from "@/components/atoms/GradientBackground";
+import GradientBlurDecoration from "@/components/atoms/GradientBlurDecoration";
 import "@testing-library/jest-dom";
 
 // framer-motionのモックは既にjest.setup.jsで設定されています
 
-describe("GradientBackground", () => {
+describe("GradientBlurDecoration as Background", () => {
   it("子要素が正しく表示される", () => {
     render(
-      <GradientBackground>
+      <GradientBlurDecoration asContainer withBackground>
         <div>テストコンテンツ</div>
-      </GradientBackground>
+      </GradientBlurDecoration>
     );
 
     expect(screen.getByText("テストコンテンツ")).toBeInTheDocument();
@@ -18,9 +18,9 @@ describe("GradientBackground", () => {
 
   it("デフォルトでアニメーションが有効", () => {
     render(
-      <GradientBackground>
+      <GradientBlurDecoration asContainer withBackground>
         <div>アニメーション有効</div>
-      </GradientBackground>
+      </GradientBlurDecoration>
     );
 
     // framer-motionはモック化されているため、motion.divはdivとしてレンダリングされます
@@ -37,9 +37,9 @@ describe("GradientBackground", () => {
 
   it("アニメーションを無効にできる", () => {
     render(
-      <GradientBackground withAnimation={false}>
+      <GradientBlurDecoration asContainer withBackground animate={false}>
         <div>アニメーション無効</div>
-      </GradientBackground>
+      </GradientBlurDecoration>
     );
 
     expect(screen.getByText("アニメーション無効")).toBeInTheDocument();
@@ -59,22 +59,27 @@ describe("GradientBackground", () => {
 
   it("カスタムクラス名が適用される", () => {
     render(
-      <GradientBackground className="custom-test-class">
+      <GradientBlurDecoration
+        asContainer
+        withBackground
+        className="custom-test-class"
+      >
         <div>カスタムクラス</div>
-      </GradientBackground>
+      </GradientBlurDecoration>
     );
 
-    const container = screen
-      .getByText("カスタムクラス")
-      .closest(".relative.z-10")?.parentElement;
-    expect(container).toHaveClass("custom-test-class");
+    // 装飾要素（absolute inset-0）にクラスが適用されることを確認
+    const decorationElement = document.querySelector(
+      ".absolute.inset-0.overflow-hidden.custom-test-class"
+    );
+    expect(decorationElement).toBeInTheDocument();
   });
 
   it("背景グラデーションが適用される", () => {
     render(
-      <GradientBackground>
+      <GradientBlurDecoration asContainer withBackground>
         <div>背景グラデーション</div>
-      </GradientBackground>
+      </GradientBlurDecoration>
     );
 
     // 実際のDOM構造に合わせてテストを調整
@@ -86,9 +91,9 @@ describe("GradientBackground", () => {
 
   it("コンテンツが相対的な位置とz-indexを持つ", () => {
     render(
-      <GradientBackground>
+      <GradientBlurDecoration asContainer withBackground>
         <div>z-indexコンテンツ</div>
-      </GradientBackground>
+      </GradientBlurDecoration>
     );
 
     const contentContainer = screen
