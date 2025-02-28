@@ -4,11 +4,11 @@ import Contact from "@/components/molecules/Contact";
 import "@testing-library/jest-dom";
 
 // ContactFormコンポーネントをモック
-jest.mock("@/components/organisms/ContactForm", () => ({
-  ContactForm: () => (
-    <div data-testid="contact-form-mock">ContactForm Mock</div>
-  ),
-}));
+jest.mock("@/components/organisms/ContactForm", () => {
+  return function MockContactForm() {
+    return <div data-testid="contact-form-mock">ContactForm Mock</div>;
+  };
+});
 
 describe("Contact", () => {
   it("コンポーネントが正しくレンダリングされること", async () => {
