@@ -1,37 +1,9 @@
 "use client";
 
-import { Button } from "@/components/atoms/Button";
-import { Mail } from "lucide-react";
 import { motion } from "framer-motion";
-import { ContactForm } from "@/components/organisms/ContactForm";
+import ContactForm from "@/components/organisms/ContactForm";
+import { Mail } from "lucide-react";
 import { fadeInUp } from "@/lib/animations/variants";
-
-// アニメーション設定
-const decorationAnimation = {
-  left: {
-    animate: {
-      x: [0, 20, 0],
-      y: [0, -20, 0],
-    },
-    transition: {
-      repeat: Infinity,
-      duration: 8,
-      ease: "easeInOut",
-    },
-  },
-  right: {
-    animate: {
-      x: [0, -20, 0],
-      y: [0, 20, 0],
-    },
-    transition: {
-      repeat: Infinity,
-      duration: 8,
-      ease: "easeInOut",
-      delay: 1,
-    },
-  },
-};
 
 // フォームコンテナのアニメーション
 const formAnimation = {
@@ -41,32 +13,12 @@ const formAnimation = {
 
 const Contact = () => {
   return (
-    <section id="contact" className="relative py-32 overflow-hidden">
-      {/* 背景のグラデーションエフェクト */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/20" />
-
-      {/* デコレーション要素 */}
-      <motion.div
-        className="absolute inset-0 overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-      >
-        <motion.div
-          className="absolute -left-4 -top-4 w-64 h-64 bg-blue-500/10 dark:bg-blue-500/10 rounded-full blur-3xl"
-          animate={decorationAnimation.left.animate}
-          transition={decorationAnimation.left.transition}
-        />
-        <motion.div
-          className="absolute -right-4 -bottom-4 w-64 h-64 bg-purple-500/10 dark:bg-purple-500/10 rounded-full blur-3xl"
-          animate={decorationAnimation.right.animate}
-          transition={decorationAnimation.right.transition}
-        />
-      </motion.div>
-
-      <div className="container relative mx-auto px-6">
-        <div className="max-w-3xl mx-auto">
-          {/* ヘッダー部分 */}
+    <section
+      id="contact"
+      className="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden"
+    >
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             className="text-center mb-12"
             initial={fadeInUp.hidden}

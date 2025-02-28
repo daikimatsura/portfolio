@@ -11,12 +11,6 @@ type FormData = {
   message: string;
 };
 
-// FormStateの型定義
-type FormState = {
-  status: "idle" | "submitting" | "success" | "error";
-  errorMessage?: string;
-};
-
 // useActionStateのモック
 jest.mock("react", () => {
   const originalReact = jest.requireActual("react");
