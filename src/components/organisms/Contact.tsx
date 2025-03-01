@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import ContactForm from "@/components/organisms/ContactForm";
+import { ContactForm } from "@/components/organisms/ContactForm";
 import { Mail } from "lucide-react";
 import { fadeInUp } from "@/lib/animations";
 import { cn } from "@/lib/utils";

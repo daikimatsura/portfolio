@@ -6,7 +6,7 @@ import { ChevronDown } from "lucide-react";
 import About from "@/components/molecules/About";
 import Blogs from "@/components/organisms/Blogs";
 import Skills from "@/components/organisms/Skills";
-import Contact from "@/components/molecules/Contact";
+import Contact from "@/components/organisms/Contact";
 
 const Home = () => {
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
