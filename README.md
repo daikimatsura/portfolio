@@ -199,3 +199,52 @@ src/__tests__/
 ---
 
 © 2025 Daiki Matsuura. All Rights Reserved.
+
+## .cursorrulesの自動生成と更新
+
+このプロジェクトでは、`.cursorrules`ファイルを自動生成・更新するための仕組みを導入しています。
+
+### 概要
+
+- `.cursor/rules.md`と`.cursor/memory.md`の内容を結合して`.cursorrules`ファイルを生成します
+- Gitのpre-commitフックを使用して、コミット前に自動的に`.cursorrules`を更新します
+- 開発者は`.cursor/rules.md`と`.cursor/memory.md`を編集するだけで、`.cursorrules`は自動的に更新されます
+
+### 使用方法
+
+1. 初期設定（初回のみ）
+
+```bash
+# Gitフックを設定
+./.cursor/sh/setup_git_hooks.sh
+```
+
+2. 手動で`.cursorrules`を生成・更新
+
+```bash
+# .cursorrulesを生成
+./.cursor/sh/generate_rules.sh
+
+# または更新（Gitに自動追加）
+./.cursor/sh/update_rules.sh
+```
+
+3. 通常の開発フロー
+
+- `.cursor/rules.md`または`.cursor/memory.md`を編集
+- 通常通りGitコミットを行う（pre-commitフックにより`.cursorrules`が自動更新される）
+
+### ファイル構成
+
+- `.cursor/rules.md`: コーディングルールを記述するファイル
+- `.cursor/memory.md`: プロジェクトの記憶を記述するファイル
+- `.cursor/sh/generate_rules.sh`: `.cursorrules`を生成するスクリプト
+- `.cursor/sh/update_rules.sh`: `.cursorrules`を更新してGitに追加するスクリプト
+- `.cursor/sh/setup_git_hooks.sh`: Gitフックを設定するスクリプト
+- `.cursorrules`: 自動生成される最終的なルールファイル（直接編集しないこと）
+
+### 注意事項
+
+- `.cursorrules`ファイルは自動生成されるため、直接編集しないでください
+- 変更が必要な場合は、`.cursor/rules.md`または`.cursor/memory.md`を編集してください
+- Gitフックが正しく設定されていることを確認してください
