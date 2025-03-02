@@ -9,13 +9,12 @@ import {
   Github,
   TestTube,
   Rocket,
-  Shield,
-  Gauge,
+  Cpu,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/atoms/Button";
 import React, { ReactNode } from "react";
-import { fadeInUpProps } from "@/lib/animations";
+import { useAccessibleAnimations } from "@/lib/animations";
 import {
   gradientText,
   blueIconColor,
@@ -31,6 +30,8 @@ import {
 } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import GradientBlurDecoration from "@/components/atoms/GradientBlurDecoration";
+import { useInView } from "react-intersection-observer";
+import { useAccessibleVariants } from "@/lib/animations";
 
 // 型定義
 interface Technology {
@@ -41,6 +42,19 @@ interface Technology {
 }
 
 const IntroductionThisSite = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  // アクセシビリティに配慮したアニメーションプロパティを取得
+  const { fadeInUpProps: accessibleFadeInUpProps, fadeInProps } =
+    useAccessibleAnimations();
+
+  // アクセシビリティに配慮したアニメーションバリアントを取得
+  const { staggerContainer: staggerContainerVariants } =
+    useAccessibleVariants();
+
   const technologies: Technology[] = [
     {
       name: "Next.js & React",
@@ -102,36 +116,88 @@ const IntroductionThisSite = () => {
     },
     {
       title: "アクセシビリティ",
-      description: "Radix UIの機能を活用した高いアクセシビリティ",
+      description:
+        "Radix UIの機能とprefers-reduced-motionに対応した高いアクセシビリティ",
     },
   ];
 
-  // 新しい実装ポイント
-  const advancedFeatures = [
+  // 実装ポイント
+  const implementationPoints = [
+    {
+      title: "Next.js App Router",
+      description:
+        "最新のNext.js App Routerを使用して、効率的なルーティングとレンダリングを実現しています。",
+      icon: <Zap className="h-6 w-6 text-blue-400" />,
+    },
+    {
+      title: "Shadcn UI + Tailwind CSS",
+      description:
+        "美しく機能的なUIコンポーネントを、Tailwind CSSによるカスタマイズ性の高いスタイリングで実装しています。",
+      icon: <Palette className="h-6 w-6 text-blue-400" />,
+    },
     {
       title: "パフォーマンス最適化",
-      description: "Webバイタルを継続的に計測し、最適なユーザー体験を提供",
-      icon: <Gauge className={cn("w-6 h-6", blueIconColor)} />,
+      description:
+        "Next.jsの画像最適化、コード分割、サーバーサイドレンダリング、キャッシュ戦略を活用して高速なページ読み込みを実現しています。",
+      icon: <Cpu className="h-6 w-6 text-blue-400" />,
     },
     {
-      title: "テスト自動化",
-      description: "単体テスト、統合テスト、E2Eテストによる品質保証",
-      icon: <TestTube className={cn("w-6 h-6", greenIconColor)} />,
+      title: "アクセシビリティ対応",
+      description:
+        "WAI-ARIAに準拠したアクセシブルなUIと、prefers-reduced-motionに対応したアニメーションを実装しています。",
+      icon: <Zap className="h-6 w-6 text-blue-400" />,
     },
     {
-      title: "エラーハンドリング",
-      description: "統一されたエラー処理とフォールバックUIの実装",
-      icon: <Shield className={cn("w-6 h-6", redIconColor)} />,
+      title: "ダークモード対応",
+      description:
+        "ユーザー設定に応じたダークモード/ライトモードの切り替えに対応しています。",
+      icon: <Palette className="h-6 w-6 text-blue-400" />,
     },
     {
-      title: "CI/CD対応",
-      description: "ESLintとTypeScriptによる厳格なコード品質管理",
-      icon: <Rocket className={cn("w-6 h-6", purpleIconColor)} />,
+      title: "レスポンシブデザイン",
+      description:
+        "モバイルからデスクトップまで、あらゆる画面サイズに最適化されたレイアウトを提供しています。",
+      icon: <Cpu className="h-6 w-6 text-blue-400" />,
+    },
+  ];
+
+  // 高度な実装ポイント
+  const advancedImplementationPoints = [
+    {
+      title: ".cursorrules自動生成システム",
+      description:
+        "Gitのpre-commitフックを活用して.cursorrulesを自動生成・更新するシステムを実装し、AIアシスタントとの効率的な協業を実現しています。",
+      icon: "🚀",
+    },
+    {
+      title: "アトミックデザインの厳格な適用",
+      description:
+        "UIコンポーネントをatoms、molecules、organisms、templates、pagesの5階層に分類し、再利用性と保守性を高めています。",
+      icon: "🚀",
+    },
+    {
+      title: "型安全性の徹底",
+      description:
+        "TypeScriptの厳格モードを有効にし、型エラーを未然に防止することで、コードの品質と信頼性を向上させています。",
+      icon: "🚀",
+    },
+    {
+      title: "アクセシビリティ対応のアニメーション",
+      description:
+        "prefers-reduced-motionメディアクエリに対応したアニメーションを実装し、モーションに敏感なユーザーに配慮しています。",
+      icon: "🚀",
     },
   ];
 
   return (
-    <section className="relative py-32 overflow-hidden">
+    <motion.section
+      ref={ref}
+      id="introduction-this-site"
+      className="py-16 px-4 md:px-8"
+      variants={staggerContainerVariants}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+    >
       {/* 背景のグラデーションエフェクト */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-200/30 dark:to-gray-900/20" />
 
@@ -143,21 +209,19 @@ const IntroductionThisSite = () => {
           {/* ヘッダー部分 */}
           <motion.div
             className="text-center mb-16"
-            {...fadeInUpProps}
+            {...accessibleFadeInUpProps}
             transition={{ duration: 0.8 }}
           >
             <motion.h1
               className={cn("text-5xl font-bold mb-6", gradientText)}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              {...fadeInProps}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
               このサイトについて
             </motion.h1>
             <motion.p
               className="text-foreground dark:text-gray-300 text-lg leading-relaxed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              {...fadeInProps}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
               このポートフォリオサイトは、私のスキルと経験を紹介するために作成しました。
@@ -171,14 +235,12 @@ const IntroductionThisSite = () => {
           {/* 使用技術セクション */}
           <motion.div
             className="mb-16"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            {...fadeInProps}
             transition={{ delay: 0.7, duration: 0.8 }}
           >
             <motion.h2
               className="text-3xl font-bold mb-8 text-center text-foreground"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              {...fadeInProps}
               transition={{ delay: 0.9, duration: 0.8 }}
             >
               使用技術
@@ -214,7 +276,7 @@ const IntroductionThisSite = () => {
                       "backdrop-blur-sm border rounded-xl p-6",
                       gradientClass
                     )}
-                    {...fadeInUpProps}
+                    {...accessibleFadeInUpProps}
                     transition={{ delay: 1.1 + index * 0.1, duration: 0.5 }}
                     whileHover={{ y: -5 }}
                   >
@@ -240,21 +302,19 @@ const IntroductionThisSite = () => {
           {/* 実装詳細セクション */}
           <motion.div
             className="mb-16"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            {...fadeInProps}
             transition={{ delay: 1.5, duration: 0.8 }}
           >
             <motion.h2
               className="text-3xl font-bold mb-8 text-center text-foreground"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              {...fadeInProps}
               transition={{ delay: 1.7, duration: 0.8 }}
             >
               実装詳細
             </motion.h2>
             <motion.div
               className={cn(cardBg, "p-8")}
-              {...fadeInUpProps}
+              {...accessibleFadeInUpProps}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
               <ul className="space-y-4 text-foreground">
@@ -278,40 +338,82 @@ const IntroductionThisSite = () => {
           {/* 新しい実装ポイントセクション */}
           <motion.div
             className="mb-16"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            {...fadeInProps}
             transition={{ delay: 2.0, duration: 0.8 }}
           >
             <motion.h2
               className="text-3xl font-bold mb-8 text-center text-foreground"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              {...fadeInProps}
               transition={{ delay: 2.1, duration: 0.8 }}
             >
-              高度な実装ポイント
+              実装ポイント
             </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {advancedFeatures.map((feature, index) => {
+              {implementationPoints.map((point, index) => {
                 return (
                   <motion.div
-                    key={feature.title}
+                    key={point.title}
                     className={cn(
                       "backdrop-blur-sm border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-900/50 rounded-xl p-6"
                     )}
-                    {...fadeInUpProps}
+                    {...accessibleFadeInUpProps}
                     transition={{ delay: 2.2 + index * 0.1, duration: 0.5 }}
                     whileHover={{ y: -5 }}
                   >
                     <div className="flex items-start">
                       <div className={cn(gradientIconBg, "p-3.5 mr-4")}>
-                        <div className="w-6 h-6">{feature.icon}</div>
+                        <div className="w-6 h-6">{point.icon}</div>
                       </div>
                       <div>
                         <h3 className="text-xl font-semibold mb-2 text-foreground">
-                          {feature.title}
+                          {point.title}
                         </h3>
                         <p className="text-foreground dark:text-gray-300">
-                          {feature.description}
+                          {point.description}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/* 新しい実装ポイントセクション */}
+          <motion.div
+            className="mb-16"
+            {...fadeInProps}
+            transition={{ delay: 2.0, duration: 0.8 }}
+          >
+            <motion.h2
+              className="text-3xl font-bold mb-8 text-center text-foreground"
+              {...fadeInProps}
+              transition={{ delay: 2.1, duration: 0.8 }}
+            >
+              高度な実装ポイント
+            </motion.h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {advancedImplementationPoints.map((point, index) => {
+                return (
+                  <motion.div
+                    key={point.title}
+                    className={cn(
+                      "backdrop-blur-sm border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-900/50 rounded-xl p-6"
+                    )}
+                    {...accessibleFadeInUpProps}
+                    transition={{ delay: 2.2 + index * 0.1, duration: 0.5 }}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="flex items-start">
+                      <div className={cn(gradientIconBg, "p-3.5 mr-4")}>
+                        <div className="w-6 h-6">{point.icon}</div>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2 text-foreground">
+                          {point.title}
+                        </h3>
+                        <p className="text-foreground dark:text-gray-300">
+                          {point.description}
                         </p>
                       </div>
                     </div>
@@ -324,14 +426,12 @@ const IntroductionThisSite = () => {
           {/* ソースコードリンク */}
           <motion.div
             className="text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            {...fadeInProps}
             transition={{ delay: 2.6, duration: 0.8 }}
           >
             <motion.p
               className="text-foreground dark:text-gray-300 mb-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              {...fadeInProps}
               transition={{ delay: 2.7, duration: 0.8 }}
             >
               このポートフォリオサイトのソースコードはGitHubで公開しています。
@@ -339,7 +439,7 @@ const IntroductionThisSite = () => {
               コーディングガイドラインに基づいた一貫性のある実装を確認できます。
             </motion.p>
             <motion.div
-              {...fadeInUpProps}
+              {...accessibleFadeInUpProps}
               transition={{ delay: 2.8, duration: 0.8 }}
             >
               <Button
@@ -359,7 +459,7 @@ const IntroductionThisSite = () => {
           </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -4,6 +4,7 @@
  * このファイルは、アプリケーション全体で使用されるアニメーション設定を一元管理します。
  * - モーションプロパティ: 直接使用するためのアニメーション設定
  * - バリアント: variants属性で使用するアニメーション設定
+ * - アクセシビリティ: prefers-reduced-motionに対応したアニメーション設定
  */
 
 // モーションプロパティ（直接使用）
@@ -12,6 +13,8 @@ export {
   fadeInDelayedProps,
   fadeInUpProps,
   scaleUpProps,
+  // アクセシビリティに配慮したアニメーション
+  useAccessibleAnimations,
 } from "./animations";
 
 // バリアント（variants属性で使用）
@@ -22,6 +25,8 @@ export {
   scaleUp,
   slideInLeft,
   slideInRight,
+  // アクセシビリティに配慮したバリアント
+  useAccessibleVariants,
 } from "./variants";
 
 /**

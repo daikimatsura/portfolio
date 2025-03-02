@@ -135,91 +135,67 @@ jest.mock("@/lib/utils", () => ({
 const mockRef = { current: null };
 
 // Mock framer-motion
-jest.mock("framer-motion", () => ({
-  motion: {
-    div: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
-        <div {...props}>{children}</div>
-      )),
-    h1: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
-        <h1 {...props}>{children}</h1>
-      )),
-    h2: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
-        <h2 {...props}>{children}</h2>
-      )),
-    h3: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
-        <h3 {...props}>{children}</h3>
-      )),
-    p: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
-        <p {...props}>{children}</p>
-      )),
-    span: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
-        <span {...props}>{children}</span>
-      )),
-    ul: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
-        <ul {...props}>{children}</ul>
-      )),
-    li: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
-        <li {...props}>{children}</li>
-      )),
-    a: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
-        <a {...props}>{children}</a>
-      )),
-    button: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
+jest.mock("framer-motion", () => {
+  const actual = jest.requireActual("framer-motion");
+  return {
+    ...actual,
+    useReducedMotion: jest.fn().mockReturnValue(false),
+    motion: {
+      div: ({ children, ...props }) => <div {...props}>{children}</div>,
+      h1: ({ children, ...props }) => <h1 {...props}>{children}</h1>,
+      h2: ({ children, ...props }) => <h2 {...props}>{children}</h2>,
+      h3: ({ children, ...props }) => <h3 {...props}>{children}</h3>,
+      p: ({ children, ...props }) => <p {...props}>{children}</p>,
+      span: ({ children, ...props }) => <span {...props}>{children}</span>,
+      button: ({ children, ...props }) => (
         <button {...props}>{children}</button>
-      )),
-    section: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
+      ),
+      a: ({ children, ...props }) => <a {...props}>{children}</a>,
+      ul: ({ children, ...props }) => <ul {...props}>{children}</ul>,
+      li: ({ children, ...props }) => <li {...props}>{children}</li>,
+      section: ({ children, ...props }) => (
         <section {...props}>{children}</section>
-      )),
-    footer: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
-        <footer {...props}>{children}</footer>
-      )),
-    header: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
+      ),
+      article: ({ children, ...props }) => (
+        <article {...props}>{children}</article>
+      ),
+      header: ({ children, ...props }) => (
         <header {...props}>{children}</header>
-      )),
-    nav: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
-        <nav {...props}>{children}</nav>
-      )),
-    form: jest
-      .fn()
-      .mockImplementation(({ children, whileHover, whileTap, ...props }) => (
-        <form {...props}>{children}</form>
-      )),
-  },
-  AnimatePresence: jest.fn().mockImplementation(({ children }) => children),
-  useAnimation: jest.fn().mockReturnValue({
-    start: jest.fn(),
-    stop: jest.fn(),
-  }),
-  useInView: jest.fn().mockReturnValue([mockRef, true]),
-}));
+      ),
+      footer: ({ children, ...props }) => (
+        <footer {...props}>{children}</footer>
+      ),
+      nav: ({ children, ...props }) => <nav {...props}>{children}</nav>,
+      main: ({ children, ...props }) => <main {...props}>{children}</main>,
+      aside: ({ children, ...props }) => <aside {...props}>{children}</aside>,
+      form: ({ children, ...props }) => <form {...props}>{children}</form>,
+      input: (props) => <input {...props} />,
+      textarea: ({ children, ...props }) => (
+        <textarea {...props}>{children}</textarea>
+      ),
+      select: ({ children, ...props }) => (
+        <select {...props}>{children}</select>
+      ),
+      option: ({ children, ...props }) => (
+        <option {...props}>{children}</option>
+      ),
+      label: ({ children, ...props }) => <label {...props}>{children}</label>,
+      fieldset: ({ children, ...props }) => (
+        <fieldset {...props}>{children}</fieldset>
+      ),
+      legend: ({ children, ...props }) => (
+        <legend {...props}>{children}</legend>
+      ),
+      table: ({ children, ...props }) => <table {...props}>{children}</table>,
+      tr: ({ children, ...props }) => <tr {...props}>{children}</tr>,
+      td: ({ children, ...props }) => <td {...props}>{children}</td>,
+      th: ({ children, ...props }) => <th {...props}>{children}</th>,
+      thead: ({ children, ...props }) => <thead {...props}>{children}</thead>,
+      tbody: ({ children, ...props }) => <tbody {...props}>{children}</tbody>,
+      tfoot: ({ children, ...props }) => <tfoot {...props}>{children}</tfoot>,
+    },
+  };
+});
 
 // Mock react-intersection-observer
 jest.mock("react-intersection-observer", () => ({
@@ -361,6 +337,11 @@ jest.mock("lucide-react", () => {
     Shield: ({ className }) => (
       <span data-testid="shield-icon" className={className}>
         Shield Icon
+      </span>
+    ),
+    Cpu: ({ className }) => (
+      <span data-testid="cpu-icon" className={className}>
+        Cpu Icon
       </span>
     ),
   };

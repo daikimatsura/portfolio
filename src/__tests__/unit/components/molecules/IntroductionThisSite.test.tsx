@@ -79,7 +79,7 @@ describe("IntroductionThisSite", () => {
     // 各実装詳細が表示されていることを確認
     expect(screen.getByText("App Router")).toBeInTheDocument();
     expect(screen.getByText("サーバーコンポーネント")).toBeInTheDocument();
-    expect(screen.getByText("レスポンシブデザイン")).toBeInTheDocument();
+    expect(screen.getAllByText("レスポンシブデザイン")[0]).toBeInTheDocument();
     expect(screen.getByText("アニメーション")).toBeInTheDocument();
     expect(screen.getByText("アクセシビリティ")).toBeInTheDocument();
   });

@@ -5,11 +5,13 @@ Next.js、Shadcn UI、Tailwind CSSを使用して構築されており、私の�
 
 ## 🌟 特徴
 
-- **モダンなUI/UX**: Shadcn UIとTailwind CSSを使用した美しく、レスポンシブなデザイン
-- **パフォーマンス最適化**: Next.jsのApp Routerを活用した高速なページロード
-- **アニメーション**: Framer Motionによる滑らかなアニメーション効果
-- **ダークモード対応**: システム設定に連動するダークモード/ライトモードの切り替え
-- **タイプセーフ**: TypeScriptによる型安全な開発環境
+- **モダンなUI/UX**: Next.js、Shadcn UI、Tailwind CSSを使用した美しく機能的なインターフェース
+- **パフォーマンス最適化**: Next.jsの画像最適化、コード分割、SSR、キャッシュ戦略を活用
+- **アニメーション**: Framer Motionを使用したスムーズなアニメーション効果
+- **ダークモード対応**: ユーザー設定に応じたテーマ切り替え
+- **型安全性**: TypeScriptの厳格モードによる堅牢なコード品質
+- **アクセシビリティ**: WAI-ARIAに準拠したアクセシブルなUI
+- **.cursorrules自動生成システム**: AIアシスタントとの効率的な協業を実現する革新的な仕組み
 
 ## 🛠️ 技術スタック
 
@@ -22,26 +24,82 @@ Next.js、Shadcn UI、Tailwind CSSを使用して構築されており、私の�
 
 ## 📋 プロジェクト構造
 
-プロジェクトはアトミックデザインパターンに基づいて構築されています：
-
 ```
-src/
-├── app/                  # Next.js App Router
-│   ├── layout.tsx        # ルートレイアウト
-│   ├── page.tsx          # ホームページ
-│   └── ...               # その他のページ
-├── components/           # コンポーネント
-│   ├── atoms/            # 基本的なUI要素
-│   ├── molecules/        # 複数のatomsを組み合わせた要素
-│   ├── organisms/        # 複数のmoleculesを組み合わせた機能的なセクション
-│   ├── templates/        # ページのレイアウト構造
-│   └── ui/               # Shadcn UIコンポーネント
-├── lib/                  # ユーティリティ関数
-├── styles/               # グローバルスタイル
-└── types/                # TypeScript型定義
+portfolio/
+├── .cursor/                # AIアシスタント用の設定ディレクトリ
+│   ├── rules.md           # コーディングルールの定義
+│   ├── memory.md          # プロジェクトの記憶
+│   └── sh/                # 自動化スクリプト
+│       ├── generate_rules.sh  # .cursorrulesの生成
+│       ├── update_rules.sh    # .cursorrulesの更新
+│       └── setup_git_hooks.sh # Gitフックの設定
+├── public/                 # 静的ファイル
+├── src/                    # ソースコード
+│   ├── app/                # Next.js App Router
+│   ├── components/         # Reactコンポーネント
+│   │   ├── atoms/         # 最小単位のUI要素
+│   │   ├── molecules/     # 複数のatomsを組み合わせた要素
+│   │   ├── organisms/     # 複数のmoleculesを組み合わせた機能的なセクション
+│   │   ├── templates/     # ページのレイアウト構造
+│   │   └── pages/         # 完全なページコンポーネント
+│   ├── hooks/              # カスタムReactフック
+│   ├── lib/                # ユーティリティ関数
+│   │   ├── animations/    # アニメーション関連
+│   │   └── utils/         # 汎用ユーティリティ
+│   ├── styles/             # グローバルスタイル
+│   └── types/              # TypeScript型定義
+├── .eslintrc.json         # ESLint設定
+├── .cursorrules           # 自動生成されたAIアシスタント用ルール
+├── next.config.js         # Next.js設定
+├── package.json           # 依存関係
+├── tailwind.config.js     # Tailwind CSS設定
+└── tsconfig.json          # TypeScript設定
 ```
 
-## 🚀 始め方
+## 🚀 開発ガイドライン
+
+- **コーディング規約**: アトミックデザインパターンに基づくコンポーネント設計
+- **TypeScript**: 厳格モードを使用した型安全なコード
+- **スタイリング**: Tailwind CSSとShadcn UIを使用した一貫したデザイン
+- **状態管理**: Reactフックとコンテキストを使用したシンプルな状態管理
+- **アクセシビリティ**: WAI-ARIAに準拠したアクセシブルなUI
+- **パフォーマンス**: Next.jsの最適化機能を活用
+
+## 🤖 .cursorrulesの自動生成・更新システム
+
+このプロジェクトでは、AIアシスタントとの効率的な協業を実現するために、`.cursorrules`の自動生成・更新システムを導入しています。
+
+### 仕組み
+
+1. `.cursor/rules.md`と`.cursor/memory.md`にコーディングルールとプロジェクトの記憶を定義
+2. `.cursor/sh/generate_rules.sh`スクリプトが両ファイルの内容を結合して`.cursorrules`を生成
+3. Gitのpre-commitフックを使用して、コミット前に自動的に`.cursorrules`を更新
+4. 更新された`.cursorrules`は自動的にコミットに含まれる
+
+### 利点
+
+- **AIアシスタントの一貫性**: セッションが切れても同じルールと記憶に基づいて作業を継続
+- **開発者の負担軽減**: ルールの手動更新が不要で、常に最新の状態を維持
+- **チーム協業の向上**: 全員が同じルールと記憶に基づいて開発を進められる
+- **バージョン管理**: ルールと記憶の変更履歴をGitで追跡可能
+
+### 設定方法
+
+```bash
+# Gitフックの設定
+bash .cursor/sh/setup_git_hooks.sh
+
+# 手動で.cursorrulesを生成・更新
+bash .cursor/sh/generate_rules.sh
+```
+
+## 💡 その他の革新的な点
+
+- **アクセシビリティへの配慮**: `prefers-reduced-motion`に対応したアニメーション
+- **パフォーマンス最適化**: Next.jsの最新機能を活用した高速なページ読み込み
+- **開発者体験の向上**: AIアシスタントとの効率的な協業による生産性向上
+
+## 🔧 セットアップ
 
 ### 前提条件
 
@@ -120,9 +178,23 @@ npm start
    - カラーパレットはダークテーマベースで統一
 
 4. **状態管理**:
+
    - ローカル状態にはReactフック（useState, useReducer）を使用
    - サーバーコンポーネントでのサーバーサイド状態管理
    - 必要に応じてコンテキストを使用したグローバル状態管理
+
+5. **アクセシビリティ**:
+
+   - セマンティックなHTML要素の使用
+   - WAI-ARIAの適切な実装
+   - キーボードナビゲーションのサポート
+   - prefers-reduced-motionに対応したアニメーション
+
+6. **パフォーマンス**:
+   - 画像の最適化
+   - コード分割と遅延ロード
+   - メモ化によるレンダリングの最適化
+   - サーバーサイドレンダリングの活用
 
 ### コードレビュー基準
 
@@ -184,7 +256,22 @@ src/__tests__/
 - **コード分割**: 動的インポートによるバンドルサイズの削減
 - **サーバーサイドレンダリング**: 初期ロード時間の短縮
 - **キャッシュ戦略**: 適切なキャッシュヘッダーの設定
-- **Web Vitals**: Core Web Vitalsの継続的なモニタリングと改善
+
+### lib/ディレクトリの構造
+
+`src/lib`ディレクトリには、アプリケーション全体で使用されるユーティリティ関数が含まれています：
+
+- **animations/**: Framer Motionを使用したアニメーション定義
+  - `animations.ts`: 基本的なアニメーションプロパティ
+  - `variants.ts`: アニメーションバリアント
+  - `index.ts`: エクスポート用インデックスファイル
+- **errors/**: エラーハンドリング関連のユーティリティ
+  - `ErrorBoundary.tsx`: エラー境界コンポーネント
+  - `errorHandlers.ts`: エラーハンドリングロジック
+  - `errorTypes.ts`: エラー型定義
+- **styles/**: スタイル関連のユーティリティ
+  - `index.ts`: 共通スタイル定義（グラデーション、カラーなど）
+- **utils.ts**: 汎用ユーティリティ関数（クラス名結合など）
 
 ## 👨‍💻 作者
 
@@ -199,52 +286,3 @@ src/__tests__/
 ---
 
 © 2025 Daiki Matsuura. All Rights Reserved.
-
-## .cursorrulesの自動生成と更新
-
-このプロジェクトでは、`.cursorrules`ファイルを自動生成・更新するための仕組みを導入しています。
-
-### 概要
-
-- `.cursor/rules.md`と`.cursor/memory.md`の内容を結合して`.cursorrules`ファイルを生成します
-- Gitのpre-commitフックを使用して、コミット前に自動的に`.cursorrules`を更新します
-- 開発者は`.cursor/rules.md`と`.cursor/memory.md`を編集するだけで、`.cursorrules`は自動的に更新されます
-
-### 使用方法
-
-1. 初期設定（初回のみ）
-
-```bash
-# Gitフックを設定
-./.cursor/sh/setup_git_hooks.sh
-```
-
-2. 手動で`.cursorrules`を生成・更新
-
-```bash
-# .cursorrulesを生成
-./.cursor/sh/generate_rules.sh
-
-# または更新（Gitに自動追加）
-./.cursor/sh/update_rules.sh
-```
-
-3. 通常の開発フロー
-
-- `.cursor/rules.md`または`.cursor/memory.md`を編集
-- 通常通りGitコミットを行う（pre-commitフックにより`.cursorrules`が自動更新される）
-
-### ファイル構成
-
-- `.cursor/rules.md`: コーディングルールを記述するファイル
-- `.cursor/memory.md`: プロジェクトの記憶を記述するファイル
-- `.cursor/sh/generate_rules.sh`: `.cursorrules`を生成するスクリプト
-- `.cursor/sh/update_rules.sh`: `.cursorrules`を更新してGitに追加するスクリプト
-- `.cursor/sh/setup_git_hooks.sh`: Gitフックを設定するスクリプト
-- `.cursorrules`: 自動生成される最終的なルールファイル（直接編集しないこと）
-
-### 注意事項
-
-- `.cursorrules`ファイルは自動生成されるため、直接編集しないでください
-- 変更が必要な場合は、`.cursor/rules.md`または`.cursor/memory.md`を編集してください
-- Gitフックが正しく設定されていることを確認してください
