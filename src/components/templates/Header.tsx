@@ -196,22 +196,6 @@ const Header = () => {
                   )}
                 </motion.div>
               ))}
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.3 }}
-                className="pt-4 border-t border-border flex justify-center space-x-4"
-              >
-                <Link
-                  href="https://github.com/daikimatsura"
-                  target="_blank"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Github className="h-5 w-5" />
-                </Link>
-                <ThemeToggle />
-              </motion.div>
             </div>
           </motion.div>
         )}
