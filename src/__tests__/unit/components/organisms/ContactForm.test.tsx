@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { act } from "react";
+import { act } from "react-dom/test-utils";
 import "@testing-library/jest-dom";
 
 // FormDataの型定義
@@ -49,7 +49,7 @@ jest.mock("lucide-react", () => ({
 
 // ContactFormコンポーネントのインポート
 // モックの後にインポートする必要がある
-import { ContactForm } from "@/components/organisms/ContactForm";
+import ContactForm from "@/components/organisms/ContactForm";
 
 // fetchのモック
 global.fetch = jest.fn();
@@ -79,6 +79,9 @@ describe("ContactForm", () => {
   });
 
   it("必須フィールドが空の場合、ブラウザのバリデーションが働くこと", async () => {
+    // HTML5のバリデーションをモック
+    HTMLFormElement.prototype.checkValidity = jest.fn().mockReturnValue(false);
+
     await act(async () => {
       render(<ContactForm />);
     });
@@ -106,6 +109,9 @@ describe("ContactForm", () => {
       });
     });
 
+    // HTML5のバリデーションをモック（有効なフォーム）
+    HTMLFormElement.prototype.checkValidity = jest.fn().mockReturnValue(true);
+
     await act(async () => {
       render(<ContactForm />);
     });
@@ -129,7 +135,10 @@ describe("ContactForm", () => {
     // フォーム送信
     const submitButton = screen.getByRole("button", { name: /送信する/i });
     await act(async () => {
-      fireEvent.click(submitButton);
+      const form = submitButton.closest("form");
+      if (form) {
+        fireEvent.submit(form);
+      }
     });
 
     // 送信中の状態を確認
@@ -145,6 +154,9 @@ describe("ContactForm", () => {
       ok: true,
       json: () => Promise.resolve({}),
     });
+
+    // HTML5のバリデーションをモック（有効なフォーム）
+    HTMLFormElement.prototype.checkValidity = jest.fn().mockReturnValue(true);
 
     await act(async () => {
       render(<ContactForm />);
@@ -168,7 +180,9 @@ describe("ContactForm", () => {
 
     // フォーム送信
     await act(async () => {
-      fireEvent.click(screen.getByRole("button", { name: /送信する/i }));
+      const container = screen.getByTestId("contact-form");
+      const form = container.querySelector("form");
+      if (form) fireEvent.submit(form);
     });
 
     // 成功メッセージが表示されることを確認
@@ -190,6 +204,9 @@ describe("ContactForm", () => {
       json: () => Promise.resolve({ error: "送信に失敗しました" }),
     });
 
+    // HTML5のバリデーションをモック（有効なフォーム）
+    HTMLFormElement.prototype.checkValidity = jest.fn().mockReturnValue(true);
+
     await act(async () => {
       render(<ContactForm />);
     });
@@ -212,7 +229,9 @@ describe("ContactForm", () => {
 
     // フォーム送信
     await act(async () => {
-      fireEvent.click(screen.getByRole("button", { name: /送信する/i }));
+      const container = screen.getByTestId("contact-form");
+      const form = container.querySelector("form");
+      if (form) fireEvent.submit(form);
     });
 
     // エラーメッセージが表示されることを確認
@@ -228,6 +247,9 @@ describe("ContactForm", () => {
       new Error("ネットワークエラー")
     );
 
+    // HTML5のバリデーションをモック（有効なフォーム）
+    HTMLFormElement.prototype.checkValidity = jest.fn().mockReturnValue(true);
+
     await act(async () => {
       render(<ContactForm />);
     });
@@ -250,7 +272,9 @@ describe("ContactForm", () => {
 
     // フォーム送信
     await act(async () => {
-      fireEvent.click(screen.getByRole("button", { name: /送信する/i }));
+      const container = screen.getByTestId("contact-form");
+      const form = container.querySelector("form");
+      if (form) fireEvent.submit(form);
     });
 
     // エラーメッセージが表示されることを確認
@@ -266,6 +290,9 @@ describe("ContactForm", () => {
       ok: true,
       json: () => Promise.resolve({}),
     });
+
+    // HTML5のバリデーションをモック（有効なフォーム）
+    HTMLFormElement.prototype.checkValidity = jest.fn().mockReturnValue(true);
 
     await act(async () => {
       render(<ContactForm />);
@@ -288,7 +315,9 @@ describe("ContactForm", () => {
     });
 
     await act(async () => {
-      fireEvent.click(screen.getByRole("button", { name: /送信する/i }));
+      const container = screen.getByTestId("contact-form");
+      const form = container.querySelector("form");
+      if (form) fireEvent.submit(form);
     });
 
     // 成功メッセージが表示されるのを待つ

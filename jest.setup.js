@@ -131,6 +131,150 @@ jest.mock("@/lib/utils", () => ({
   },
 }));
 
+// Mock @/lib/styles
+jest.mock("@/lib/styles", () => ({
+  errorCardBg: "error-card-bg-mock",
+  errorIconBg: "error-icon-bg-mock",
+  errorText: "error-text-mock",
+  gradientButtonBg: "gradient-button-bg-mock",
+  gradientText: "gradient-text-mock",
+  blueIconColor: "blue-icon-color-mock",
+  greenIconColor: "green-icon-color-mock",
+  redIconColor: "red-icon-color-mock",
+  purpleIconColor: "purple-icon-color-mock",
+  yellowIconColor: "yellow-icon-color-mock",
+  orangeIconColor: "orange-icon-color-mock",
+  getTechCardColor: jest
+    .fn()
+    .mockImplementation((color) => `tech-card-color-${color}-mock`),
+}));
+
+// Mock @/components/atoms/Button
+jest.mock("@/components/atoms/Button", () => ({
+  Button: ({
+    children,
+    onClick,
+    gradient,
+    className,
+    variant,
+    size,
+    asChild,
+    disabled,
+  }) => {
+    // バリアントに基づいてクラスを生成
+    let variantClasses = "";
+    if (variant === "default" || !variant) {
+      variantClasses = "bg-primary text-primary-foreground hover:bg-primary/90";
+    } else if (variant === "destructive") {
+      variantClasses =
+        "bg-destructive text-destructive-foreground hover:bg-destructive/90";
+    } else if (variant === "outline") {
+      variantClasses =
+        "border border-input bg-background hover:bg-accent hover:text-accent-foreground";
+    } else if (variant === "secondary") {
+      variantClasses =
+        "bg-secondary text-secondary-foreground hover:bg-secondary/80";
+    } else if (variant === "ghost") {
+      variantClasses = "hover:bg-accent hover:text-accent-foreground";
+    } else if (variant === "link") {
+      variantClasses = "text-primary underline-offset-4 hover:underline";
+    }
+
+    // サイズに基づいてクラスを生成
+    let sizeClasses = "";
+    if (size === "default" || !size) {
+      sizeClasses = "h-10 px-4 py-2";
+    } else if (size === "sm") {
+      sizeClasses = "h-9 rounded-md px-3";
+    } else if (size === "lg") {
+      sizeClasses = "h-11 rounded-md px-8";
+    } else if (size === "icon") {
+      sizeClasses = "h-10 w-10";
+    }
+
+    const allClasses = `${variantClasses} ${sizeClasses} ${className || ""}`;
+
+    // asChildがtrueの場合は子要素のpropsを拡張
+    if (asChild && children && typeof children === "object") {
+      // 直接子要素を返す（React.cloneElementは使用しない）
+      const childProps = {
+        className: allClasses,
+        disabled,
+        onClick,
+        "data-testid": "button-mock",
+        "data-gradient": gradient,
+      };
+
+      return <div {...childProps}>{children}</div>;
+    }
+
+    return (
+      <button
+        data-testid="button-mock"
+        onClick={onClick}
+        className={allClasses}
+        data-gradient={gradient}
+        disabled={disabled}
+      >
+        {children}
+      </button>
+    );
+  },
+  buttonVariants: ({ variant, size, className }) => {
+    // バリアントに基づいてクラスを生成
+    let variantClasses = "";
+    if (variant === "default" || !variant) {
+      variantClasses = "bg-primary text-primary-foreground hover:bg-primary/90";
+    } else if (variant === "destructive") {
+      variantClasses =
+        "bg-destructive text-destructive-foreground hover:bg-destructive/90";
+    } else if (variant === "outline") {
+      variantClasses =
+        "border border-input bg-background hover:bg-accent hover:text-accent-foreground";
+    } else if (variant === "secondary") {
+      variantClasses =
+        "bg-secondary text-secondary-foreground hover:bg-secondary/80";
+    } else if (variant === "ghost") {
+      variantClasses = "hover:bg-accent hover:text-accent-foreground";
+    } else if (variant === "link") {
+      variantClasses = "text-primary underline-offset-4 hover:underline";
+    }
+
+    // サイズに基づいてクラスを生成
+    let sizeClasses = "";
+    if (size === "default" || !size) {
+      sizeClasses = "h-10 px-4 py-2";
+    } else if (size === "sm") {
+      sizeClasses = "h-9 rounded-md px-3";
+    } else if (size === "lg") {
+      sizeClasses = "h-11 rounded-md px-8";
+    } else if (size === "icon") {
+      sizeClasses = "h-10 w-10";
+    }
+
+    return `${variantClasses} ${sizeClasses} ${className || ""}`;
+  },
+}));
+
+// Mock @/components/atoms/SectionTitle
+jest.mock("@/components/atoms/SectionTitle", () => {
+  return {
+    __esModule: true,
+    default: ({ title, subtitle, align = "center", className = "", icon }) => (
+      <div
+        data-testid="section-title-mock"
+        className={`text-${align} ${className}`}
+      >
+        <h2 className="text-4xl font-bold mb-4 inline-block relative text-transparent bg-clip-text">
+          {icon && <span className="mr-2">{icon}</span>}
+          {title}
+        </h2>
+        {subtitle && <p className="text-muted-foreground">{subtitle}</p>}
+      </div>
+    ),
+  };
+});
+
 // 共通のモックリファレンス
 const mockRef = { current: null };
 
@@ -163,7 +307,9 @@ jest.mock("framer-motion", () => {
         <header {...props}>{children}</header>
       ),
       footer: ({ children, ...props }) => (
-        <footer {...props}>{children}</footer>
+        <footer data-testid="footer-mock" {...props}>
+          Footer Mock{children}
+        </footer>
       ),
       nav: ({ children, ...props }) => <nav {...props}>{children}</nav>,
       main: ({ children, ...props }) => <main {...props}>{children}</main>,
@@ -222,6 +368,19 @@ jest.mock("next/image", () => ({
   default: (props) => <img {...props} />,
 }));
 
+// Mock next/font/google
+jest.mock("next/font/google", () => ({
+  Geist: () => ({
+    variable: "--font-geist-sans",
+  }),
+  Geist_Mono: () => ({
+    variable: "--font-geist-mono",
+  }),
+  Noto_Sans_JP: () => ({
+    variable: "--font-noto-sans-jp",
+  }),
+}));
+
 // Mock for lucide-react icons
 jest.mock("lucide-react", () => {
   return {
@@ -265,11 +424,6 @@ jest.mock("lucide-react", () => {
     ChevronRight: () => (
       <span data-testid="chevron-right-icon">ChevronRight Icon</span>
     ),
-    Mail: ({ className }) => (
-      <span data-testid="mail-icon" className={className}>
-        Mail Icon
-      </span>
-    ),
     Linkedin: ({ className, "data-testid": testId }) => (
       <span data-testid={testId || "linkedin-icon"} className={className}>
         LinkedinIcon
@@ -303,21 +457,13 @@ jest.mock("lucide-react", () => {
     ),
     ChevronDown: () => <span data-testid="chevron-down-icon">▼</span>,
     ChevronUp: () => <span data-testid="chevron-up-icon">▲</span>,
-    Monitor: () => <span data-testid="monitor-icon">🖥️</span>,
-    Send: ({ className }) => (
-      <span data-testid="send-icon" className={className}>
-        Send Icon
-      </span>
+    Monitor: () => <span data-testid="monitor-icon">��️</span>,
+    Send: () => <span data-testid="send-icon">Send Icon</span>,
+    CheckCircle: () => (
+      <span data-testid="check-circle-icon">CheckCircle Icon</span>
     ),
-    CheckCircle: ({ className }) => (
-      <span data-testid="check-circle-icon" className={className}>
-        CheckCircle Icon
-      </span>
-    ),
-    AlertCircle: ({ className }) => (
-      <span data-testid="alert-circle-icon" className={className}>
-        AlertCircle Icon
-      </span>
+    AlertCircle: () => (
+      <span data-testid="alert-circle-icon">AlertCircle Icon</span>
     ),
     TestTube: ({ className }) => (
       <span data-testid="test-tube-icon" className={className}>
@@ -344,5 +490,49 @@ jest.mock("lucide-react", () => {
         Cpu Icon
       </span>
     ),
+    AlertTriangle: ({ className }) => (
+      <span data-testid="alert-triangle-icon" className={className}>
+        AlertTriangle Icon
+      </span>
+    ),
+    RefreshCw: ({ className }) => (
+      <span data-testid="refresh-cw-icon" className={className}>
+        RefreshCw Icon
+      </span>
+    ),
+    Mail: () => <span data-testid="mail-icon">Mail Icon</span>,
   };
 });
+
+// Mock @/components/templates/Header
+jest.mock("@/components/templates/Header", () => {
+  return {
+    __esModule: true,
+    default: () => <header data-testid="header-mock">Header Mock</header>,
+  };
+});
+
+// Mock @/components/templates/Footer
+jest.mock("@/components/templates/Footer", () => {
+  return {
+    __esModule: true,
+    default: () => <footer data-testid="footer-mock">Footer Mock</footer>,
+  };
+});
+
+// Mock @/hooks/useTheme
+jest.mock("@/hooks/useTheme", () => {
+  return {
+    __esModule: true,
+    ThemeProvider: ({ children }) => (
+      <div data-testid="theme-provider-mock">{children}</div>
+    ),
+    useTheme: () => ({
+      theme: "dark",
+      setTheme: jest.fn(),
+    }),
+  };
+});
+
+// Mock CSS imports
+jest.mock("@/app/globals.css", () => ({}), { virtual: true });

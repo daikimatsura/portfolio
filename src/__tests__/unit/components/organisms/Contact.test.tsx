@@ -1,12 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import Contact from "@/components/organisms/Contact";
 
-// ContactFormコンポーネントをモック
-jest.mock("@/components/organisms/ContactForm", () => ({
-  ContactForm: () => <div data-testid="contact-form">Mocked ContactForm</div>,
-}));
-
-// Mailアイコンのモックはjest.setup.jsで定義済み
+// ContactFormコンポーネントをモックする（依存関係のみ）
+jest.mock("@/components/organisms/ContactForm", () => {
+  return {
+    __esModule: true,
+    default: () => <div data-testid="contact-form">Contact Form Component</div>,
+  };
+});
 
 describe("Contact", () => {
   it("renders correctly", () => {

@@ -162,7 +162,7 @@ export const ContactForm = () => {
 
   // 通常のフォーム表示（初期状態またはエラー状態）
   return (
-    <div className="w-full">
+    <div className="w-full" data-testid="contact-form">
       <motion.form
         onSubmit={handleSubmit}
         className="space-y-6"
