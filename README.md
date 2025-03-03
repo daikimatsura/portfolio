@@ -3,6 +3,10 @@
 このリポジトリは、私のポートフォリオサイトのソースコードです。<br/>
 Next.js、Shadcn UI、Tailwind CSSを使用して構築されており、私の経歴、スキルなどを紹介しています。
 
+## サイトURL情報
+
+https://daikimatsuura.vercel.app/
+
 ## 🌟 特徴
 
 - **モダンなUI/UX**: Next.js、Shadcn UI、Tailwind CSSを使用した美しく機能的なインターフェース
@@ -27,6 +31,7 @@ Next.js、Shadcn UI、Tailwind CSSを使用して構築されており、私の�
 ```
 portfolio/
 ├── .cursor/                # AIアシスタント用の設定ディレクトリ
+│   ├── prompt.md          # AIアシスタントの役割と指示
 │   ├── rules.md           # コーディングルールの定義
 │   ├── memory.md          # プロジェクトの記憶
 │   └── sh/                # 自動化スクリプト
@@ -71,10 +76,11 @@ portfolio/
 
 ### 仕組み
 
-1. `.cursor/rules.md`と`.cursor/memory.md`にコーディングルールとプロジェクトの記憶を定義
-2. `.cursor/sh/generate_rules.sh`スクリプトが両ファイルの内容を結合して`.cursorrules`を生成
-3. Gitのpre-commitフックを使用して、コミット前に自動的に`.cursorrules`を更新
-4. 更新された`.cursorrules`は自動的にコミットに含まれる
+1. `.cursor/prompt.md`にAIアシスタントの役割と指示を定義
+2. `.cursor/rules.md`と`.cursor/memory.md`にコーディングルールとプロジェクトの記憶を定義
+3. `.cursor/sh/generate_rules.sh`スクリプトが各ファイルの内容を結合して`.cursorrules`を生成
+4. Gitのpre-commitフックを使用して、コミット前に自動的に`.cursorrules`を更新
+5. 更新された`.cursorrules`は自動的にコミットに含まれる
 
 ### 利点
 
