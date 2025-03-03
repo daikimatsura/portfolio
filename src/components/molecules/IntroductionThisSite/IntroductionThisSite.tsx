@@ -10,6 +10,11 @@ import {
   TestTube,
   Rocket,
   Cpu,
+  Moon,
+  LayoutGrid,
+  Shield,
+  GitBranch,
+  Accessibility,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/atoms/Button";
@@ -133,31 +138,19 @@ const IntroductionThisSite = () => {
       title: "Shadcn UI + Tailwind CSS",
       description:
         "美しく機能的なUIコンポーネントを、Tailwind CSSによるカスタマイズ性の高いスタイリングで実装しています。",
-      icon: <Palette className="h-6 w-6 text-blue-400" />,
-    },
-    {
-      title: "パフォーマンス最適化",
-      description:
-        "Next.jsの画像最適化、コード分割、サーバーサイドレンダリング、キャッシュ戦略を活用して高速なページ読み込みを実現しています。",
-      icon: <Cpu className="h-6 w-6 text-blue-400" />,
-    },
-    {
-      title: "アクセシビリティ対応",
-      description:
-        "WAI-ARIAに準拠したアクセシブルなUIと、prefers-reduced-motionに対応したアニメーションを実装しています。",
-      icon: <Zap className="h-6 w-6 text-blue-400" />,
+      icon: <Palette className="h-6 w-6 text-purple-400" />,
     },
     {
       title: "ダークモード対応",
       description:
         "ユーザー設定に応じたダークモード/ライトモードの切り替えに対応しています。",
-      icon: <Palette className="h-6 w-6 text-blue-400" />,
+      icon: <Moon className="h-6 w-6 text-yellow-400" />,
     },
     {
-      title: "レスポンシブデザイン",
+      title: "アトミックデザインの厳格な適用",
       description:
-        "モバイルからデスクトップまで、あらゆる画面サイズに最適化されたレイアウトを提供しています。",
-      icon: <Cpu className="h-6 w-6 text-blue-400" />,
+        "UIコンポーネントをatoms、molecules、organisms、templates、pagesの5階層に分類し、再利用性と保守性を高めています。",
+      icon: <LayoutGrid className="h-6 w-6 text-green-400" />,
     },
   ];
 
@@ -167,25 +160,13 @@ const IntroductionThisSite = () => {
       title: ".cursorrules自動生成システム",
       description:
         "Gitのpre-commitフックを活用して.cursorrulesを自動生成・更新するシステムを実装し、AIアシスタントとの効率的な協業を実現しています。",
-      icon: "🚀",
-    },
-    {
-      title: "アトミックデザインの厳格な適用",
-      description:
-        "UIコンポーネントをatoms、molecules、organisms、templates、pagesの5階層に分類し、再利用性と保守性を高めています。",
-      icon: "🚀",
-    },
-    {
-      title: "型安全性の徹底",
-      description:
-        "TypeScriptの厳格モードを有効にし、型エラーを未然に防止することで、コードの品質と信頼性を向上させています。",
-      icon: "🚀",
+      icon: <GitBranch className="h-6 w-6 text-orange-400" />,
     },
     {
       title: "アクセシビリティ対応のアニメーション",
       description:
         "prefers-reduced-motionメディアクエリに対応したアニメーションを実装し、モーションに敏感なユーザーに配慮しています。",
-      icon: "🚀",
+      icon: <Accessibility className="h-6 w-6 text-blue-400" />,
     },
   ];
 
@@ -228,7 +209,7 @@ const IntroductionThisSite = () => {
               <br />
               モダンなWeb技術を活用し、パフォーマンスとユーザー体験を重視した設計になっています。
               <br />
-              テスト駆動開発とCI/CD対応により、高品質なコードベースを維持しています。
+              AI駆動開発をスムーズに行うため.cursorrulesを自動生成、更新する仕組みを実装しています。
             </motion.p>
           </motion.div>
 
@@ -335,7 +316,7 @@ const IntroductionThisSite = () => {
             </motion.div>
           </motion.div>
 
-          {/* 新しい実装ポイントセクション */}
+          {/* 実装ポイントセクション */}
           <motion.div
             className="mb-16"
             {...fadeInProps}
@@ -379,16 +360,16 @@ const IntroductionThisSite = () => {
             </div>
           </motion.div>
 
-          {/* 新しい実装ポイントセクション */}
+          {/* 高度な実装ポイントセクション */}
           <motion.div
             className="mb-16"
             {...fadeInProps}
-            transition={{ delay: 2.0, duration: 0.8 }}
+            transition={{ delay: 2.5, duration: 0.8 }}
           >
             <motion.h2
               className="text-3xl font-bold mb-8 text-center text-foreground"
               {...fadeInProps}
-              transition={{ delay: 2.1, duration: 0.8 }}
+              transition={{ delay: 2.6, duration: 0.8 }}
             >
               高度な実装ポイント
             </motion.h2>
@@ -401,7 +382,7 @@ const IntroductionThisSite = () => {
                       "backdrop-blur-sm border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-900/50 rounded-xl p-6"
                     )}
                     {...accessibleFadeInUpProps}
-                    transition={{ delay: 2.2 + index * 0.1, duration: 0.5 }}
+                    transition={{ delay: 2.7 + index * 0.1, duration: 0.5 }}
                     whileHover={{ y: -5 }}
                   >
                     <div className="flex items-start">
