@@ -1,6 +1,6 @@
 "use client";
 
-import IntroductionThisSite from "@/components/molecules/IntroductionThisSite";
+import IntroductionThisSite from "@/components/molecules/IntroductionThisSite/IntroductionThisSite";
 import { useEffect } from "react";
 
 /**

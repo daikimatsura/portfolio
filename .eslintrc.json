@@ -10,6 +10,30 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
-    // 必要に応じてルールを追加
-  }
+    // モックの一元管理を強制するルール
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "CallExpression[callee.name='jest.mock']",
+        "message": "jest.mock()の使用は禁止されています。モックはjest.setup.jsで一元管理してください。テストファイル内でモックを定義する代わりに、jest.setup.jsにモックを追加してください。"
+      },
+      {
+        "selector": "ImportDeclaration[source.value='jest-mock-extended']",
+        "message": "jest-mock-extendedの使用は禁止されています。モックはjest.setup.jsで一元管理してください。"
+      },
+      {
+        "selector": "CallExpression[callee.object.name='jest'][callee.property.name='spyOn']",
+        "message": "jest.spyOn()の使用は禁止されています。モックはjest.setup.jsで一元管理してください。"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["jest.setup.js", "jest.config.js"],
+      "rules": {
+        "no-restricted-syntax": "off",
+        "no-restricted-imports": "off"
+      }
+    }
+  ]
 }

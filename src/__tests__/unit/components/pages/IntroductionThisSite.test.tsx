@@ -3,15 +3,18 @@ import { render, screen } from "@testing-library/react";
 import IntroductionThisSitePage from "@/components/pages/IntroductionThisSite";
 
 // 依存コンポーネントのモック
-jest.mock("@/components/molecules/IntroductionThisSite", () => {
-  return function MockIntroductionThisSite() {
-    return (
-      <div data-testid="mock-introduction-this-site">
-        IntroductionThisSite Component
-      </div>
-    );
-  };
-});
+jest.mock(
+  "@/components/molecules/IntroductionThisSite/IntroductionThisSite",
+  () => {
+    return function MockIntroductionThisSite() {
+      return (
+        <div data-testid="mock-introduction-this-site">
+          IntroductionThisSite Component
+        </div>
+      );
+    };
+  }
+);
 
 // window.scrollToのモック
 const scrollToMock = jest.fn();

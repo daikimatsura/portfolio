@@ -24,6 +24,24 @@ jest.mock("@testing-library/react", () => {
   };
 });
 
+// React useActionStateのモック
+jest.mock("react", () => {
+  const originalReact = jest.requireActual("react");
+  return {
+    ...originalReact,
+    useActionState: jest
+      .fn()
+      .mockImplementation((action, initialState) => [
+        initialState,
+        jest.fn(),
+        false,
+      ]),
+  };
+});
+
+// fetchのグローバルモック
+global.fetch = jest.fn();
+
 // Mock next/router
 jest.mock("next/router", () => ({
   useRouter() {
@@ -147,113 +165,6 @@ jest.mock("@/lib/styles", () => ({
   getTechCardColor: jest
     .fn()
     .mockImplementation((color) => `tech-card-color-${color}-mock`),
-}));
-
-// Mock @/components/atoms/Button
-jest.mock("@/components/atoms/Button", () => ({
-  Button: ({
-    children,
-    onClick,
-    gradient,
-    className,
-    variant,
-    size,
-    asChild,
-    disabled,
-  }) => {
-    // バリアントに基づいてクラスを生成
-    let variantClasses = "";
-    if (variant === "default" || !variant) {
-      variantClasses = "bg-primary text-primary-foreground hover:bg-primary/90";
-    } else if (variant === "destructive") {
-      variantClasses =
-        "bg-destructive text-destructive-foreground hover:bg-destructive/90";
-    } else if (variant === "outline") {
-      variantClasses =
-        "border border-input bg-background hover:bg-accent hover:text-accent-foreground";
-    } else if (variant === "secondary") {
-      variantClasses =
-        "bg-secondary text-secondary-foreground hover:bg-secondary/80";
-    } else if (variant === "ghost") {
-      variantClasses = "hover:bg-accent hover:text-accent-foreground";
-    } else if (variant === "link") {
-      variantClasses = "text-primary underline-offset-4 hover:underline";
-    }
-
-    // サイズに基づいてクラスを生成
-    let sizeClasses = "";
-    if (size === "default" || !size) {
-      sizeClasses = "h-10 px-4 py-2";
-    } else if (size === "sm") {
-      sizeClasses = "h-9 rounded-md px-3";
-    } else if (size === "lg") {
-      sizeClasses = "h-11 rounded-md px-8";
-    } else if (size === "icon") {
-      sizeClasses = "h-10 w-10";
-    }
-
-    const allClasses = `${variantClasses} ${sizeClasses} ${className || ""}`;
-
-    // asChildがtrueの場合は子要素のpropsを拡張
-    if (asChild && children && typeof children === "object") {
-      // 直接子要素を返す（React.cloneElementは使用しない）
-      const childProps = {
-        className: allClasses,
-        disabled,
-        onClick,
-        "data-testid": "button-mock",
-        "data-gradient": gradient,
-      };
-
-      return <div {...childProps}>{children}</div>;
-    }
-
-    return (
-      <button
-        data-testid="button-mock"
-        onClick={onClick}
-        className={allClasses}
-        data-gradient={gradient}
-        disabled={disabled}
-      >
-        {children}
-      </button>
-    );
-  },
-  buttonVariants: ({ variant, size, className }) => {
-    // バリアントに基づいてクラスを生成
-    let variantClasses = "";
-    if (variant === "default" || !variant) {
-      variantClasses = "bg-primary text-primary-foreground hover:bg-primary/90";
-    } else if (variant === "destructive") {
-      variantClasses =
-        "bg-destructive text-destructive-foreground hover:bg-destructive/90";
-    } else if (variant === "outline") {
-      variantClasses =
-        "border border-input bg-background hover:bg-accent hover:text-accent-foreground";
-    } else if (variant === "secondary") {
-      variantClasses =
-        "bg-secondary text-secondary-foreground hover:bg-secondary/80";
-    } else if (variant === "ghost") {
-      variantClasses = "hover:bg-accent hover:text-accent-foreground";
-    } else if (variant === "link") {
-      variantClasses = "text-primary underline-offset-4 hover:underline";
-    }
-
-    // サイズに基づいてクラスを生成
-    let sizeClasses = "";
-    if (size === "default" || !size) {
-      sizeClasses = "h-10 px-4 py-2";
-    } else if (size === "sm") {
-      sizeClasses = "h-9 rounded-md px-3";
-    } else if (size === "lg") {
-      sizeClasses = "h-11 rounded-md px-8";
-    } else if (size === "icon") {
-      sizeClasses = "h-10 w-10";
-    }
-
-    return `${variantClasses} ${sizeClasses} ${className || ""}`;
-  },
 }));
 
 // Mock @/components/atoms/SectionTitle
@@ -501,6 +412,8 @@ jest.mock("lucide-react", () => {
       </span>
     ),
     Mail: () => <span data-testid="mail-icon">Mail Icon</span>,
+    // ContactFormテスト用に追加したアイコン
+    Clock: () => <span data-testid="clock-icon">Clock Icon</span>,
   };
 });
 
@@ -536,3 +449,14 @@ jest.mock("@/hooks/useTheme", () => {
 
 // Mock CSS imports
 jest.mock("@/app/globals.css", () => ({}), { virtual: true });
+
+// コンソールメソッドのモック
+// ErrorBoundary.testとerrorHandlers.testで使用
+jest.spyOn(console, "error").mockImplementation(() => {});
+jest.spyOn(console, "warn").mockImplementation(() => {});
+jest.spyOn(console, "info").mockImplementation(() => {});
+
+// テスト終了時にモックをリセットするためのグローバルセットアップ
+afterEach(() => {
+  jest.clearAllMocks();
+});

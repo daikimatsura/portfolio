@@ -1,3 +1,6 @@
+import React from "react";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { motion } from "framer-motion";
 import CareerTimeline from "@/components/molecules/CareerTimeline";
 import { Badge } from "@/components/atoms/Badge";
 import { Card, CardContent } from "@/components/atoms/Card";
