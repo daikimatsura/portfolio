@@ -9,10 +9,8 @@ import {
   Github,
   TestTube,
   Rocket,
-  Cpu,
   Moon,
   LayoutGrid,
-  Shield,
   GitBranch,
   Accessibility,
 } from "lucide-react";
@@ -46,7 +44,7 @@ interface Technology {
   color: string;
 }
 
-const IntroductionThisSite = () => {
+export const IntroductionThisSite = ({ className }: { className?: string }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -174,7 +172,7 @@ const IntroductionThisSite = () => {
     <motion.section
       ref={ref}
       id="introduction-this-site"
-      className="py-16 px-4 md:px-8"
+      className={cn("py-16 px-4 md:px-8", className)}
       variants={staggerContainerVariants}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
@@ -444,5 +442,4 @@ const IntroductionThisSite = () => {
   );
 };
 
-export { IntroductionThisSite };
 export default IntroductionThisSite;

@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import IntroductionThisSite from "@/components/molecules/IntroductionThisSite";
+import { IntroductionThisSite } from "@/components/molecules/IntroductionThisSite";
 
 /**
  * このサイトについてページのメタデータ

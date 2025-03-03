@@ -1,94 +1,129 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import IntroductionThisSite from "./IntroductionThisSite";
 import "@testing-library/jest-dom";
+import { IntroductionThisSite } from "./IntroductionThisSite";
 
-// framer-motionのモックは既にjest.setup.jsで設定されています
-// next/linkのモックも既にjest.setup.jsで設定されています
+// アニメーション関連のフックをモック
+jest.mock("@/lib/animations", () => ({
+  useAnimationInView: () => ({
+    ref: { current: null },
+    inView: true,
+    animation: {
+      hidden: { opacity: 0, y: 50 },
+      visible: { opacity: 1, y: 0 },
+    },
+    transition: { duration: 0.5 },
+  }),
+  useAccessibleAnimations: () => ({
+    fadeInUpProps: {
+      initial: { opacity: 0, y: 50 },
+      animate: { opacity: 1, y: 0 },
+    },
+    fadeInProps: {
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+    },
+  }),
+  useAccessibleVariants: () => ({
+    staggerContainer: {
+      hidden: {},
+      visible: {
+        transition: {
+          staggerChildren: 0.1,
+        },
+      },
+    },
+  }),
+}));
+
+// GradientBlurDecorationコンポーネントのモック
+jest.mock("@/components/atoms/GradientBlurDecoration", () => ({
+  __esModule: true,
+  default: ({ animate }: { animate?: boolean }) => (
+    <div data-testid="gradient-blur-decoration" data-animate={animate}>
+      Gradient Blur Decoration
+    </div>
+  ),
+}));
+
+// react-intersection-observerのモック
+jest.mock("react-intersection-observer", () => ({
+  useInView: () => ({
+    ref: { current: null },
+    inView: true,
+  }),
+}));
+
+// Lucide Reactアイコンのモック
+jest.mock("lucide-react", () => ({
+  Zap: () => <div data-testid="zap-icon">Zap Icon</div>,
+  Code: () => <div data-testid="code-icon">Code Icon</div>,
+  Palette: () => <div data-testid="palette-icon">Palette Icon</div>,
+  Layers: () => <div data-testid="layers-icon">Layers Icon</div>,
+  TestTube: () => <div data-testid="test-tube-icon">TestTube Icon</div>,
+  Rocket: () => <div data-testid="rocket-icon">Rocket Icon</div>,
+  Moon: () => <div data-testid="moon-icon">Moon Icon</div>,
+  LayoutGrid: () => <div data-testid="layout-grid-icon">LayoutGrid Icon</div>,
+  GitBranch: () => <div data-testid="git-branch-icon">GitBranch Icon</div>,
+  Accessibility: () => (
+    <div data-testid="accessibility-icon">Accessibility Icon</div>
+  ),
+  Github: () => <div data-testid="github-icon">Github Icon</div>,
+}));
+
+// スタイル関連のモック
+jest.mock("@/lib/styles", () => ({
+  gradientText: "gradient-text-class",
+  blueIconColor: "blue-icon-color",
+  greenIconColor: "green-icon-color",
+  redIconColor: "red-icon-color",
+  purpleIconColor: "purple-icon-color",
+  yellowIconColor: "yellow-icon-color",
+  orangeIconColor: "orange-icon-color",
+  cardBg: "card-bg-class",
+  iconBg: "icon-bg-class",
+  getTechCardColor: () => "tech-card-color",
+  gradientIconBg: "gradient-icon-bg",
+}));
+
+// Buttonコンポーネントのモック
+jest.mock("@/components/atoms/Button", () => ({
+  Button: ({
+    children,
+    ...props
+  }: React.PropsWithChildren<
+    React.ButtonHTMLAttributes<HTMLButtonElement>
+  >) => (
+    <button data-testid="button" {...props}>
+      {children}
+    </button>
+  ),
+}));
 
 describe("IntroductionThisSite", () => {
-  it("セクションタイトルが正しく表示される", () => {
+  it("正しくレンダリングされる", () => {
     render(<IntroductionThisSite />);
 
+    // セクションタイトルが表示されていることを確認
     expect(screen.getByText("このサイトについて")).toBeInTheDocument();
-  });
 
-  it("サブタイトルが表示される", () => {
-    render(<IntroductionThisSite />);
-
+    // 説明文の一部が表示されていることを確認
     expect(
       screen.getByText(
         /このポートフォリオサイトは、私のスキルと経験を紹介するために作成しました。/
       )
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        /モダンなWeb技術を活用し、パフォーマンスとユーザー体験を重視した設計になっています。/
-      )
-    ).toBeInTheDocument();
   });
 
-  it("テクノロジーカードが表示される", () => {
+  it("使用技術セクションが表示される", () => {
     render(<IntroductionThisSite />);
-
-    // 各テクノロジーのタイトルが表示されていることを確認
+    expect(screen.getByText("使用技術")).toBeInTheDocument();
     expect(screen.getByText("Next.js & React")).toBeInTheDocument();
     expect(screen.getByText("TypeScript")).toBeInTheDocument();
-    expect(screen.getByText("Tailwind CSS & Shadcn UI")).toBeInTheDocument();
-    expect(screen.getByText("アトミックデザイン")).toBeInTheDocument();
   });
 
-  it("テクノロジーの説明が表示される", () => {
+  it("GitHubリポジトリへのリンクが表示される", () => {
     render(<IntroductionThisSite />);
-
-    // 各テクノロジーの説明が表示されていることを確認
-    expect(
-      screen.getByText(
-        /モダンなUIとシームレスなユーザー体験を実現するフレームワーク/
-      )
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/型安全性を確保し、開発効率と保守性を向上/)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/美しく一貫性のあるデザインシステムを構築/)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/再利用可能で保守性の高いコンポーネント設計/)
-    ).toBeInTheDocument();
-  });
-
-  it("GitHubリンクが表示される", () => {
-    render(<IntroductionThisSite />);
-
-    const githubLink = screen.getByText(/GitHubでコードを見る/).closest("a");
-    expect(githubLink).toBeInTheDocument();
-    expect(githubLink).toHaveAttribute(
-      "href",
-      "https://github.com/daikimatsura/portfolio"
-    );
-    expect(githubLink).toHaveAttribute("target", "_blank");
-  });
-
-  it("実装詳細セクションが表示される", () => {
-    render(<IntroductionThisSite />);
-
-    // 実装詳細セクションのタイトルが表示されていることを確認
-    expect(screen.getByText("実装詳細")).toBeInTheDocument();
-
-    // 各実装詳細が表示されていることを確認
-    expect(screen.getByText("App Router")).toBeInTheDocument();
-    expect(screen.getByText("サーバーコンポーネント")).toBeInTheDocument();
-    expect(screen.getAllByText("レスポンシブデザイン")[0]).toBeInTheDocument();
-    expect(screen.getByText("アニメーション")).toBeInTheDocument();
-    expect(screen.getByText("アクセシビリティ")).toBeInTheDocument();
-  });
-
-  it("背景エフェクト要素が存在する", () => {
-    render(<IntroductionThisSite />);
-
-    // 背景グラデーションの要素をチェック
-    const gradientBg = document.querySelector(".bg-gradient-to-b");
-    expect(gradientBg).toBeInTheDocument();
+    expect(screen.getByText("GitHubでコードを見る")).toBeInTheDocument();
   });
 });

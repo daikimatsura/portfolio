@@ -20,3 +20,5 @@ export const useAnimationInView = (threshold = 0.1, triggerOnce = true) => {
 
   return { ref, controls, inView };
 };
+
+export default useAnimationInView;
