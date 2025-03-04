@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # スクリプトの説明
-echo "=== .cursorrulesの自動生成スクリプト ==="
-echo "このスクリプトは.cursor配下のmdファイル（prompt.md、rules.md、memory.md）を読み込み、.cursorrulesファイルを自動生成します。"
+echo "=== .cursor/rules/cursorrules.mdcの自動生成スクリプト ==="
+echo "このスクリプトは.cursor配下のmdファイル（prompt.md、rules.md、memory.md）を読み込み、.cursor/rules/cursorrules.mdcファイルを自動生成します。"
 echo ""
 
 # 作業ディレクトリを取得
@@ -10,11 +10,18 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CURSOR_DIR="$(dirname "$SCRIPT_DIR")"
 PROJECT_ROOT="$(dirname "$CURSOR_DIR")"
 
-# 出力ファイルのパス
-OUTPUT_FILE="$PROJECT_ROOT/.cursorrules"
+# 出力ディレクトリとファイルのパス
+OUTPUT_DIR="$CURSOR_DIR/rules"
+OUTPUT_FILE="$OUTPUT_DIR/cursorrules.mdc"
 
 # 一時ファイル
 TMP_FILE="$CURSOR_DIR/tmp_rules"
+
+# 出力ディレクトリの存在確認と作成
+if [ ! -d "$OUTPUT_DIR" ]; then
+  echo "出力ディレクトリが存在しないため作成します: $OUTPUT_DIR"
+  mkdir -p "$OUTPUT_DIR"
+fi
 
 # ファイルの存在確認
 if [ ! -f "$CURSOR_DIR/rules.md" ]; then
@@ -39,7 +46,7 @@ fi
 > "$TMP_FILE"
 
 # ヘッダーを追加
-echo "# 自動生成された.cursorrules" > "$TMP_FILE"
+echo "# 自動生成された.cursor/rules/cursorrules.mdc" > "$TMP_FILE"
 echo "# 生成日時: $(date)" >> "$TMP_FILE"
 echo "# このファイルは.cursor/sh/generate_rules.shによって自動生成されています。" >> "$TMP_FILE"
 echo "# 直接編集せず、.cursor/prompt.md、.cursor/rules.md、.cursor/memory.mdを編集してください。" >> "$TMP_FILE"
@@ -70,7 +77,7 @@ mv "$TMP_FILE" "$OUTPUT_FILE"
 # 実行権限を付与
 chmod 644 "$OUTPUT_FILE"
 
-echo "✅ .cursorrulesファイルが正常に生成されました: $OUTPUT_FILE"
+echo "✅ .cursor/rules/cursorrules.mdcファイルが正常に生成されました: $OUTPUT_FILE"
 echo "ファイルサイズ: $(du -h "$OUTPUT_FILE" | cut -f1)"
 echo ""
 echo "注意: このファイルは自動生成されています。変更する場合は元のmdファイル（prompt.md、rules.md、memory.md）を編集してください。" 
