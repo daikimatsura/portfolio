@@ -2,7 +2,7 @@
 
 # スクリプトの説明
 echo "=== Gitフック設定スクリプト ==="
-echo "このスクリプトはGitのpre-commitフックを設定し、コミット前に.cursorrulesを自動更新します。"
+echo "このスクリプトはGitのpre-commitフックを設定し、コミット前に.cursor/rules/cursorrules.mdcを自動更新します。"
 echo ""
 
 # 作業ディレクトリを取得
@@ -28,7 +28,7 @@ cat > "$PRE_COMMIT_HOOK" << 'EOF'
 #!/bin/bash
 
 # pre-commitフック
-# コミット前に.cursorrulesを自動更新します
+# コミット前に.cursor/rules/cursorrules.mdcを自動更新します
 
 # スクリプトのパスを取得
 SCRIPT_PATH="$(git rev-parse --show-toplevel)/.cursor/sh/update_rules.sh"
@@ -44,7 +44,7 @@ bash "$SCRIPT_PATH"
 
 # スクリプトの実行結果を確認
 if [ $? -ne 0 ]; then
-  echo "エラー: .cursorrulesの更新に失敗しました。"
+  echo "エラー: .cursor/rules/cursorrules.mdcの更新に失敗しました。"
   exit 1
 fi
 
@@ -56,4 +56,4 @@ EOF
 chmod +x "$PRE_COMMIT_HOOK"
 
 echo "✅ pre-commitフックが正常に設定されました: $PRE_COMMIT_HOOK"
-echo "これにより、コミット前に.cursorrulesファイルが自動的に更新されます。" 
+echo "これにより、コミット前に.cursor/rules/cursorrules.mdcファイルが自動的に更新されます。" 
