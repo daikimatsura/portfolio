@@ -559,7 +559,5 @@ Next.js App Router with React, Shadcn UI, Radix UI, and Tailwind
 - アクセシビリティを考慮したテストを書く（例: `getByRole`の使用）
 - スナップショットテストは変更が少ないコンポーネントに限定して使用
 - モックは個別のテストファイルではなく`jest.setup.js`で一元管理する
-- 個別のテストファイル内で`jest.mock()`や`jest.spyOn()`を使用しない
-- 新しいモックが必要な場合は、必ず`jest.setup.js`に追加する
-- テストファイルでは`jest.setup.js`で定義されたモックを利用する
+- 必要であればテストファイルでは`jest.setup.js`で定義されたモックを利用する
 - ESLintルールによりモックの一元管理が強制されている

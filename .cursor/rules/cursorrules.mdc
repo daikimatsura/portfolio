@@ -4,7 +4,7 @@ globs:
 alwaysApply: true
 ---
 # 自動生成された.cursor/rules/cursorrules.mdc
-# 生成日時: Tue Mar  4 13:25:34 JST 2025
+# 生成日時: Tue Mar  4 13:26:20 JST 2025
 # このファイルは.cursor/sh/generate_rules.shによって自動生成されています。
 # 直接編集せず、.cursor/prompt.md、.cursor/rules.md、.cursor/memory.mdを編集してください。
 
@@ -703,9 +703,7 @@ Next.js App Router with React, Shadcn UI, Radix UI, and Tailwind
 - アクセシビリティを考慮したテストを書く（例: `getByRole`の使用）
 - スナップショットテストは変更が少ないコンポーネントに限定して使用
 - モックは個別のテストファイルではなく`jest.setup.js`で一元管理する
-- 個別のテストファイル内で`jest.mock()`や`jest.spyOn()`を使用しない
-- 新しいモックが必要な場合は、必ず`jest.setup.js`に追加する
-- テストファイルでは`jest.setup.js`で定義されたモックを利用する
+- 必要であればテストファイルでは`jest.setup.js`で定義されたモックを利用する
 - ESLintルールによりモックの一元管理が強制されている
 
 ## プロジェクトの記憶
