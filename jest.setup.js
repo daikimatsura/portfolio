@@ -251,6 +251,7 @@ jest.mock("framer-motion", () => {
       tbody: ({ children, ...props }) => <tbody {...props}>{children}</tbody>,
       tfoot: ({ children, ...props }) => <tfoot {...props}>{children}</tfoot>,
     },
+    AnimatePresence: ({ children }) => <>{children}</>,
   };
 });
 
@@ -368,7 +369,7 @@ jest.mock("lucide-react", () => {
     ),
     ChevronDown: () => <span data-testid="chevron-down-icon">▼</span>,
     ChevronUp: () => <span data-testid="chevron-up-icon">▲</span>,
-    Monitor: () => <span data-testid="monitor-icon">��️</span>,
+    Monitor: () => <span data-testid="monitor-icon">️</span>,
     Send: () => <span data-testid="send-icon">Send Icon</span>,
     CheckCircle: () => (
       <span data-testid="check-circle-icon">CheckCircle Icon</span>
@@ -449,6 +450,35 @@ jest.mock("@/hooks/useTheme", () => {
 
 // Mock CSS imports
 jest.mock("@/app/globals.css", () => ({}), { virtual: true });
+
+// Homeコンポーネントのテスト用モック
+jest.mock("@/components/molecules/About", () => {
+  return {
+    __esModule: true,
+    default: () => <div data-testid="mock-about">About Component</div>,
+  };
+});
+
+jest.mock("@/components/organisms/Blogs", () => {
+  return {
+    __esModule: true,
+    default: () => <div data-testid="mock-blogs">Blogs Component</div>,
+  };
+});
+
+jest.mock("@/components/organisms/Skills", () => {
+  return {
+    __esModule: true,
+    default: () => <div data-testid="mock-skills">Skills Component</div>,
+  };
+});
+
+jest.mock("@/components/organisms/Contact", () => {
+  return {
+    __esModule: true,
+    default: () => <div data-testid="mock-contact">Contact Component</div>,
+  };
+});
 
 // コンソールメソッドのモック
 // ErrorBoundary.testとerrorHandlers.testで使用

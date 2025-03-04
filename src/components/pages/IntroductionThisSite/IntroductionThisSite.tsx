@@ -9,7 +9,7 @@ import { useEffect } from "react";
  * このコンポーネントは、ポートフォリオサイトの技術的な詳細や実装について説明するページです。
  * molecules/IntroductionThisSiteコンポーネントをラップし、必要に応じてページレベルの処理を追加します。
  */
-const IntroductionThisSitePage = () => {
+export const IntroductionThisSitePage = () => {
   // ページ表示時にスクロール位置をトップに戻す
   useEffect(() => {
     window.scrollTo(0, 0);

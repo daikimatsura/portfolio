@@ -8,7 +8,7 @@ import Blogs from "@/components/organisms/Blogs";
 import Skills from "@/components/organisms/Skills";
 import Contact from "@/components/organisms/Contact";
 
-const Home = () => {
+export const Home = () => {
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
   // スクロールインジケーターの表示/非表示を制御

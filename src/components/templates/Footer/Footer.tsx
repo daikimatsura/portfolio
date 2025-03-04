@@ -1,4 +1,3 @@
-// components/layout/Footer.tsx
 "use client";
 
 import Link from "next/link";
@@ -21,7 +20,11 @@ const navLinks = [
 //   },
 // ];
 
-const Footer = () => {
+/**
+ * アプリケーションのフッターコンポーネント
+ * ナビゲーションリンク、プロフィール情報、著作権情報を含む
+ */
+export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -115,5 +118,3 @@ const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;

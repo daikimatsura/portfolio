@@ -1,45 +1,8 @@
 import React from "react";
 import { render, screen, act } from "@testing-library/react";
-import Home from "@/components/pages/Home";
+import { Home } from "./Home";
 
-// 依存コンポーネントのモック
-jest.mock("@/components/molecules/About", () => {
-  return function MockAbout() {
-    return <div data-testid="mock-about">About Component</div>;
-  };
-});
-
-jest.mock("@/components/organisms/Blogs", () => {
-  return function MockBlogs() {
-    return <div data-testid="mock-blogs">Blogs Component</div>;
-  };
-});
-
-jest.mock("@/components/organisms/Skills", () => {
-  return function MockSkills() {
-    return <div data-testid="mock-skills">Skills Component</div>;
-  };
-});
-
-jest.mock("@/components/organisms/Contact", () => {
-  return function MockContact() {
-    return <div data-testid="mock-contact">Contact Component</div>;
-  };
-});
-
-// framer-motionのモック
-jest.mock("framer-motion", () => {
-  return {
-    motion: {
-      div: ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-        <div {...props}>{children}</div>
-      ),
-    },
-    AnimatePresence: ({ children }: { children: React.ReactNode }) => (
-      <>{children}</>
-    ),
-  };
-});
+// モックの作成をjest.setup.jsに移動したため、このファイルではモックを定義しない
 
 describe("Home", () => {
   beforeEach(() => {

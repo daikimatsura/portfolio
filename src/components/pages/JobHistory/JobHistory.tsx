@@ -1,10 +1,14 @@
-import React from "react";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { motion } from "framer-motion";
+"use client";
+
+import React, { useEffect } from "react";
 import CareerTimeline from "@/components/molecules/CareerTimeline";
 import { Badge } from "@/components/atoms/Badge";
 import { Card, CardContent } from "@/components/atoms/Card";
 
+/**
+ * 職務経歴を表示するページコンポーネント
+ * 経歴サマリー、資格、スキルハイライト、職務経歴を表示する
+ */
 const careerData: CareerHistory[] = [
   {
     id: "0",
@@ -47,7 +51,12 @@ const careerData: CareerHistory[] = [
   },
 ];
 
-const JobHistory = () => {
+export const JobHistoryPage = () => {
+  // ページ表示時に画面の先頭にスクロール
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <div className="max-w-4xl mx-auto p-6">
@@ -111,7 +120,8 @@ const JobHistory = () => {
   );
 };
 
-export default JobHistory;
+export default JobHistoryPage;
+
 /*
 const careerData1: CareerHistory[] = [
   {

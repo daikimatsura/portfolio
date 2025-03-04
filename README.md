@@ -38,14 +38,16 @@ portfolio/
 │       ├── generate_rules.sh  # .cursorrulesの生成
 │       ├── update_rules.sh    # .cursorrulesの更新
 │       └── setup_git_hooks.sh # Gitフックの設定
+│   └── rules/               # CursorのPJルールファイル
+│       ├── cursorrules.mdc      # AIアシスタント用ルール
 ├── public/                 # 静的ファイル
 ├── src/                    # ソースコード
 │   ├── app/                # Next.js App Router
 │   ├── components/         # Reactコンポーネント
-│   │   ├── atoms/         # 最小単位のUI要素
-│   │   ├── molecules/     # 複数のatomsを組み合わせた要素
-│   │   ├── organisms/     # 複数のmoleculesを組み合わせた機能的なセクション
-│   │   ├── templates/     # ページのレイアウト構造
+│   │   ├── atoms/         # 最小単位のUI要素（ボタン、入力フィールド、アイコンなど）
+│   │   ├── molecules/     # 複数のatomsを組み合わせた要素（検索フォーム、ナビゲーションリンクグループなど）
+│   │   ├── organisms/     # 複数のmoleculesを組み合わせた機能的なセクション（コンタクトフォームなど）
+│   │   ├── templates/     # ページのレイアウト構造（ヘッダー、フッターなど）
 │   │   └── pages/         # 完全なページコンポーネント
 │   ├── hooks/              # カスタムReactフック
 │   ├── lib/                # ユーティリティ関数
@@ -63,12 +65,84 @@ portfolio/
 
 ## 🚀 開発ガイドライン
 
-- **コーディング規約**: アトミックデザインパターンに基づくコンポーネント設計
-- **TypeScript**: 厳格モードを使用した型安全なコード
-- **スタイリング**: Tailwind CSSとShadcn UIを使用した一貫したデザイン
-- **状態管理**: Reactフックとコンテキストを使用したシンプルな状態管理
-- **アクセシビリティ**: WAI-ARIAに準拠したアクセシブルなUI
-- **パフォーマンス**: Next.jsの最適化機能を活用
+### コンポーネント設計
+
+各コンポーネントは以下の標準ディレクトリ構造に従って実装します：
+
+```
+ComponentName/
+├── ComponentName.tsx    # コンポーネント実装
+├── ComponentName.test.tsx    # テスト
+└── index.ts             # エクスポート定義
+```
+
+### コーディング規約
+
+1. **アトミックデザイン**:
+
+   - 階層構造を厳格に遵守（organisms → molecules → atoms）
+   - 逆方向の依存（molecules → organisms）は禁止
+   - コンポーネントの責任範囲を明確に定義
+
+2. **TypeScript**:
+
+   - 厳格な型付けを実施
+   - `any`型の使用を避け、具体的な型定義を使用
+   - 型定義は`src/types`ディレクトリで集中管理
+
+3. **スタイリング**:
+
+   ```tsx
+   <div className={cn(
+     "bg-gray-900/80 p-4 rounded-lg",
+     "hover:bg-gray-800/90 transition-colors",
+     className
+   )}>
+   ```
+
+   - Tailwind CSSのユーティリティクラスを`cn()`関数でグループ化
+   - 背景色は暗めの色調、アクセント色は青系統を基本
+
+4. **エラーハンドリング**:
+
+   ```tsx
+   try {
+     // 処理
+   } catch (error) {
+     console.error("エラーが発生しました:", error);
+     return <ErrorComponent message="エラーが発生しました" />;
+   }
+   ```
+
+5. **データフェッチング**:
+   ```tsx
+   const data = await fetch("/api/data", { next: { revalidate: 3600 } }).then(
+     (res) => res.json()
+   );
+   ```
+   - 可能な限りサーバーコンポーネントでデータフェッチング
+   - 適切なキャッシュ戦略を設定
+
+### 品質管理
+
+1. **リントチェック**:
+
+   ```bash
+   yarn lint  # すべてのソースコードとテストファイルをチェック
+   ```
+
+   - コンポーネント実装・修正後
+   - テスト実装・修正後
+   - プルリクエスト作成前
+   - ビルド実行前
+
+2. **テスト**:
+   ```bash
+   yarn test  # すべてのテストを実行
+   ```
+   - コンポーネント変更後は対応するテストを実行
+   - 構造変更後は全テストを実行
+   - テストファイルは各コンポーネントと同じディレクトリに配置
 
 ## 🤖 .cursorrulesの自動生成・更新システム
 
@@ -78,9 +152,9 @@ portfolio/
 
 1. `.cursor/prompt.md`にAIアシスタントの役割と指示を定義
 2. `.cursor/rules.md`と`.cursor/memory.md`にコーディングルールとプロジェクトの記憶を定義
-3. `.cursor/sh/generate_rules.sh`スクリプトが各ファイルの内容を結合して`.cursorrules`を生成
-4. Gitのpre-commitフックを使用して、コミット前に自動的に`.cursorrules`を更新
-5. 更新された`.cursorrules`は自動的にコミットに含まれる
+3. `.cursor/sh/generate_rules.sh`スクリプトが各ファイルの内容を結合して`cursorrules.mdc`を生成
+4. Gitのpre-commitフックを使用して、コミット前に自動的に`cursorrules.mdc`を更新
+5. 更新された`cursorrules.mdc`は自動的にコミットに含まれる
 
 ### 利点
 
@@ -217,42 +291,70 @@ npm start
 
 このプロジェクトではJestとReact Testing Libraryを使用してテストを実装しています。
 
+### テストコマンド
+
 ```bash
 # すべてのテストを実行
 yarn test
-# または
-npm test
 
 # 監視モードでテストを実行（ファイル変更時に自動的に再実行）
 yarn test:watch
-# または
-npm run test:watch
 
 # カバレッジレポートを生成
 yarn test:coverage
-# または
-npm run test:coverage
 ```
 
-### テスト環境の設定
+### テスト実装パターン
 
-- **Jest**: テストランナーとして使用
-- **React Testing Library**: コンポーネントのテストに使用
-- **JSX変換**: 新しいReact JSX変換を使用（高速なパフォーマンス）
-- **モック**: 外部依存関係（API、アイコンなど）は適切にモック化
+1. **モック戦略**:
 
-テストファイルは各コンポーネントと同じディレクトリ構造で `src/__tests__` ディレクトリに配置されています。
+   - 外部ライブラリ（アイコン、UIコンポーネント、フレームワーク機能）は一元的にモック
+   - `jest.setup.js`でモックの基本設定を集中管理
+   - 複雑なコンポーネントは階層構造を保持しつつ簡略化したモックを作成
 
-```
-src/__tests__/
-├── unit/                 # 単体テスト
-│   ├── components/       # コンポーネントテスト
-│   │   ├── atoms/        # 基本的なUI要素のテスト
-│   │   ├── molecules/    # 複合コンポーネントのテスト
-│   │   └── organisms/    # 機能的なセクションのテスト
-│   └── hooks/            # カスタムフックのテスト
-└── integration/          # 統合テスト
-```
+2. **共通モックパターン**:
+
+   ```tsx
+   // アイコンコンポーネント
+   jest.mock("@/components/atoms/Icon", () => ({
+     Icon: ({ "data-testid": testId }) => <span data-testid={testId} />,
+   }));
+
+   // Framer Motionコンポーネント
+   jest.mock("framer-motion", () => ({
+     motion: {
+       div: ({ children, ...props }) => <div {...props}>{children}</div>,
+     },
+   }));
+   ```
+
+3. **テスト安定性向上の手法**:
+
+   - 要素取得は`data-testid`属性を優先使用
+   - 非同期処理テストでは`waitFor`や`findBy*`クエリを使用
+   - 複雑なテキスト検証は正規表現による部分一致を活用
+   - セレクタは安定性の高い方法（id > role > class）を優先
+
+4. **テストファイルの配置**:
+   ```
+   src/components/カテゴリ/
+     └── ComponentName/
+         ├── ComponentName.tsx
+         ├── ComponentName.test.tsx  # コンポーネントと同じディレクトリに配置
+         └── index.ts
+   ```
+
+### テスト実行のタイミング
+
+- コンポーネント変更後は対応するテストを必ず実行
+- 構造変更後は全テストを実行して影響範囲を確認
+- ビルド前の全テスト実行による品質保証
+
+### テスト修正の優先順位
+
+1. コンポーネントの意図と実装が正しい場合はテストを修正
+2. テストの期待値が正しい場合はコンポーネントを修正
+3. 両方に問題がある場合は設計から見直し
 
 ## 🔍 パフォーマンス最適化
 

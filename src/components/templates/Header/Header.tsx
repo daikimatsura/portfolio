@@ -9,7 +9,11 @@ import { ThemeToggle } from "@/components/atoms/ThemeToggle";
 import { gradientText } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 
-const Header = () => {
+/**
+ * アプリケーションのヘッダーコンポーネント
+ * ナビゲーションリンク、テーマトグル、モバイルメニューを含む
+ */
+export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
