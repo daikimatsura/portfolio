@@ -4,7 +4,7 @@ globs:
 alwaysApply: true
 ---
 # 自動生成された.cursor/rules/cursorrules.mdc
-# 生成日時: Tue Mar  4 11:47:20 JST 2025
+# 生成日時: Tue Mar  4 13:13:30 JST 2025
 # このファイルは.cursor/sh/generate_rules.shによって自動生成されています。
 # 直接編集せず、.cursor/prompt.md、.cursor/rules.md、.cursor/memory.mdを編集してください。
 

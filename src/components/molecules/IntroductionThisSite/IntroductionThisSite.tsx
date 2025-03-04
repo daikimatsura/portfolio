@@ -207,7 +207,7 @@ export const IntroductionThisSite = ({ className }: { className?: string }) => {
               <br />
               モダンなWeb技術を活用し、パフォーマンスとユーザー体験を重視した設計になっています。
               <br />
-              AI駆動開発をスムーズに行うため.cursorrulesを自動生成、更新する仕組みを実装しています。
+              AI駆動開発をスムーズに行うためcursor/rules/*.mdcを自動生成、更新する仕組みを実装しています。
             </motion.p>
           </motion.div>
 
