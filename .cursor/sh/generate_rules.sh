@@ -45,8 +45,15 @@ fi
 # 一時ファイルを初期化
 > "$TMP_FILE"
 
-# ヘッダーを追加
-echo "# 自動生成された.cursor/rules/cursorrules.mdc" > "$TMP_FILE"
+# YAML frontmatterを最初に追加
+echo "---" > "$TMP_FILE"
+echo "description: 以下のプロンプトに絶対遵守すること" >> "$TMP_FILE"
+echo "globs: " >> "$TMP_FILE"
+echo "alwaysApply: true" >> "$TMP_FILE"
+echo "---" >> "$TMP_FILE"
+
+# 次にヘッダーを追加
+echo "# 自動生成された.cursor/rules/cursorrules.mdc" >> "$TMP_FILE"
 echo "# 生成日時: $(date)" >> "$TMP_FILE"
 echo "# このファイルは.cursor/sh/generate_rules.shによって自動生成されています。" >> "$TMP_FILE"
 echo "# 直接編集せず、.cursor/prompt.md、.cursor/rules.md、.cursor/memory.mdを編集してください。" >> "$TMP_FILE"
