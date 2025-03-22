@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
  * ナビゲーションリンク、テーマトグル、モバイルメニューを含む
  */
 export const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
@@ -128,7 +128,7 @@ export const Header = () => {
             </Link>
           </motion.div>
 
-          {/* モバイルメニューボタン */}
+          {/* モバイルメニューボタン
           <div className="lg:hidden flex items-center gap-4">
             <ThemeToggle />
             <Link
@@ -149,10 +149,10 @@ export const Header = () => {
                 {isMenuOpen ? <X /> : <Menu />}
               </motion.button>
             )}
-          </div>
+          </div> */}
 
           {/* デスクトップメニュー */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="flex items-center space-x-8">
             {renderNavItems()}
             {renderGlobalNavItems()}
 
@@ -182,7 +182,7 @@ export const Header = () => {
       </div>
 
       {/* モバイルメニュー */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
@@ -249,7 +249,7 @@ export const Header = () => {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </motion.nav>
   );
 };
