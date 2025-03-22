@@ -42,8 +42,8 @@ export const BlogPostContent = ({ post, contentRef }: BlogPostContentProps) => {
         </div>
 
         {/* モバイルのヘッダー - スクロールしても固定表示 */}
-        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-background backdrop-blur-sm border-b px-4 py-3">
-          <div className="container mx-auto flex items-center justify-between">
+        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b px-4 py-3">
+          <div className="max-w-screen-xl mx-auto flex items-center justify-between">
             <Link
               href="/blog"
               className="inline-flex items-center text-primary hover:underline"
@@ -69,14 +69,14 @@ export const BlogPostContent = ({ post, contentRef }: BlogPostContentProps) => {
         {/* モバイル向け目次（クリックで表示・非表示） - 固定ヘッダーの下に表示 */}
         <div
           className={cn(
-            "lg:hidden fixed top-[53px] left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b",
+            "lg:hidden fixed top-[53px] left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-b",
             "transition-all duration-300 ease-in-out",
             isTocOpen
-              ? "opacity-100 max-h-[60vh] overflow-y-auto"
-              : "opacity-0 max-h-0 overflow-hidden"
+              ? "opacity-100 max-h-[70vh] overflow-y-auto"
+              : "opacity-0 max-h-0 overflow-hidden pointer-events-none"
           )}
         >
-          <div className="container mx-auto p-4">
+          <div className="max-w-screen-xl mx-auto p-4">
             <h2 className="text-xl font-bold mb-4">目次</h2>
             <TableOfContents contentRef={contentRef} />
           </div>
