@@ -35,6 +35,8 @@ jest.mock("next/image", () => ({
     src,
     alt,
     className,
+    fill,
+    priority,
   }: {
     src: string;
     alt: string;
@@ -42,7 +44,18 @@ jest.mock("next/image", () => ({
     fill?: boolean;
     priority?: boolean;
   }) {
-    return <img src={src} alt={alt} className={className} />;
+    // img要素の代わりにdiv要素を使用して画像をモックする
+    return (
+      <div
+        data-testid="next-image"
+        data-src={src}
+        data-alt={alt}
+        className={className}
+        data-fill={fill ? "true" : "false"}
+        data-priority={priority ? "true" : "false"}
+        aria-label={alt}
+      />
+    );
   },
 }));
 
