@@ -27,7 +27,7 @@ ZennやQiitaなどのブログサービスに投稿するのもいいですが�
 
 実際にこの記事自体もNext.jsとMarkdownを使用して作成していますので以下のリポジトリをご覧ください。
 
-[https://github.com/daikimatsuura/portfolio](https://github.com/daikimatsuura/portfolio)
+[https://github.com/daikimatsura/portfolio](https://github.com/daikimatsura/portfolio)
 
 ## この記事で学べること
 
