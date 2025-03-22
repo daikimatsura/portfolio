@@ -80,7 +80,7 @@ export const Blogs = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="text-center m-32"
+          className="text-center "
         >
           <Link
             href="/blog"
