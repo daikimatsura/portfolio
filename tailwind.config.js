@@ -73,7 +73,49 @@ module.exports = {
       fontFeatureSettings: {
         palt: '"palt"',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: "100%",
+            color: "hsl(var(--foreground))",
+            a: {
+              color: "hsl(var(--primary))",
+              "&:hover": {
+                color: "hsl(var(--primary))",
+              },
+            },
+            h1: {
+              color: "hsl(var(--foreground))",
+            },
+            h2: {
+              color: "hsl(var(--foreground))",
+            },
+            h3: {
+              color: "hsl(var(--foreground))",
+            },
+            h4: {
+              color: "hsl(var(--foreground))",
+            },
+            code: {
+              color: "hsl(var(--foreground))",
+              backgroundColor: "hsl(var(--accent))",
+              borderRadius: "0.25rem",
+              padding: "0.15rem 0.3rem",
+            },
+            blockquote: {
+              borderLeftColor: "hsl(var(--primary))",
+              backgroundColor: "hsl(var(--accent) / 0.2)",
+              color: "hsl(var(--foreground))",
+            },
+            pre: {
+              backgroundColor: "hsl(var(--accent) / 0.8)",
+              color: "hsl(var(--foreground))",
+              overflow: "auto",
+            },
+          },
+        },
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };

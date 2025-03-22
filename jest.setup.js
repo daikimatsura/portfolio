@@ -4,6 +4,18 @@
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
 
+// Mock IntersectionObserver
+class MockIntersectionObserver {
+  constructor(callback) {
+    this.callback = callback;
+  }
+  observe = jest.fn();
+  unobserve = jest.fn();
+  disconnect = jest.fn();
+}
+
+global.IntersectionObserver = MockIntersectionObserver;
+
 // React 19のサポートを追加
 // ReactDOMTestUtils.actの警告を抑制
 jest.mock("react-dom/test-utils", () => {

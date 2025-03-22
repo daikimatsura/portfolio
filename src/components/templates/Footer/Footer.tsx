@@ -8,6 +8,7 @@ import { fadeInProps, fadeInDelayedProps } from "@/lib/animations";
 const navLinks = [
   { name: "ホーム", path: "/" },
   { name: "職務経歴", path: "/job-history" },
+  { name: "ブログ", path: "/blog" },
   { name: "このサイトについて", path: "/introduction-this-site" },
 ];
 

@@ -4,6 +4,8 @@ import { BlogCard } from "@/components/molecules/BlogCard";
 import { useInView } from "react-intersection-observer";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export const Blogs = () => {
   const { ref, inView } = useInView({
@@ -74,7 +76,20 @@ export const Blogs = () => {
             主にフロントエンド開発やAWSサービスに関する内容を発信しています。
           </p>
         </motion.div>
-
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.8 }}
+          className="text-center m-32"
+        >
+          <Link
+            href="/blog"
+            className="inline-flex items-center px-6 py-3 rounded-full bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors"
+          >
+            <span>サイト内の記事を見る</span>
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {blogs.map((blog, index) => (
             <motion.div
@@ -101,22 +116,6 @@ export const Blogs = () => {
             </motion.div>
           ))}
         </div>
-        {/* 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.8 }}
-          className="text-center mt-24"
-        >
-          <Link
-            href="https://www.geekfeed.co.jp/author/matsura/"
-            target="_blank"
-            className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors"
-          >
-            <span>すべての記事を見る</span>
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </motion.div> */}
       </div>
     </section>
   );

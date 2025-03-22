@@ -69,19 +69,20 @@ describe("Blogs", () => {
     render(<Blogs />);
 
     const links = screen.getAllByRole("link");
-    expect(links[0]).toHaveAttribute(
+    expect(links[0]).toHaveAttribute("href", "/blog");
+    expect(links[1]).toHaveAttribute(
       "href",
       "https://www.geekfeed.co.jp/geekblog/nextjs-amazon-connect/"
     );
-    expect(links[1]).toHaveAttribute(
+    expect(links[2]).toHaveAttribute(
       "href",
       "https://www.geekfeed.co.jp/geekblog/amazon-bedrock-review-logic"
     );
-    expect(links[2]).toHaveAttribute(
+    expect(links[3]).toHaveAttribute(
       "href",
       "https://www.geekfeed.co.jp/geekblog/twilio-flex-v2-line/"
     );
-    expect(links[3]).toHaveAttribute(
+    expect(links[4]).toHaveAttribute(
       "href",
       "https://www.geekfeed.co.jp/author/matsura/"
     );
@@ -110,5 +111,15 @@ describe("Blogs", () => {
       "alt",
       "Twilio Flex v2.x.x系でLINE連携を実装する方法"
     );
+  });
+
+  it("サイト内の記事を見るリンクが表示される", () => {
+    render(<Blogs />);
+
+    const siteArticlesLink = screen.getByText("サイト内の記事を見る");
+    expect(siteArticlesLink).toBeInTheDocument();
+
+    const linkElement = siteArticlesLink.closest("a");
+    expect(linkElement).toHaveAttribute("href", "/blog");
   });
 });

@@ -1,5 +1,6 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import { Header } from "./Header";
 
 // 必要なモック
@@ -9,7 +10,7 @@ jest.mock("next/navigation", () => ({
 
 // 最小限のテスト実装
 describe("Header", () => {
-  it("renders without crashing", () => {
+  beforeEach(() => {
     // window.matchMediaのモック
     Object.defineProperty(window, "matchMedia", {
       writable: true,
@@ -24,11 +25,25 @@ describe("Header", () => {
         dispatchEvent: jest.fn(),
       })),
     });
+  });
 
+  it("renders without crashing", () => {
     // エラーをキャッチしつつレンダリングを試みる
     expect(() => {
       const { container } = render(<Header />);
       expect(container).toBeInTheDocument();
     }).not.toThrow();
+  });
+
+  it("グローバルナビゲーションアイテムが表示される", () => {
+    render(<Header />);
+
+    // グローバルナビゲーションアイテム
+    const blogLink = screen.getByText("ブログ");
+    expect(blogLink).toBeInTheDocument();
+
+    // リンク先を確認
+    const linkElement = blogLink.closest("a");
+    expect(linkElement).toHaveAttribute("href", "/blog");
   });
 });
