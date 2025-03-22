@@ -1,10 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/atoms/Button";
-import { Menu, X, Github } from "lucide-react";
+import { Github } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/atoms/ThemeToggle";
 import { gradientText } from "@/lib/styles";
 import { cn } from "@/lib/utils";
