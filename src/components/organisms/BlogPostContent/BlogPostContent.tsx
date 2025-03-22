@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ArrowLeft, List, X } from "lucide-react";
 import { TableOfContents } from "@/components/molecules/TableOfContents";
 import { MarkdownPost } from "@/types/markdown";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 interface BlogPostContentProps {
@@ -78,7 +78,10 @@ export const BlogPostContent = ({ post, contentRef }: BlogPostContentProps) => {
         >
           <div className="max-w-screen-xl mx-auto p-4">
             <h2 className="text-xl font-bold mb-4">目次</h2>
-            <TableOfContents contentRef={contentRef} />
+            <TableOfContents
+              contentRef={contentRef}
+              setIsTocOpen={setIsTocOpen}
+            />
           </div>
         </div>
 

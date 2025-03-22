@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 
 interface TableOfContentsProps {
   contentRef: React.RefObject<HTMLDivElement | null>;
+  setIsTocOpen?: (isOpen: boolean) => void;
 }
 
 interface Heading {
@@ -13,7 +14,10 @@ interface Heading {
   level: number;
 }
 
-export const TableOfContents = ({ contentRef }: TableOfContentsProps) => {
+export const TableOfContents = ({
+  contentRef,
+  setIsTocOpen,
+}: TableOfContentsProps) => {
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string>("");
 
@@ -167,6 +171,8 @@ export const TableOfContents = ({ contentRef }: TableOfContentsProps) => {
                   history.pushState(null, "", `#${heading.id}`);
                   // アクティブIDを設定
                   setActiveId(heading.id);
+                  // モバイルの目次を閉じる
+                  setIsTocOpen && setIsTocOpen(false);
                 }
               }}
             >
