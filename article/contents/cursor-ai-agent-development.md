@@ -10,7 +10,9 @@ published_at: "2025-03-04"
 
 # はじめに
 
-[Cursorエディタ](https://docs.cursor.com/get-started/welcome)のようなAIコーディングアシスタントを活用すると、開発効率が大幅にアップします。でも、AIとの協業にはいくつか課題もありますよね。この記事では、AIとの協業をもっと効率的にするための工夫をした方法を紹介します。
+[Cursorエディタ](https://docs.cursor.com/get-started/welcome)のようなAIコーディングアシスタントを活用すると、開発効率が大幅にアップします。
+
+でも、AIとの協業にはいくつか課題もありますよね。この記事では、AIとの協業をもっと効率的にするための工夫をした方法を紹介します。
 
 ## この記事で学べること
 
@@ -180,7 +182,7 @@ Next.js App Router with React, Shadcn UI, Radix UI, and Tailwind
 
 全文が気になる方は以下からご覧ください。
 
-https://github.com/daikimatsura/portfolio/tree/main/.cursor
+[https://github.com/daikimatsura/portfolio/tree/main/.cursor](https://github.com/daikimatsura/portfolio/tree/main/.cursor)
 
 ### 自動化スクリプト
 
