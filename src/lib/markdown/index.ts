@@ -3,7 +3,6 @@ import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
-import { MarkdownPost, MarkdownPostMeta } from "@/types/markdown";
 
 const postsDirectory = path.join(process.cwd(), "article", "contents");
 

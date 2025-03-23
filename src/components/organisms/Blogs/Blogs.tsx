@@ -6,6 +6,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { blogs } from "@/constants/blogs";
 
 export const Blogs = () => {
   const { ref, inView } = useInView({
@@ -14,37 +15,6 @@ export const Blogs = () => {
   });
 
   const control = useAnimation();
-
-  const blogs = [
-    {
-      id: 1,
-      title:
-        "Next.jsでAmazon Connectの標準CCPを埋め込み動的データを取得する方法",
-      tags: ["Next.js", "TypeScript", "Amazon Connect"],
-      link: "https://www.geekfeed.co.jp/geekblog/nextjs-amazon-connect/",
-      image: "/blog1.png",
-    },
-    {
-      id: 2,
-      title: "AWS Bedrockを活用したAI生成テキスト評価と再生成の実装技法",
-      tags: ["Amazon Bedrock", "TypeScript", "Gen AI"],
-      link: "https://www.geekfeed.co.jp/geekblog/amazon-bedrock-review-logic",
-      image: "/blog2.png",
-    },
-    {
-      id: 3,
-      title: "Twilio Flex v2.x.x系でLINE連携を実装する方法",
-      tags: ["Twilio", "LINE"],
-      link: "https://www.geekfeed.co.jp/geekblog/twilio-flex-v2-line/",
-      image: "/blog3.png",
-    },
-    {
-      id: 4,
-      title: "ブログ一覧",
-      tags: [],
-      link: "https://www.geekfeed.co.jp/author/matsura/",
-    },
-  ];
 
   useEffect(() => {
     if (inView) {
@@ -73,6 +43,7 @@ export const Blogs = () => {
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             技術的な知見や経験を共有するために執筆したブログ記事です。
+            <br />
             主にフロントエンド開発やAWSサービスに関する内容を発信しています。
           </p>
         </motion.div>
@@ -86,36 +57,10 @@ export const Blogs = () => {
             href="/blog"
             className="inline-flex items-center px-6 py-3 rounded-full bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors"
           >
-            <span>サイト内の記事を見る</span>
+            <span>ブログ記事一覧</span>
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {blogs.map((blog, index) => (
-            <motion.div
-              key={blog.id}
-              ref={index === 0 ? ref : undefined}
-              custom={index}
-              animate={control}
-              initial="hidden"
-              variants={{
-                visible: (i) => ({
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    delay: i * 0.2,
-                    duration: 0.5,
-                    ease: "easeOut",
-                  },
-                }),
-                hidden: { opacity: 0, y: 50 },
-              }}
-              whileHover={{ y: -10, transition: { duration: 0.3 } }}
-            >
-              <BlogCard blog={blog} />
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   );

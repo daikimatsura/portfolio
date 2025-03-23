@@ -1,4 +1,4 @@
-export interface MarkdownPost {
+type MarkdownPost = {
   slug: string;
   title: string;
   published_at: string;
@@ -8,9 +8,9 @@ export interface MarkdownPost {
   coverImage?: string;
   emoji?: string;
   published?: boolean;
-}
+};
 
-export interface MarkdownPostMeta {
+type MarkdownPostMeta = {
   slug: string;
   title: string;
   published_at: string;
@@ -19,4 +19,4 @@ export interface MarkdownPostMeta {
   coverImage?: string;
   emoji?: string;
   published?: boolean;
-}
+};
