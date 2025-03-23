@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import { MarkdownPost } from "@/types/markdown";
 import { BlogPostContent } from "@/components/organisms/BlogPostContent";
 
 interface BlogPostClientProps {
