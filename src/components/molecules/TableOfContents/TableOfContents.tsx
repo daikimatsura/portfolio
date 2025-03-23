@@ -24,31 +24,20 @@ export const TableOfContents = ({
   // 記事内の見出し要素を取得
   useEffect(() => {
     if (!contentRef.current) {
-      console.log("contentRef.current is null");
       return;
     }
 
     const contentElement = contentRef.current;
-    console.log("コンテンツ要素:", contentElement);
+    const DEBUG = process.env.NODE_ENV === "development";
 
     // すべての見出し要素を含むセレクタを使用
     const headingElements = Array.from(
       contentElement.querySelectorAll("h1, h2, h3, h4, h5, h6")
     );
 
-    console.log("見出し要素の数:", headingElements.length);
-    console.log(
-      "見出し要素のタグ名:",
-      headingElements.map((h) => h.tagName)
-    );
-    console.log(
-      "見出し要素のテキスト:",
-      headingElements.map((h) => h.textContent)
-    );
-    console.log(
-      "見出し要素のID:",
-      headingElements.map((h) => h.id)
-    );
+    if (DEBUG) {
+      console.log("見出し要素の数:", headingElements.length);
+    }
 
     // 見出し情報を抽出
     const allHeadingsData = headingElements.map((heading) => {
@@ -71,7 +60,10 @@ export const TableOfContents = ({
           `heading-${heading.tagName.toLowerCase()}-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
 
         heading.id = finalId;
-        console.log(`IDを生成: "${text}" -> "${finalId}"`);
+
+        if (DEBUG) {
+          console.log("生成されたID:", finalId, "元のテキスト:", text);
+        }
       }
 
       const id = heading.id;
@@ -81,20 +73,21 @@ export const TableOfContents = ({
       return { id, text, level };
     });
 
-    console.log("フィルター前の全見出し:", allHeadingsData);
-
     // フィルタリングを段階的に適用
     const nonEmptyHeadings = allHeadingsData.filter(
       (heading) => heading.id && heading.text
     );
-    console.log("空でない見出し:", nonEmptyHeadings);
 
-    const finalHeadings = nonEmptyHeadings.filter(
-      (heading) => !heading.text.match(/^目次$/i)
+    // 目次を除外（"目次"という見出しを目次から除外）
+    const headingsWithoutToc = nonEmptyHeadings.filter(
+      (heading) => heading.text !== "目次"
     );
-    console.log("最終的な見出し:", finalHeadings);
 
-    setHeadings(finalHeadings);
+    if (DEBUG) {
+      console.log("処理後の見出し:", headingsWithoutToc);
+    }
+
+    setHeadings(headingsWithoutToc);
 
     // IntersectionObserverを設定
     const observerOptions = {
@@ -131,7 +124,6 @@ export const TableOfContents = ({
   }, [contentRef]);
 
   if (headings.length === 0) {
-    console.log("見出しが見つかりませんでした");
     return null;
   }
 

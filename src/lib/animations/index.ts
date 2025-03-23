@@ -11,20 +11,13 @@
 export {
   fadeInProps,
   fadeInDelayedProps,
-  fadeInUpProps,
   scaleUpProps,
   // アクセシビリティに配慮したアニメーション
   useAccessibleAnimations,
 } from "./animations";
 
 // バリアント（variants属性で使用）
-// animations.tsからのエクスポートは非推奨とし、variants.tsからのエクスポートを優先使用
 export {
-  staggerContainer,
-  fadeInUp,
-  scaleUp,
-  slideInLeft,
-  slideInRight,
   // アクセシビリティに配慮したバリアント
   useAccessibleVariants,
 } from "./variants";

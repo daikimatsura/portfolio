@@ -62,17 +62,6 @@ export default function NotFound() {
                 ホームに戻る
               </Link>
             </Button>
-
-            <Button
-              asChild
-              variant="outline"
-              className="bg-background/5 backdrop-blur-sm border-border hover:bg-background/10"
-            >
-              <Link href="/#contact">
-                <Search className="mr-2 h-4 w-4" />
-                お問い合わせ
-              </Link>
-            </Button>
           </motion.div>
         </div>
       </motion.div>

@@ -12,15 +12,6 @@ const navLinks = [
   { name: "このサイトについて", path: "/introduction-this-site" },
 ];
 
-// // ソーシャルリンク
-// const socialLinks = [
-//   {
-//     name: "GitHub",
-//     icon: <Github className="h-5 w-5" />,
-//     url: "https://github.com/daikimatsura",
-//   },
-// ];
-
 /**
  * アプリケーションのフッターコンポーネント
  * ナビゲーションリンク、プロフィール情報、著作権情報を含む
@@ -76,32 +67,7 @@ export const Footer = () => {
           </div>
 
           {/* ソーシャルリンク */}
-          {/* <div>
-            <motion.h3
-              className="text-lg font-medium mb-4"
-              {...fadeInProps}
-            >
-              ソーシャル
-            </motion.h3>
-            <motion.div className="flex space-x-4" {...fadeInDelayedProps}>
-              {socialLinks.map((link) => (
-                <motion.div
-                  key={link.name}
-                  whileHover={{ y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Link
-                    href={link.url}
-                    target={link.url.startsWith("http") ? "_blank" : undefined}
-                    className="bg-gray-800 p-2 rounded-full text-gray-400 hover:text-white hover:bg-blue-600 transition-colors"
-                    aria-label={link.name}
-                  >
-                    {link.icon}
-                  </Link>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div> */}
+          <div></div>
         </div>
 
         {/* フッターボトム */}

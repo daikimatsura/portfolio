@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { fadeInUpProps } from "@/lib/animations";
+import { useAccessibleAnimations } from "@/lib/animations";
 import { gradientText, gradientUnderline } from "@/lib/styles";
 
 export interface SectionTitleProps {
@@ -24,6 +24,8 @@ export default function SectionTitle({
     center: "text-center",
     right: "text-right",
   };
+
+  const { fadeInUpProps } = useAccessibleAnimations();
 
   return (
     <motion.div

@@ -14,7 +14,6 @@ import { cn } from "@/lib/utils";
  * ナビゲーションリンク、テーマトグル、モバイルメニューを含む
  */
 export const Header = () => {
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
@@ -36,12 +35,7 @@ export const Header = () => {
     };
   }, []);
 
-  const navItems = [
-    // { name: "About me", href: "#about-me" },
-    // { name: "Blogs", href: "#blogs" },
-    // { name: "Skills", href: "#skills" },
-    { name: "Contact", href: "#contact", isButton: true },
-  ];
+  const navItems = [{ name: "Contact", href: "#contact", isButton: true }];
 
   // 常に表示するナビゲーション項目
   const globalNavItems = [{ name: "ブログ", href: "/blog" }];
@@ -129,29 +123,6 @@ export const Header = () => {
             </Link>
           </motion.div>
 
-          {/* モバイルメニューボタン
-          <div className="lg:hidden flex items-center gap-4">
-            <ThemeToggle />
-            <Link
-              href="https://github.com/daikimatsura"
-              target="_blank"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Github className="h-5 w-5" />
-            </Link>
-            {(isHomePage || globalNavItems.length > 0) && (
-              <motion.button
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                className="text-foreground hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                {isMenuOpen ? <X /> : <Menu />}
-              </motion.button>
-            )}
-          </div> */}
-
           {/* デスクトップメニュー */}
           <div className="flex items-center space-x-8">
             {renderNavItems()}
@@ -181,76 +152,6 @@ export const Header = () => {
           </div>
         </div>
       </div>
-
-      {/* モバイルメニュー */}
-      {/* <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden w-full bg-background/90 backdrop-blur-md border-t border-border"
-          >
-            <div className="container mx-auto px-6 py-6 space-y-6">
-              {isHomePage &&
-                navItems.map((item, index) => (
-                  <motion.div
-                    key={item.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.3 }}
-                  >
-                    {item.isButton ? (
-                      <Button
-                        gradient
-                        className="w-full text-white font-medium rounded-xl shadow-lg"
-                        asChild
-                      >
-                        <Link
-                          href={item.href}
-                          onClick={() => setIsMenuOpen(false)}
-                          className="flex items-center justify-center w-full h-full px-4 py-2"
-                        >
-                          {item.name}
-                        </Link>
-                      </Button>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        className="block text-foreground hover:text-primary transition-colors"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                    )}
-                  </motion.div>
-                ))}
-
-              {globalNavItems.map((item, index) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay:
-                      (isHomePage ? navItems.length : 0) * 0.1 + index * 0.1,
-                    duration: 0.3,
-                  }}
-                >
-                  <Link
-                    href={item.href}
-                    className="block text-foreground hover:text-primary transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence> */}
     </motion.nav>
   );
 };

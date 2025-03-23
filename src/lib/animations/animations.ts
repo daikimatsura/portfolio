@@ -66,18 +66,6 @@ export const useAccessibleAnimations = () => {
 // ===============================
 
 /**
- * フェードインアップアニメーション
- * 下から上に要素をフェードインさせる
- *
- * @deprecated useAccessibleAnimations()を使用してください
- */
-export const fadeInUpProps = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
-};
-
-/**
  * フェードインアニメーション
  * 要素をフェードインさせる
  */

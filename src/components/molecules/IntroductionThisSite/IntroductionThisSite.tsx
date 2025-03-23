@@ -177,12 +177,6 @@ export const IntroductionThisSite = ({ className }: { className?: string }) => {
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
     >
-      {/* 背景のグラデーションエフェクト */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-200/30 dark:to-gray-900/20" />
-
-      {/* デコレーション要素 */}
-      <GradientBlurDecoration animate={true} />
-
       <div className="container relative mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           {/* ヘッダー部分 */}
