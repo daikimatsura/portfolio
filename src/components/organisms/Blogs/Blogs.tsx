@@ -1,27 +1,8 @@
-"use client";
-
-import { BlogCard } from "@/components/molecules/BlogCard";
-import { useInView } from "react-intersection-observer";
-import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { blogs } from "@/constants/blogs";
 
 export const Blogs = () => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const control = useAnimation();
-
-  useEffect(() => {
-    if (inView) {
-      control.start("visible");
-    }
-  }, [control, inView]);
-
   return (
     <section id="blogs" className="py-20 relative overflow-hidden">
       {/* 装飾要素 */}
