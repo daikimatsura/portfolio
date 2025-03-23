@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, List, X } from "lucide-react";
 import { TableOfContents } from "@/components/molecules/TableOfContents";
-import { MarkdownPost } from "@/types/markdown";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 

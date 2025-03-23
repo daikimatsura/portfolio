@@ -1,7 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BlogPostContent } from "./BlogPostContent";
-import { MarkdownPost } from "@/types/markdown";
 import { createRef } from "react";
 
 // TableOfContentsコンポーネントのモック
