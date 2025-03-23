@@ -40,21 +40,35 @@ portfolio/
 │       └── setup_git_hooks.sh # Gitフックの設定
 │   └── rules/               # CursorのPJルールファイル
 │       ├── cursorrules.mdc      # AIアシスタント用ルール
+├── article/               # ブログ記事関連ファイル
+│   ├── contents/         # マークダウン記事ファイル（.md）
+│   └── prompt/           # 記事作成用のプロンプトとテンプレート
+│       ├── prompt.md     # 記事作成補助プロンプト
+│       └── template.md   # 新規記事作成用テンプレート
+├── docs/                  # プロジェクトドキュメント
+│   └── markdown-blog-guide.md # マークダウンブログシステムの使用ガイド
 ├── public/                 # 静的ファイル
+│   └── images/             # 画像ファイル
+│       └── blog/           # ブログ記事用画像
 ├── src/                    # ソースコード
 │   ├── app/                # Next.js App Router
+│   │   └── blog/          # ブログ関連ページ
+│   │       ├── page.tsx   # ブログ一覧ページ
+│   │       └── [slug]/    # 個別記事ページ
 │   ├── components/         # Reactコンポーネント
 │   │   ├── atoms/         # 最小単位のUI要素（ボタン、入力フィールド、アイコンなど）
-│   │   ├── molecules/     # 複数のatomsを組み合わせた要素（検索フォーム、ナビゲーションリンクグループなど）
-│   │   ├── organisms/     # 複数のmoleculesを組み合わせた機能的なセクション（コンタクトフォームなど）
+│   │   ├── molecules/     # 複数のatomsを組み合わせた要素（検索フォーム、目次など）
+│   │   ├── organisms/     # 複数のmoleculesを組み合わせた機能的なセクション（記事コンテンツなど）
 │   │   ├── templates/     # ページのレイアウト構造（ヘッダー、フッターなど）
 │   │   └── pages/         # 完全なページコンポーネント
 │   ├── hooks/              # カスタムReactフック
 │   ├── lib/                # ユーティリティ関数
 │   │   ├── animations/    # アニメーション関連
+│   │   ├── markdown/      # マークダウン処理ユーティリティ
 │   │   └── utils/         # 汎用ユーティリティ
 │   ├── styles/             # グローバルスタイル
 │   └── types/              # TypeScript型定義
+│       └── markdown.d.ts  # マークダウン記事の型定義
 ├── .eslintrc.json         # ESLint設定
 ├── .cursorrules           # 自動生成されたAIアシスタント用ルール
 ├── next.config.js         # Next.js設定
@@ -62,6 +76,107 @@ portfolio/
 ├── tailwind.config.js     # Tailwind CSS設定
 └── tsconfig.json          # TypeScript設定
 ```
+
+## 📝 マークダウンブログシステム
+
+このポートフォリオサイトには、マークダウンファイルを使用したブログシステムが実装されています。
+シンプルで効率的なコンテンツ管理を実現し、GitHubでの記事管理とバージョン追跡が可能です。
+
+### ドキュメントとテンプレート
+
+ブログ記事の執筆をサポートするために、以下のドキュメントとテンプレートを用意しています：
+
+- **使用ガイド**: [`docs/markdown-blog-guide.md`](docs/markdown-blog-guide.md) - マークダウンブログシステムの詳細な使用方法
+- **記事テンプレート**: [`article/prompt/template.md`](article/prompt/template.md) - 新規記事作成用のテンプレート
+
+記事を作成する際は、テンプレートをコピーして必要事項を入力するだけで簡単に執筆を開始できます。
+
+### ディレクトリ構造
+
+```
+portfolio/
+├── article/               # ブログ記事関連ファイル
+│   ├── contents/         # マークダウン記事ファイル（.md）
+│   └── prompt/           # 記事作成用のプロンプトテンプレート
+├── docs/                 # ドキュメント
+│   └── markdown-blog-guide.md # 使用ガイド
+├── src/
+│   ├── lib/markdown/     # マークダウン処理ユーティリティ
+│   ├── types/markdown.d.ts # マークダウン記事の型定義
+│   ├── app/blog/         # ブログページのルートコンポーネント
+│   │   ├── page.tsx      # ブログ一覧ページ
+│   │   └── [slug]/       # 個別記事ページ
+│   │       ├── page.tsx      # サーバーコンポーネント
+│   │       └── page.client.tsx # クライアントコンポーネント
+│   └── components/
+│       ├── molecules/
+│       │   └── TableOfContents/ # 記事の目次コンポーネント
+│       └── organisms/
+│           └── BlogPostContent/ # 記事表示コンポーネント
+```
+
+### マークダウン記事の構造
+
+記事ファイルは `article/contents/` ディレクトリに `.md` 形式で保存されます。
+各記事は以下のようなフロントマターを持ちます：
+
+```markdown
+---
+title: "記事タイトル"
+emoji: "📝"
+type: "tech"
+excerpt: "記事の概要説明"
+topics: ["Next.js", "React", "TypeScript"]
+published: true
+published_at: "2023-03-22"
+---
+
+記事の本文...
+```
+
+#### 主要なフロントマターフィールド
+
+| フィールド   | 説明                                             | 必須 |
+| ------------ | ------------------------------------------------ | :--: |
+| title        | 記事タイトル                                     |  ✅  |
+| published_at | 公開日（YYYY-MM-DD形式）                         |  ✅  |
+| excerpt      | 記事概要（一覧表示用）                           |  ❌  |
+| topics       | トピックタグの配列                               |  ❌  |
+| emoji        | 記事を表すアイコン（カバー画像がない場合に表示） |  ❌  |
+| coverImage   | カバー画像のURL                                  |  ❌  |
+| published    | 公開状態（false=下書き）                         |  ❌  |
+
+### 主要機能
+
+- **自動目次生成**: 記事内の見出しから目次を自動生成
+- **モバイル対応UI**: デスクトップとモバイルで最適化された閲覧体験
+- **シンタックスハイライト**: コードブロックの言語に応じた構文強調表示
+- **ページネーション**: 記事数増加時に対応した一覧表示の最適化
+- **公開日スケジュール**: future dateによる公開スケジュール機能
+
+### 記事作成の流れ
+
+1. `article/prompt/template.md` をコピーして `article/contents/` に新規`.md`ファイルを作成
+2. フロントマターに必要な情報を入力
+3. マークダウン形式で記事を執筆
+4. 開発環境で記事の表示を確認
+5. 本番環境にデプロイして公開
+
+詳細な手順は [`docs/markdown-blog-guide.md`](docs/markdown-blog-guide.md) を参照してください。
+
+### マークダウン処理ライブラリ
+
+- [gray-matter](https://github.com/jonschlinkert/gray-matter): フロントマターの解析
+- [remark](https://github.com/remarkjs/remark): マークダウンのHTML変換
+- [remark-html](https://github.com/remarkjs/remark-html): HTML出力プラグイン
+
+### 今後の拡張予定
+
+- RSS/Atom フィード対応
+- 検索機能の追加
+- 関連記事の自動推奨
+- SNSシェア機能の強化
+- アクセス解析との連携
 
 ## 🚀 開発ガイドライン
 
