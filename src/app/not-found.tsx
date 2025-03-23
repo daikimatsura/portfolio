@@ -3,7 +3,7 @@
 import { Button } from "@/components/atoms/Button";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Home, Search } from "lucide-react";
+import { Home } from "lucide-react";
 import { notFoundCardBg, notFoundIconBg, notFoundText } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 

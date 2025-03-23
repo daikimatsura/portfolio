@@ -32,7 +32,6 @@ import {
   gradientIconBg,
 } from "@/lib/styles";
 import { cn } from "@/lib/utils";
-import GradientBlurDecoration from "@/components/atoms/GradientBlurDecoration";
 import { useInView } from "react-intersection-observer";
 import { useAccessibleVariants } from "@/lib/animations";
 
