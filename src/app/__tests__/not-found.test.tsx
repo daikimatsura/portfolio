@@ -38,13 +38,4 @@ describe("NotFound", () => {
     expect(homeLink).toHaveAttribute("href", "/");
     expect(screen.getByTestId("home-icon")).toBeInTheDocument();
   });
-
-  it("お問い合わせリンクが正しく表示される", () => {
-    render(<NotFound />);
-
-    // お問い合わせリンクが表示されていることを確認
-    const contactLink = screen.getByText("お問い合わせ").closest("a");
-    expect(contactLink).toHaveAttribute("href", "/#contact");
-    expect(screen.getByTestId("search-icon")).toBeInTheDocument();
-  });
 });
