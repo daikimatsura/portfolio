@@ -10,12 +10,12 @@ describe("SkillCard", () => {
     title: "フロントエンド",
     icon: "🌐",
     skills: [
-      { name: "React", percentage: 90 },
-      { name: "TypeScript", percentage: 85 },
-      { name: "Next.js", percentage: 80 },
-      { name: "HTML/CSS", percentage: 95 },
-      { name: "Tailwind CSS", percentage: 85 },
-      { name: "Vue.js", percentage: 70 },
+      { name: "React", experienceLevel: "業務でよく使う" as const },
+      { name: "TypeScript", experienceLevel: "業務でよく使う" as const },
+      { name: "Next.js", experienceLevel: "使用経験あり" as const },
+      { name: "HTML/CSS", experienceLevel: "業務でよく使う" as const },
+      { name: "Tailwind CSS", experienceLevel: "使用経験あり" as const },
+      { name: "Vue.js", experienceLevel: "学習したことがある" as const },
     ],
   };
 
@@ -85,9 +85,9 @@ describe("SkillCard", () => {
       title: "バックエンド",
       icon: "⚙️",
       skills: [
-        { name: "Node.js", percentage: 80 },
-        { name: "Express", percentage: 75 },
-        { name: "MongoDB", percentage: 70 },
+        { name: "Node.js", experienceLevel: "業務でよく使う" as const },
+        { name: "Express", experienceLevel: "使用経験あり" as const },
+        { name: "MongoDB", experienceLevel: "学習したことがある" as const },
       ],
     };
 
@@ -107,8 +107,8 @@ describe("SkillCard", () => {
     const skillWithoutIcon = {
       title: "その他",
       skills: [
-        { name: "Git", percentage: 85 },
-        { name: "Docker", percentage: 70 },
+        { name: "Git", experienceLevel: "業務でよく使う" as const },
+        { name: "Docker", experienceLevel: "使用経験あり" as const },
       ],
     };
 
@@ -117,5 +117,30 @@ describe("SkillCard", () => {
     expect(screen.getByText("その他")).toBeInTheDocument();
     expect(screen.getByText("Git")).toBeInTheDocument();
     expect(screen.getByText("Docker")).toBeInTheDocument();
+  });
+
+  it("経験レベルとアイコンが正しく表示される", () => {
+    render(<SkillCard skill={mockSkill} />);
+
+    // 「すべて表示」ボタンをクリックして全てのスキルを表示
+    fireEvent.click(screen.getByText("すべて表示"));
+
+    // 経験レベルが表示されている（複数存在する場合はgetAllByTextを使用）
+    const businessLevels = screen.getAllByText("業務でよく使う");
+    const touchedLevels = screen.getAllByText("使用経験あり");
+    const studiedLevels = screen.getAllByText("学習したことがある");
+
+    expect(businessLevels.length).toBeGreaterThan(0);
+    expect(touchedLevels.length).toBeGreaterThan(0);
+    expect(studiedLevels.length).toBeGreaterThan(0);
+
+    // レベルアイコンが表示されている
+    const starIcons = screen.getAllByText("⭐"); // 業務でよく使う
+    const toolIcons = screen.getAllByText("🔧"); // 使用経験あり
+    const bookIcons = screen.getAllByText("📚"); // 学習したことがある
+
+    expect(starIcons.length).toBeGreaterThan(0);
+    expect(toolIcons.length).toBeGreaterThan(0);
+    expect(bookIcons.length).toBeGreaterThan(0);
   });
 });

@@ -17,35 +17,23 @@ export const Skills = () => {
       skills: [
         {
           name: "React",
-          percentage: 95,
-        },
-        {
-          name: "Next.js",
-          percentage: 90,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "TypeScript",
-          percentage: 90,
-        },
-        {
-          name: "TailwindCSS",
-          percentage: 90,
-        },
-        {
-          name: "Shadcn/UI",
-          percentage: 90,
-        },
-        {
-          name: "MUI",
-          percentage: 90,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "GraphQL",
-          percentage: 80,
+          experienceLevel: "業務でよく使う" as const,
+        },
+        {
+          name: "Next.js",
+          experienceLevel: "使用経験あり" as const,
         },
         {
           name: "React Native",
-          percentage: 50,
+          experienceLevel: "学習したことがある" as const,
         },
       ],
     },
@@ -55,15 +43,15 @@ export const Skills = () => {
       skills: [
         {
           name: "Node.js",
-          percentage: 99,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "Python",
-          percentage: 40,
+          experienceLevel: "使用経験あり" as const,
         },
         {
           name: "Golang",
-          percentage: 40,
+          experienceLevel: "学習したことがある" as const,
         },
       ],
     },
@@ -73,47 +61,47 @@ export const Skills = () => {
       skills: [
         {
           name: "AWS CDK",
-          percentage: 90,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "IAM",
-          percentage: 90,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "AWS Lambda",
-          percentage: 90,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "DynamoDB",
-          percentage: 90,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "Amplify",
-          percentage: 90,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "AWS S3",
-          percentage: 90,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "AWS CloudFront",
-          percentage: 80,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "AWS AppSync",
-          percentage: 80,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "AWS API Gateway",
-          percentage: 80,
-        },
-        {
-          name: "Amazon Bedrock",
-          percentage: 70,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "Amazon Connect",
-          percentage: 70,
+          experienceLevel: "使用経験あり" as const,
+        },
+        {
+          name: "Amazon Bedrock",
+          experienceLevel: "使用経験あり" as const,
         },
       ],
     },
@@ -123,11 +111,11 @@ export const Skills = () => {
       skills: [
         {
           name: "Figma",
-          percentage: 80,
+          experienceLevel: "使用経験あり" as const,
         },
         {
           name: "Draw.io",
-          percentage: 80,
+          experienceLevel: "使用経験あり" as const,
         },
       ],
     },
@@ -137,34 +125,15 @@ export const Skills = () => {
       skills: [
         {
           name: "Git",
-          percentage: 99,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "Notion",
-          percentage: 99,
+          experienceLevel: "業務でよく使う" as const,
         },
         {
           name: "Google Workspace",
-          percentage: 90,
-        },
-      ],
-    },
-    {
-      title: "Other",
-      icon: "🌟",
-      skills: [
-        { name: "AWS Architect", percentage: 80 },
-        {
-          name: "Developer Leadership",
-          percentage: 80,
-        },
-        {
-          name: "Scrum",
-          percentage: 60,
-        },
-        {
-          name: "Agile",
-          percentage: 60,
+          experienceLevel: "業務でよく使う" as const,
         },
       ],
     },

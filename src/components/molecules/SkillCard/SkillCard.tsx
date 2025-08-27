@@ -4,9 +4,11 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
+type ExperienceLevel = "業務でよく使う" | "使用経験あり" | "学習したことがある";
+
 type Skill = {
   name: string;
-  percentage: number;
+  experienceLevel: ExperienceLevel;
 };
 
 type SkillCategory = {
@@ -24,6 +26,48 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
 
   const toggleExpand = () => {
     setExpanded((prev) => !prev);
+  };
+
+  // 経験レベルに基づいてプログレスバーの幅を計算
+  const getProgressWidth = (level: ExperienceLevel) => {
+    switch (level) {
+      case "業務でよく使う":
+        return 100;
+      case "使用経験あり":
+        return 65;
+      case "学習したことがある":
+        return 35;
+      default:
+        return 0;
+    }
+  };
+
+  // 経験レベルに基づいて色を決定
+  const getProgressColor = (level: ExperienceLevel) => {
+    switch (level) {
+      case "業務でよく使う":
+        return "from-green-600 to-emerald-600 dark:from-green-500 dark:to-emerald-500";
+      case "使用経験あり":
+        return "from-blue-600 to-indigo-600 dark:from-blue-500 dark:to-indigo-500";
+      case "学習したことがある":
+        return "from-orange-600 to-amber-600 dark:from-orange-500 dark:to-amber-500";
+      default:
+        return "from-gray-600 to-gray-600 dark:from-gray-500 dark:to-gray-500";
+    }
+  };
+
+  // 経験レベルに基づいてアイコンを決定
+  const getLevelIcon = (level: ExperienceLevel) => {
+    switch (level) {
+      case "業務でよく使う":
+        return "⭐";
+      case "使用経験あり":
+        return "🔧";
+      case "学習したことがある":
+        return "📚";
+      default:
+        return "";
+    }
   };
 
   return (
@@ -62,16 +106,23 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
                     <span className="font-medium text-foreground">
                       {item.name}
                     </span>
-                    <span className="text-muted-foreground">
-                      {item.percentage}%
-                    </span>
+                    <div className="text-right flex items-center gap-1">
+                      <span className="text-sm">
+                        {getLevelIcon(item.experienceLevel)}
+                      </span>
+                      <span className="text-muted-foreground text-xs">
+                        {item.experienceLevel}
+                      </span>
+                    </div>
                   </div>
                   <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
-                      animate={{ width: `${item.percentage}%` }}
+                      animate={{
+                        width: `${getProgressWidth(item.experienceLevel)}%`,
+                      }}
                       transition={{ duration: 1, delay: 0.2 }}
-                      className="h-full bg-gradient-to-r from-blue-700 to-purple-700 dark:from-blue-500 dark:to-purple-500 rounded-full"
+                      className={`h-full bg-gradient-to-r ${getProgressColor(item.experienceLevel)} rounded-full`}
                     />
                   </div>
                 </motion.div>

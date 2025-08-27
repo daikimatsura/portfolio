@@ -37,7 +37,7 @@ describe("Skills", () => {
     expect(screen.getByText("React")).toBeInTheDocument();
     expect(screen.getByText("Next.js")).toBeInTheDocument();
     expect(screen.getByText("TypeScript")).toBeInTheDocument();
-    expect(screen.getByText("TailwindCSS")).toBeInTheDocument();
+    expect(screen.getByText("GraphQL")).toBeInTheDocument();
   });
 
   it("バックエンドスキルカードが表示される", () => {
@@ -82,25 +82,18 @@ describe("Skills", () => {
     expect(screen.getByText("Notion")).toBeInTheDocument();
   });
 
-  it("その他のスキルカードが表示される", () => {
+  it("スキルカードにカテゴリアイコンが表示される", () => {
     render(<Skills />);
 
-    expect(screen.getByText("Other")).toBeInTheDocument();
-
-    // その他のスキルの一部が表示されていることを確認
-    expect(screen.getByText("AWS Architect")).toBeInTheDocument();
-    expect(screen.getByText("Developer Leadership")).toBeInTheDocument();
-  });
-
-  it("スキルカードにアイコンが表示される", () => {
-    render(<Skills />);
-
-    // 各スキルカードのアイコンが表示されていることを確認
+    // 各スキルカードのカテゴリアイコンが表示されていることを確認
     expect(screen.getByText("💻")).toBeInTheDocument(); // Frontend
-    expect(screen.getByText("🔧")).toBeInTheDocument(); // Backend
     expect(screen.getByText("☁️")).toBeInTheDocument(); // AWS Infrastructure
     expect(screen.getByText("🎨")).toBeInTheDocument(); // Design
     expect(screen.getByText("🛠️")).toBeInTheDocument(); // Tools
-    expect(screen.getByText("🌟")).toBeInTheDocument(); // Other
+
+    // Backendカテゴリのアイコンは🔧だが、経験レベルアイコンとしても使用されるため、
+    // カテゴリタイトルと一緒に表示されていることを確認
+    const backendTitle = screen.getByText("Backend");
+    expect(backendTitle).toBeInTheDocument();
   });
 });
